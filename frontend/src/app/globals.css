@@ -5,6 +5,8 @@
   --color-white: #FFFFFF;
   --color-blush: #F3DEDF;
   --color-stone: #8C8884;
+  --color-blue: #026F98;
+  --color-blue-dark: #015373;
 
   /* Font variables loaded via Next.js google fonts */
   --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
