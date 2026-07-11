@@ -124,10 +124,10 @@
 .primaryCta::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  width: calc(50% + 1.5px);
   background-color: var(--color-white);
   transform: scaleX(0);
   transform-origin: right;
@@ -139,10 +139,10 @@
 .primaryCta::after {
   content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
+  top: -1px;
+  bottom: -1px;
+  right: -1px;
+  width: calc(50% + 1.5px);
   background-color: var(--color-white);
   transform: scaleX(0);
   transform-origin: left;

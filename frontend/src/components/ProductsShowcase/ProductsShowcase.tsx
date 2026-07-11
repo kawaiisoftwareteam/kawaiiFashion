@@ -146,7 +146,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                   className={styles.quickAddBtn}
                   onClick={(e) => onAddToCart(product.name, e)}
                 >
-                  Quick Add
+                  <span>Quick Add</span>
                 </button>
               </div>
 
@@ -232,7 +232,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                     setSelectedProduct(null);
                   }}
                 >
-                  Add to Cart
+                  <span>Add to Cart</span>
                 </button>
               </div>
             </div>
