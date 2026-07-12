@@ -149,10 +149,20 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 0 20px;
+    padding: 0 16px;
     height: 70px;
   }
   .nav {
     display: none;
+  }
+  .logo {
+    font-size: 20px;
+  }
+  .logoSub {
+    font-size: 8px;
+    letter-spacing: 0.25em;
+  }
+  .actions {
+    gap: 16px;
   }
 }
