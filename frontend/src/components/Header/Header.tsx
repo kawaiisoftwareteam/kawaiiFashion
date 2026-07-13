@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import styles from "./Header.module.css";
 
 interface HeaderProps {
@@ -19,12 +20,12 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews }: Heade
 
       {/* Header / Navigation */}
       <div className={styles.header}>
-        <div className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <div>
             <span className={styles.logoAccent}>K</span>AWAII BEAUTY
           </div>
           <span className={styles.logoSub}>collection</span>
-        </div>
+        </Link>
 
         <nav className={styles.nav}>
           <a href="#" className={styles.navLink}>
@@ -103,7 +104,11 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews }: Heade
               <path d="m21 21-4.3-4.3" />
             </svg>
           </button>
-          <button className={`${styles.iconButton} ${cartFeedback ? styles.jiggle : ""}`} aria-label="Shopping Cart">
+          <Link
+            href="/cart"
+            className={`${styles.iconButton} ${cartFeedback ? styles.jiggle : ""}`}
+            aria-label="Shopping Cart"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -120,7 +125,7 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews }: Heade
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
             <span className={styles.badge}>{cartCount}</span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>
