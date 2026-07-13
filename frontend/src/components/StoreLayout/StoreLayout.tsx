@@ -2,6 +2,7 @@
 
 import React from "react";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import ReviewsDrawer from "../ReviewsDrawer/ReviewsDrawer";
 import CartDrawer from "../CartDrawer/CartDrawer";
 import Toast from "../Toast/Toast";
@@ -38,6 +39,9 @@ export default function StoreLayout({ children }: StoreLayoutProps) {
         <main style={{ flex: 1 }}>
           {children}
         </main>
+
+        {/* Footer */}
+        <Footer />
       </div>
 
       {/* Slide-out Customer Reviews Drawer */}
