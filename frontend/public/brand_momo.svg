@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <circle cx="50" cy="50" r="46" fill="#FFF2F3" stroke="#D66B78" stroke-width="1.5"/>
+  <!-- Minimalist Peach Blossom -->
+  <g transform="translate(50, 50)">
+    <!-- 5 Petals -->
+    <path d="M0,0 C-12,-18 12,-18 0,0 Z" fill="#D66B78" opacity="0.85"/>
+    <path d="M0,0 C18,-12 18,12 0,0 Z" fill="#D66B78" opacity="0.85"/>
+    <path d="M0,0 C12,18 -12,18 0,0 Z" fill="#D66B78" opacity="0.85"/>
+    <path d="M0,0 C-18,12 -18,-12 0,0 Z" fill="#D66B78" opacity="0.85"/>
+    <!-- Rotate 45deg for 5th petal arrangement and texture -->
+    <g transform="rotate(72)">
+      <path d="M0,0 C-12,-18 12,-18 0,0 Z" fill="#E88F9A" opacity="0.9"/>
+    </g>
+    <g transform="rotate(144)">
+      <path d="M0,0 C-12,-18 12,-18 0,0 Z" fill="#E88F9A" opacity="0.9"/>
+    </g>
+    <g transform="rotate(216)">
+      <path d="M0,0 C-12,-18 12,-18 0,0 Z" fill="#E88F9A" opacity="0.9"/>
+    </g>
+    <g transform="rotate(288)">
+      <path d="M0,0 C-12,-18 12,-18 0,0 Z" fill="#E88F9A" opacity="0.9"/>
+    </g>
+    <!-- Center stamen -->
+    <circle cx="0" cy="0" r="5" fill="#FFE3E6"/>
+    <circle cx="0" cy="0" r="2.5" fill="#D66B78"/>
+  </g>
+</svg>

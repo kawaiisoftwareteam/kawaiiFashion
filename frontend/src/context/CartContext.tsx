@@ -20,6 +20,14 @@ interface CartContextType {
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
+  isCartOpen: boolean;
+  setIsCartOpen: (open: boolean) => void;
+  isReviewsOpen: boolean;
+  setIsReviewsOpen: (open: boolean) => void;
+  cartFeedback: boolean;
+  toastMessage: string | null;
+  setToastMessage: (msg: string | null) => void;
+  triggerToast: (message: string) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -27,6 +35,27 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // UI states for drawers and toast
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isReviewsOpen, setIsReviewsOpen] = useState(false);
+  const [cartFeedback, setCartFeedback] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const triggerToast = (message: string) => {
+    setCartFeedback(true);
+    setToastMessage(message);
+
+    // Reset jiggle animation
+    setTimeout(() => {
+      setCartFeedback(false);
+    }, 600);
+
+    // Auto-dismiss toast
+    setTimeout(() => {
+      setToastMessage((prev) => (prev === message ? null : prev));
+    }, 3000);
+  };
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -67,6 +96,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prevItems, { ...newItem, quantity: 1 }];
     });
+    
+    // Automatically trigger the toast and visual jiggle on add to cart
+    triggerToast(`Added ${newItem.name} to Cart!`);
   };
 
   const removeFromCart = (id: string) => {
@@ -106,6 +138,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         removeFromCart,
         updateQuantity,
         clearCart,
+        isCartOpen,
+        setIsCartOpen,
+        isReviewsOpen,
+        setIsReviewsOpen,
+        cartFeedback,
+        toastMessage,
+        setToastMessage,
+        triggerToast,
       }}
     >
       {children}

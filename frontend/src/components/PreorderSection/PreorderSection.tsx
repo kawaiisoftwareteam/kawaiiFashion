@@ -56,7 +56,7 @@ export default function PreorderSection({ onPreorderAdded }: PreorderSectionProp
   };
 
   return (
-    <section className={styles.preorderSection}>
+    <section className={styles.preorderSection} id="new-arrivals">
       <div className={styles.sectionHeader}>
         <span className={styles.tagline}>Limited Release</span>
         <h2 className={styles.title}>Secure Your Pre-Order</h2>

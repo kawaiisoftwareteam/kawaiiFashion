@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <circle cx="50" cy="50" r="46" fill="#FFF5F5" stroke="#A62B2B" stroke-width="1.5"/>
+  <!-- Minimal Camellia Flower -->
+  <g transform="translate(50, 48)">
+    <!-- Petals -->
+    <path d="M0,0 C-15,-25 15,-25 0,0 Z" fill="#A62B2B" opacity="0.8"/>
+    <path d="M0,0 C25,-15 25,15 0,0 Z" fill="#A62B2B" opacity="0.8"/>
+    <path d="M0,0 C15,25 -15,25 0,0 Z" fill="#A62B2B" opacity="0.8"/>
+    <path d="M0,0 C-25,15 -25,-15 0,0 Z" fill="#A62B2B" opacity="0.8"/>
+    <!-- Inner Petals -->
+    <path d="M0,0 C-10,-18 10,-18 0,0 Z" fill="#C93B3B"/>
+    <path d="M0,0 C18,-10 18,10 0,0 Z" fill="#C93B3B"/>
+    <path d="M0,0 C10,18 -10,18 0,0 Z" fill="#C93B3B"/>
+    <path d="M0,0 C-18,10 -18,-10 0,0 Z" fill="#C93B3B"/>
+    <!-- Flower Center -->
+    <circle cx="0" cy="0" r="6" fill="#E6A15C"/>
+    <circle cx="0" cy="0" r="3" fill="#FFF"/>
+  </g>
+</svg>

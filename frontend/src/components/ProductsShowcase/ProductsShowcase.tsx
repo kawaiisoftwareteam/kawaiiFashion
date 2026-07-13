@@ -2,97 +2,36 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { products, Product } from "../../data/products";
+import { useCart } from "../../context/CartContext";
 import styles from "./ProductsShowcase.module.css";
 
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  price: string;
-  rating: number;
-  reviewsCount: number;
-  image: string;
-  hoverImage: string;
-  badge?: string;
-  tagline: string;
-  description: string;
-  ingredients: string;
-  usage: string;
-}
-
-const products: Product[] = [
-  {
-    id: "serum",
-    name: "Rice Ferment Brightening Serum",
-    category: "serum",
-    price: "$36.00",
-    rating: 5,
-    reviewsCount: 48,
-    image: "/product_serum.png",
-    hoverImage: "/product_serum_hover.png",
-    badge: "Best Seller",
-    tagline: "Hydrate & Illuminate",
-    description: "Infused with traditional Japanese Sake extract and Niacinamide, this lightweight serum deeply penetrates to fade dark spots, refine texture, and deliver a translucent, glass-skin glow.",
-    ingredients: "Sake Extract (Rice Ferment Filtrate), Niacinamide (5%), Hyaluronic Acid, Licorice Root Extract, Green Tea Extract, Glycerin.",
-    usage: "Apply 2-3 drops onto clean, damp skin morning and night. Pat gently until fully absorbed before applying moisturizer."
-  },
-  {
-    id: "cream",
-    name: "Camellia Nourishing Cream",
-    category: "moisturizer",
-    price: "$42.00",
-    rating: 5,
-    reviewsCount: 36,
-    image: "/product_cream.png",
-    hoverImage: "/product_cream_hover.png",
-    badge: "Award Winner",
-    tagline: "Deep Moisture Lock",
-    description: "A rich, velvety cream enriched with premium cold-pressed Camellia Japonica seed oil. It wraps the skin in a protective layer of intense moisture, repairing the lipid barrier and softening fine lines.",
-    ingredients: "Camellia Japonica Seed Oil, Shea Butter, Squalane, Ceramide NP, Vitamin E, Centella Asiatica (Cica) Extract.",
-    usage: "Warm a pea-sized amount between fingertips and press gently into face and neck as the final step of your evening routine."
-  },
-  {
-    id: "cleanser",
-    name: "Peach Blossom Cleansing Oil",
-    category: "cleanser",
-    price: "$28.00",
-    rating: 4,
-    reviewsCount: 52,
-    image: "/product_cleanser.png",
-    hoverImage: "/product_cleanser_hover.png",
-    badge: "New",
-    tagline: "Gentle Makeup Melter",
-    description: "A lightweight, water-soluble cleansing oil that effortlessly dissolves waterproof makeup, sunscreen, and excess sebum while preserving skin hydration. Emulsifies into a milky lotion that rinses clean.",
-    ingredients: "Peach Kernel Oil, Jojoba Seed Oil, Olive Fruit Oil, Vitamin E, Peach Blossom Extract, Polyglyceryl-10 Dioleate.",
-    usage: "Pump 2-3 times onto dry hands and massage over dry face. Add warm water to emulsify, then rinse thoroughly."
-  },
-  {
-    id: "mask",
-    name: "Matcha Green Tea Clay Mask",
-    category: "mask",
-    price: "$34.00",
-    rating: 5,
-    reviewsCount: 29,
-    image: "/product_mask.png",
-    hoverImage: "/product_mask_hover.png",
-    badge: "Popular",
-    tagline: "Pore Purifier",
-    description: "A creamy clay mask formulated with Uji Matcha and mineral-rich Kaolin clay. It detoxifies pores, absorbs excess oil, and gently exfoliates without stripping or drying the skin.",
-    ingredients: "Uji Matcha (Camellia Sinensis Leaf Powder), Kaolin Clay, Bentonite, Aloe Vera Juice, Panthenol, Allantoin.",
-    usage: "Apply an even layer to clean skin, avoiding eyes and lips. Leave on for 10-12 minutes, then rinse with warm water. Use 1-2 times weekly."
-  }
-];
-
-interface ProductsShowcaseProps {
-  onAddToCart: (productName: string, event?: React.MouseEvent) => void;
-}
-
-export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps) {
+export default function ProductsShowcase() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { addToCart } = useCart();
+
+  // Filter out preorder products and non-core categories for the main featured homepage list
+  const mainCategories = ["cleanser", "serum", "moisturizer", "mask"];
+  const homepageProducts = products.filter(
+    (p) => !p.isPreorder && !p.releaseSchedule && mainCategories.includes(p.category)
+  );
+
+  const handleAddToCart = (product: Product, event?: React.MouseEvent) => {
+    if (event) {
+      event.stopPropagation(); // prevent opening details modal
+    }
+    
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image
+    });
+  };
 
   return (
-    <section className={styles.showcaseSection}>
+    <section className={styles.showcaseSection} id="shop">
       <div className={styles.showcaseHeaderWrapper}>
         <span className={styles.showcaseTagline}>Curated For You</span>
         <h2 className={styles.showcaseTitle}>Best of Kawaii Beauty</h2>
@@ -116,7 +55,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
 
       {/* Product Cards Grid */}
       <div className={styles.productGrid}>
-        {products
+        {homepageProducts
           .filter((p) => activeFilter === "all" || p.category === activeFilter)
           .map((product) => (
             <div
@@ -144,7 +83,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                 />
                 <button
                   className={styles.quickAddBtn}
-                  onClick={(e) => onAddToCart(product.name, e)}
+                  onClick={(e) => handleAddToCart(product, e)}
                 >
                   <span>Quick Add</span>
                 </button>
@@ -157,7 +96,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                 </div>
                 <h3 className={styles.cardTitle}>{product.name}</h3>
                 <p className={styles.cardTagline}>{product.tagline}</p>
-                <span className={styles.cardPrice}>{product.price}</span>
+                <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
               </div>
             </div>
           ))}
@@ -210,7 +149,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                     {selectedProduct.rating}.0 • {selectedProduct.reviewsCount} customer reviews
                   </span>
                 </div>
-                <div className={styles.modalPrice}>{selectedProduct.price}</div>
+                <div className={styles.modalPrice}>${selectedProduct.price.toFixed(2)}</div>
 
                 <p className={styles.modalDesc}>{selectedProduct.description}</p>
 
@@ -228,7 +167,7 @@ export default function ProductsShowcase({ onAddToCart }: ProductsShowcaseProps)
                 <button
                   className={styles.modalAddBtn}
                   onClick={() => {
-                    onAddToCart(selectedProduct.name);
+                    handleAddToCart(selectedProduct);
                     setSelectedProduct(null);
                   }}
                 >
