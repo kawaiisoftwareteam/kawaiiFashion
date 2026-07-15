@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { products, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
@@ -16,6 +16,47 @@ export default function ProductsShowcase() {
   const homepageProducts = products.filter(
     (p) => !p.isPreorder && !p.releaseSchedule && mainCategories.includes(p.category)
   );
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+  const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+
+  const updateArrows = () => {
+    if (gridRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = gridRef.current;
+      setShowLeftArrow(scrollLeft > 5);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 5);
+    }
+  };
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (grid) {
+      grid.addEventListener("scroll", updateArrows);
+      window.addEventListener("resize", updateArrows);
+      
+      updateArrows();
+      const timer = setTimeout(updateArrows, 100);
+      
+      return () => {
+        grid.removeEventListener("scroll", updateArrows);
+        window.removeEventListener("resize", updateArrows);
+        clearTimeout(timer);
+      };
+    }
+  }, [activeFilter, homepageProducts]);
+
+  const handleScroll = (direction: "left" | "right") => {
+    if (gridRef.current) {
+      const { clientWidth } = gridRef.current;
+      const scrollAmount = clientWidth * 0.8;
+      gridRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const handleAddToCart = (product: Product, event?: React.MouseEvent) => {
     if (event) {
@@ -53,53 +94,118 @@ export default function ProductsShowcase() {
         </div>
       </div>
 
-      {/* Product Cards Grid */}
-      <div className={styles.productGrid}>
-        {homepageProducts
-          .filter((p) => activeFilter === "all" || p.category === activeFilter)
-          .map((product) => (
-            <div
-              key={product.id}
-              className={styles.productCard}
-              onClick={() => setSelectedProduct(product)}
-            >
-              <div className={styles.productImageWrapper}>
-                {product.badge && <span className={styles.cardBadge}>{product.badge}</span>}
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  style={{ objectFit: "cover" }}
-                  className={styles.cardImage}
-                />
-                <Image
-                  src={product.hoverImage}
-                  alt={`${product.name} alternate view`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  style={{ objectFit: "cover" }}
-                  className={styles.cardImageHover}
-                />
-                <button
-                  className={styles.quickAddBtn}
-                  onClick={(e) => handleAddToCart(product, e)}
-                >
-                  <span>Quick Add</span>
-                </button>
-              </div>
+      {/* Product Cards Grid Wrapper */}
+      <div className={styles.gridContainer}>
+        {/* Left Arrow Button */}
+        <button
+          className={`${styles.scrollArrow} ${styles.scrollArrowLeft} ${showLeftArrow ? styles.scrollArrowActive : ""}`}
+          onClick={() => handleScroll("left")}
+          aria-label="Scroll left"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
 
-              <div className={styles.productInfo}>
-                <div className={styles.cardRating}>
-                  <span className={styles.cardStars}>{"★".repeat(product.rating)}</span>
-                  <span className={styles.cardReviewsCount}>({product.reviewsCount})</span>
+        {/* Product Cards Grid */}
+        <div className={styles.productGrid} ref={gridRef}>
+          {homepageProducts
+            .filter((p) => activeFilter === "all" || p.category === activeFilter)
+            .map((product) => (
+              <div
+                key={product.id}
+                className={styles.productCard}
+                onClick={() => setSelectedProduct(product)}
+                onMouseEnter={() => setHoveredProductId(product.id)}
+                onMouseLeave={() => setHoveredProductId(null)}
+              >
+                <div className={styles.productImageWrapper}>
+                  {product.badge && <span className={styles.cardBadge}>{product.badge}</span>}
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    style={{ objectFit: "cover" }}
+                    className={styles.cardImage}
+                  />
+                  <Image
+                    src={product.hoverImage}
+                    alt={`${product.name} alternate view`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    style={{ objectFit: "cover" }}
+                    className={styles.cardImageHover}
+                  />
+                  {/* Hover Video */}
+                  <video
+                    src={product.category === "cleanser" || product.category === "toner" ? "/cleanser_use.mp4" : "/serum_use.mp4"}
+                    loop
+                    muted
+                    playsInline
+                    className={`${styles.cardVideo} ${hoveredProductId === product.id ? styles.cardVideoActive : ""}`}
+                    ref={(el) => {
+                      if (el) {
+                        if (hoveredProductId === product.id) {
+                          el.play().catch(() => {});
+                        } else {
+                          el.pause();
+                          el.currentTime = 0;
+                        }
+                      }
+                    }}
+                  />
+                  <button
+                    className={styles.quickAddBtn}
+                    onClick={(e) => handleAddToCart(product, e)}
+                  >
+                    <span>Quick Add</span>
+                  </button>
                 </div>
-                <h3 className={styles.cardTitle}>{product.name}</h3>
-                <p className={styles.cardTagline}>{product.tagline}</p>
-                <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+
+                <div className={styles.productInfo}>
+                  <div className={styles.cardRating}>
+                    <span className={styles.cardStars}>{"★".repeat(product.rating)}</span>
+                    <span className={styles.cardReviewsCount}>({product.reviewsCount})</span>
+                  </div>
+                  <h3 className={styles.cardTitle}>{product.name}</h3>
+                  <p className={styles.cardTagline}>{product.tagline}</p>
+                  <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
+
+        {/* Right Arrow Button */}
+        <button
+          className={`${styles.scrollArrow} ${styles.scrollArrowRight} ${showRightArrow ? styles.scrollArrowActive : ""}`}
+          onClick={() => handleScroll("right")}
+          aria-label="Scroll right"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
 
       {/* Product Detail Modal */}

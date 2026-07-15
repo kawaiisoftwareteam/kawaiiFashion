@@ -13,10 +13,39 @@
   gap: 50px;
 }
 
+.footerLeftColumn {
+  display: contents; /* Behaves as direct grid children on desktop */
+}
+
 @media (max-width: 1024px) {
   .footerContent {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr; /* Wider left column to provide breathing room */
     gap: 40px;
+  }
+
+  .footerLeftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 48px; /* Natural spacing between brand logo and newsletter box */
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContainer {
+    padding: 60px 24px 30px;
+  }
+
+  .footerContent {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContent {
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
   }
 }
 
@@ -86,19 +115,13 @@
   gap: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .linkColumns {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: 1fr;
+    gap: 48px; /* Increased from 24px for clear visual separation between SHOP, BRANDS, and COLLECTIONS */
   }
 }
 
-@media (max-width: 480px) {
-  .linkColumns {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-}
 
 .linkColumn h3,
 .newsletterPanel h3 {

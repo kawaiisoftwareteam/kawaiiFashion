@@ -135,6 +135,23 @@
   transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.cardVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.cardVideoActive {
+  opacity: 1;
+}
+
 .productCard:hover .cardImage {
   opacity: 0;
   transform: scale(1.04);
@@ -302,8 +319,13 @@
 }
 
 @keyframes fadeInModal {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modalContent {
@@ -318,8 +340,15 @@
 }
 
 @keyframes slideUpModal {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modalClose {
@@ -514,6 +543,63 @@
   transform: translateY(-2px);
 }
 
+/* Scrollable Grid Container */
+.gridContainer {
+  position: relative;
+  width: 100%;
+}
+
+.scrollArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  border: 1px solid rgba(140, 136, 132, 0.15);
+  box-shadow: 0 4px 12px rgba(13, 13, 13, 0.08);
+  color: var(--color-ink);
+  display: none; /* hidden on desktop unless scroll is activated */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollArrowActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scrollArrow:hover {
+  background-color: var(--color-crimson);
+  color: var(--color-white);
+  border-color: var(--color-crimson);
+  box-shadow: 0 6px 16px rgba(207, 54, 66, 0.2);
+}
+
+.scrollArrowLeft {
+  left: -23px; /* Hang halfway off the edge of the grid wrapper */
+}
+
+.scrollArrowRight {
+  right: -23px; /* Hang halfway off the edge of the grid wrapper */
+}
+
+@media (max-width: 1024px) {
+  .scrollArrowLeft {
+    left: 10px; /* Bring arrow inside on tablet screens */
+  }
+
+  .scrollArrowRight {
+    right: 10px; /* Bring arrow inside on tablet screens */
+  }
+}
+
 /* Responsive adjustments for Showcase & Modal */
 @media (max-width: 1200px) {
   .productGrid {
@@ -526,9 +612,11 @@
   .showcaseSection {
     padding: 80px 30px;
   }
+
   .modalContent {
     max-width: 760px;
   }
+
   .modalDetails {
     padding: 30px;
   }
@@ -538,35 +626,64 @@
   .showcaseSection {
     padding: 60px 20px;
   }
+
   .showcaseTitle {
     font-size: 36px;
   }
-  .productGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+
+  .scrollArrow {
+    display: flex;
   }
+
+  .productGrid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 10px 4px 20px 4px;
+    margin: 0;
+    scrollbar-width: none; /* Hide default scrollbar */
+  }
+
+  .productGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .productCard {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+  }
+
   .productInfo {
     padding: 16px;
     gap: 8px;
   }
+
   .cardTitle {
     font-size: 16px;
   }
+
   .quickAddBtn {
     transform: translateY(0);
   }
+
   .modalContent {
     max-height: 90vh;
     overflow-y: auto;
   }
+
   .modalLayout {
     flex-direction: column;
     height: auto;
   }
+
   .modalImageWrapper {
     height: 320px;
     width: 100%;
   }
+
   .modalDetails {
     padding: 24px;
     overflow-y: visible;
@@ -574,7 +691,7 @@
 }
 
 @media (max-width: 480px) {
-  .productGrid {
-    grid-template-columns: 1fr;
+  .productCard {
+    flex: 0 0 250px; /* Slightly narrower card for small screens */
   }
 }

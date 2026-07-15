@@ -243,9 +243,11 @@
     padding: 3rem 1.25rem;
     border-radius: 0;
   }
+
   .title {
     font-size: 2rem;
   }
+
   .grid {
     grid-template-columns: 1fr;
     max-width: 400px;

@@ -23,39 +23,65 @@ export default function Footer() {
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.footerContent}>
-        {/* Left Side: Brand Logo and Description */}
-        <div className={styles.brandPanel}>
-          <Link href="/" className={styles.logo}>
-            <div>
-              <span className={styles.logoAccent}>K</span>AWAII BEAUTY
+        <div className={styles.footerLeftColumn}>
+          {/* Left Side: Brand Logo and Description */}
+          <div className={styles.brandPanel}>
+            <Link href="/" className={styles.logo}>
+              <div>
+                <span className={styles.logoAccent}>K</span>AWAII BEAUTY
+              </div>
+              <span className={styles.logoSub}>collection</span>
+            </Link>
+            <p className={styles.brandDesc}>
+              Time-honored Japanese skincare secrets meets modern clean beauty science. Handpicked premium formulations designed to target dehydration, build barrier resilience, and restore your natural, glass-like radiance.
+            </p>
+            {/* Social Icons */}
+            <div className={styles.socialList}>
+              <a href="#" className={styles.socialLink} aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="Pinterest">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" x2="12" y1="2" y2="8"/>
+                  <line x1="12" x2="6" y1="2" y2="8"/>
+                  <path d="M12 2v20"/>
+                  <path d="M4 12h16"/>
+                </svg>
+              </a>
+              <a href="#" className={styles.socialLink} aria-label="TikTok">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                </svg>
+              </a>
             </div>
-            <span className={styles.logoSub}>collection</span>
-          </Link>
-          <p className={styles.brandDesc}>
-            Time-honored Japanese skincare secrets meets modern clean beauty science. Handpicked premium formulations designed to target dehydration, build barrier resilience, and restore your natural, glass-like radiance.
-          </p>
-          {/* Social Icons */}
-          <div className={styles.socialList}>
-            <a href="#" className={styles.socialLink} aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-              </svg>
-            </a>
-            <a href="#" className={styles.socialLink} aria-label="Pinterest">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" x2="12" y1="2" y2="8"/>
-                <line x1="12" x2="6" y1="2" y2="8"/>
-                <path d="M12 2v20"/>
-                <path d="M4 12h16"/>
-              </svg>
-            </a>
-            <a href="#" className={styles.socialLink} aria-label="TikTok">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-              </svg>
-            </a>
+          </div>
+
+          {/* Newsletter Column */}
+          <div className={styles.newsletterPanel}>
+            <h3>Subscribe</h3>
+            <p>Join the Kawaii Club to receive beauty tips, early access to releases, and 15% off your first purchase.</p>
+            <form onSubmit={handleSubscribe} className={styles.subscribeForm}>
+              <input
+                type="email"
+                required
+                placeholder="your.email@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.subscribeInput}
+              />
+              <button type="submit" className={styles.subscribeBtn}>
+                {subscribed ? "Subscribed!" : "Join"}
+              </button>
+            </form>
+            {subscribed && (
+              <span className={styles.successMessage}>
+                Check your inbox for your 15% discount code!
+              </span>
+            )}
           </div>
         </div>
 
@@ -93,31 +119,6 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-        </div>
-
-        {/* Newsletter Column */}
-        <div className={styles.newsletterPanel}>
-          <h3>Subscribe</h3>
-          <p>Join the Kawaii Club to receive beauty tips, early access to releases, and 15% off your first purchase.</p>
-          <form onSubmit={handleSubscribe} className={styles.subscribeForm}>
-            <input
-              type="email"
-              required
-              placeholder="your.email@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={styles.subscribeInput}
-            />
-            <button type="submit" className={styles.subscribeBtn}>
-              {subscribed ? "Subscribed!" : "Join"}
-            </button>
-          </form>
-          {subscribed && (
-            <span className={styles.successMessage}>
-              Check your inbox for your 15% discount code!
-            </span>
-          )}
         </div>
       </div>
 
