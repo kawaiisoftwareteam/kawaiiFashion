@@ -152,6 +152,68 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
               </div>
             </div>
           </div>
+          <div className={styles.navItem}>
+            <span className={styles.navLink}>
+              Family Care
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </span>
+            <div className={`${styles.dropdown} ${styles.familyDropdown}`}>
+              <div className={styles.dropdownTitle}>Skincare by Family</div>
+              <div className={styles.dropdownGridSingle}>
+                <Link
+                  href="/collections/ladies-care"
+                  className={styles.dropdownCard}
+                  style={{
+                    ["--brand-hover-bg" as any]: "#FDF7F8",
+                    ["--brand-hover-color" as any]: "#CF3642",
+                  }}
+                >
+                  <div className={styles.dropdownCardText}>
+                    <span className={styles.dropdownCardName}>Ladies' Luxury</span>
+                    <span className={styles.dropdownCardTagline}>Sakura & Camellia glow care</span>
+                  </div>
+                </Link>
+                <Link
+                  href="/collections/men-care"
+                  className={styles.dropdownCard}
+                  style={{
+                    ["--brand-hover-bg" as any]: "#F0F4F5",
+                    ["--brand-hover-color" as any]: "#026F98",
+                  }}
+                >
+                  <div className={styles.dropdownCardText}>
+                    <span className={styles.dropdownCardName}>Men's Care</span>
+                    <span className={styles.dropdownCardTagline}>Oil-control & shave relief</span>
+                  </div>
+                </Link>
+                <Link
+                  href="/collections/baby-care"
+                  className={styles.dropdownCard}
+                  style={{
+                    ["--brand-hover-bg" as any]: "#FDFBF7",
+                    ["--brand-hover-color" as any]: "#D4AF37",
+                  }}
+                >
+                  <div className={styles.dropdownCardText}>
+                    <span className={styles.dropdownCardName}>Baby & Kids</span>
+                    <span className={styles.dropdownCardTagline}>Ultra-gentle milk & oat care</span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
           <a href="#" className={styles.navLink}>
             Offers
           </a>

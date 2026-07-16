@@ -137,6 +137,48 @@ export const collections: Collection[] = [
       "Lip Care: Lock in lip moisture with Yuzu Brightening Lip Balm."
     ],
     tagline: "Intense Barrier Repair"
+  },
+  {
+    id: "ladies-care",
+    name: "Ladies' Luxury Collection",
+    subtitle: "Illuminate, firm & plumping overnight care",
+    description: "A luxurious skincare experience that restores youthful vitality and glass-skin radiance. Packed with antioxidant-rich Sakura, collagen-boosting peptides, and hydrating peach nectar.",
+    accentColor: "#CF3642",
+    bgGradient: "linear-gradient(135deg, #FDF7F8 0%, #F5DDE1 100%)",
+    steps: [
+      "Treat: Boost radiance with Porcelain Sakura Glow Serum.",
+      "Moisturize: Firm and restore skin barrier with Tsubaki Blossom Anti-Aging Cream.",
+      "Overnight Mask: Lock in hydration with Momo Rosewater Hydra-Gel Mask."
+    ],
+    tagline: "3 Steps to Glass-Skin Youth"
+  },
+  {
+    id: "men-care",
+    name: "Men's Care Collection",
+    subtitle: "Cleanse, soothe & control shine",
+    description: "A simple, high-performance skincare routine designed for men. Formulated to control excess sebum, soothe razor burn, and keep skin deeply hydrated with a velvet-matte finish.",
+    accentColor: "#026F98",
+    bgGradient: "linear-gradient(135deg, #F0F4F5 0%, #D4E3EA 100%)",
+    steps: [
+      "Cleanse: Purify pores with Uji Matcha Charcoal Wash.",
+      "Soothe: Calm razor irritation using Tsubaki Men's Shave & Beard Balm.",
+      "Moisturize: Hydrate and control shine with Rice Ferment Matte Moisturizer."
+    ],
+    tagline: "3 Steps to Refined Skin"
+  },
+  {
+    id: "baby-care",
+    name: "Baby & Kids Gentle Collection",
+    subtitle: "Pure, allergen-free & ultra-soothing protection",
+    description: "Pediatrician-tested, fragrance-free formulations crafted for hyper-sensitive infant skin. Combines comforting oatmeal, natural milk lipids, and nourishing camellia seed oil.",
+    accentColor: "#D4AF37",
+    bgGradient: "linear-gradient(135deg, #FDFBF7 0%, #F3ECE0 100%)",
+    steps: [
+      "Bath: Cleanse skin gently head-to-toe with Hokkaido Milk & Oat Baby Wash.",
+      "Soothe: Protect dry patches or diaper rash with Sweet Peach Calming Baby Balm.",
+      "Lotion: Nourish and soften skin with Camellia Seed Ultra-Soft Baby Lotion."
+    ],
+    tagline: "3 Steps to Comfort Baby"
   }
 ];
 
@@ -357,5 +399,161 @@ export const products: Product[] = [
     usage: "Apply a generous layer onto lips before sleeping, or swipe on during the day as needed.",
     brandId: "kome-rituals",
     collections: ["double-hydration-kit"]
+  },
+  // Men's Skincare Collection
+  {
+    id: "men_matcha_wash",
+    name: "Uji Matcha Charcoal Wash",
+    category: "cleanser",
+    price: 29,
+    rating: 4.8,
+    reviewsCount: 34,
+    image: "/product_cleanser.png",
+    hoverImage: "/product_cleanser_hover.png",
+    badge: "Oil Control",
+    tagline: "Purify & Mattify",
+    description: "A high-performance foaming cleanser combining stone-ground Uji Matcha with active binchotan charcoal. It deep cleanses pores, balances sebum, and prevents razor bumps without stripping.",
+    ingredients: "Uji Matcha (Camellia Sinensis Leaf Powder), Binchotan Charcoal, Salicylic Acid (0.5%), Licorice Root Extract, Aloe Vera Leaf Juice.",
+    usage: "Lather a small amount between wet hands and massage onto face in circular motions. Rinse thoroughly with lukewarm water. Use morning and night.",
+    brandId: "uji-matcha-co",
+    collections: ["men-care"]
+  },
+  {
+    id: "men_tsubaki_balm",
+    name: "Tsubaki Men's Shave & Beard Balm",
+    category: "moisturizer",
+    price: 35,
+    rating: 4.9,
+    reviewsCount: 26,
+    image: "/product_cream.png",
+    hoverImage: "/product_cream_hover.png",
+    badge: "Soothe & Soften",
+    tagline: "Post-Shave Recovery",
+    description: "A fast-absorbing, cooling balm packed with cold-pressed Camellia oil and soothing centella. It instantly calms razor burn, hydrates skin, and conditions facial hair for a soft finish.",
+    ingredients: "Camellia Japonica Seed Oil, Centella Asiatica (Cica) Extract, Allantoin, Witch Hazel, Hyaluronic Acid, Menthol.",
+    usage: "Apply 1-2 pumps onto freshly shaved skin or throughout beard. Smooth gently over face and neck until fully absorbed.",
+    brandId: "tsubaki-labs",
+    collections: ["men-care"]
+  },
+  {
+    id: "men_kome_matte",
+    name: "Rice Ferment Matte Moisturizer",
+    category: "moisturizer",
+    price: 32,
+    rating: 4.7,
+    reviewsCount: 42,
+    image: "/product_cream.png",
+    hoverImage: "/product_cream_hover.png",
+    badge: "Zero Shine",
+    tagline: "Ultra-Lightweight Hydration",
+    description: "Formulated with fermented rice water and oil-absorbing minerals, this weightless gel-cream delivers 24-hour hydration while leaving a clean, velvet-matte finish.",
+    ingredients: "Rice Ferment Filtrate (Sake Extract), Niacinamide (3%), Green Tea Extract, Sodium Hyaluronate, Silica.",
+    usage: "Smooth a pea-sized amount onto face and neck after cleansing or toning. Ideal for daytime use to control oil.",
+    brandId: "kome-rituals",
+    collections: ["men-care"]
+  },
+  // Ladies' Skincare Collection
+  {
+    id: "ladies_sakura_serum",
+    name: "Porcelain Sakura Glow Serum",
+    category: "serum",
+    price: 45,
+    rating: 5.0,
+    reviewsCount: 78,
+    image: "/product_serum.png",
+    hoverImage: "/product_serum_hover.png",
+    badge: "Top Rated",
+    tagline: "Instant Glass-Skin Luminosity",
+    description: "A luxury brightening serum infused with hand-harvested Sakura distillate and arbutin. It targets hyperpigmentation, uneven skin tone, and dullness for a glowing, porcelain complexion.",
+    ingredients: "Sakura Flower Distillate, Alpha-Arbutin (2%), Niacinamide (5%), Pearl Powder, Hyaluronic Acid.",
+    usage: "Dispense 3-4 drops onto palms and pat gently into clean face and neck. For maximum glass-skin glow, use morning and night.",
+    brandId: "momo-glow",
+    collections: ["ladies-care"]
+  },
+  {
+    id: "ladies_tsubaki_cream",
+    name: "Tsubaki Blossom Anti-Aging Cream",
+    category: "moisturizer",
+    price: 58,
+    rating: 4.9,
+    reviewsCount: 64,
+    image: "/product_cream.png",
+    hoverImage: "/product_cream_hover.png",
+    badge: "Luxury Care",
+    tagline: "Firm & Restore Resilience",
+    description: "A rich, indulgent cream combining island Camellia seed oil with botanical peptides. It targets fine lines, boosts collagen production, and restores youthful plumpness to mature or dry skin.",
+    ingredients: "Camellia Japonica Seed Oil, Acetyl Hexapeptide-8, Adenosine, Rice Bran Extract, Ceramide NP.",
+    usage: "Warm a small amount between fingertips and massage onto face and neck in upward, lifting motions. Use as the final step in your evening routine.",
+    brandId: "tsubaki-labs",
+    collections: ["ladies-care"]
+  },
+  {
+    id: "ladies_momo_mask",
+    name: "Momo Rosewater Hydra-Gel Mask",
+    category: "mask",
+    price: 36,
+    rating: 4.8,
+    reviewsCount: 47,
+    image: "/product_mask.png",
+    hoverImage: "/product_mask_hover.png",
+    badge: "Hydration Boost",
+    tagline: "Overnight Petal Plump",
+    description: "An overnight jelly-gel mask infused with Japanese peach extract and rose distillate. It locks in moisture while you sleep, revealing bouncy, deeply hydrated, peach-soft skin by morning.",
+    ingredients: "Prunus Persica (Peach) Fruit Water, Rose Flower Distillate, Honey Extract, Squalane, Centella Asiatica, Beta-Glucan.",
+    usage: "Smooth a generous layer over skin as the final step of your evening routine. Leave on overnight and rinse with warm water in the morning. Use 2-3 times a week.",
+    brandId: "momo-glow",
+    collections: ["ladies-care"]
+  },
+  // Baby Skincare Collection
+  {
+    id: "baby_oat_wash",
+    name: "Hokkaido Milk & Oat Baby Wash",
+    category: "cleanser",
+    price: 24,
+    rating: 4.9,
+    reviewsCount: 55,
+    image: "/product_cleanser.png",
+    hoverImage: "/product_cleanser_hover.png",
+    badge: "Tear-Free",
+    tagline: "Gentle Head-to-Toe Care",
+    description: "An ultra-gentle, soap-free body wash and shampoo formulated for newborns and toddlers. Enriched with nourishing Hokkaido milk lipids and colloidal oatmeal to protect delicate skin barriers.",
+    ingredients: "Hokkaido Organic Milk Lipids, Colloidal Oatmeal, Aloe Vera Extract, Chamomile Extract, Glycerin.",
+    usage: "Apply a small amount to wet skin and hair, lather gently, and rinse thoroughly. Perfect for daily bath time.",
+    brandId: "kome-rituals",
+    collections: ["baby-care"]
+  },
+  {
+    id: "baby_peach_balm",
+    name: "Sweet Peach Calming Baby Balm",
+    category: "moisturizer",
+    price: 22,
+    rating: 5.0,
+    reviewsCount: 39,
+    image: "/product_cream.png",
+    hoverImage: "/product_cream_hover.png",
+    badge: "Hypoallergenic",
+    tagline: "Immediate Dry Patch Relief",
+    description: "A rich, protective barrier balm that relieves eczema, cradle cap, and dry, irritated patches. Formulated with skin-calming peach extract and organic chamomile oil.",
+    ingredients: "Peach Kernel Oil, Organic Chamomile Extract, Shea Butter, Sunflower Seed Wax, Calendula Extract.",
+    usage: "Apply a thin layer to affected dry patches, cheeks, or diaper area. Repeat as needed throughout the day.",
+    brandId: "momo-glow",
+    collections: ["baby-care"]
+  },
+  {
+    id: "baby_camellia_lotion",
+    name: "Camellia Seed Ultra-Soft Baby Lotion",
+    category: "moisturizer",
+    price: 26,
+    rating: 4.9,
+    reviewsCount: 41,
+    image: "/product_cream.png",
+    hoverImage: "/product_cream_hover.png",
+    badge: "Pediatrician Tested",
+    tagline: "Soothing 24Hr Moisture",
+    description: "A lightweight, fragrance-free moisturizing lotion crafted with organic Camellia seed oil to nourish delicate skin and maintain natural pH balance.",
+    ingredients: "Camellia Japonica Seed Oil, Jojoba Seed Oil, Squalane, Tocopherol (Vitamin E), Panthenol.",
+    usage: "Gently massage onto baby's face and body after a bath, or anytime skin feels dry. Suitable for daily use.",
+    brandId: "tsubaki-labs",
+    collections: ["baby-care"]
   }
 ];

@@ -223,6 +223,17 @@
   width: 660px;
 }
 
+.familyDropdown {
+  width: 320px;
+}
+
+.dropdownGridSingle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
 .dropdownTitle {
   font-family: var(--font-sans);
   font-size: 11px;

@@ -2,6 +2,7 @@
 
 import Hero from "../components/Hero/Hero";
 import ProductsShowcase from "../components/ProductsShowcase/ProductsShowcase";
+import FamilyCollections from "../components/FamilyCollections/FamilyCollections";
 import PreorderSection from "../components/PreorderSection/PreorderSection";
 import UpcomingSection from "../components/UpcomingSection/UpcomingSection";
 import { useCart } from "../context/CartContext";
@@ -24,6 +25,9 @@ export default function Home() {
 
       {/* Product Showcase Catalog */}
       <ProductsShowcase />
+
+      {/* Family Collections (Men, Ladies, Baby) */}
+      <FamilyCollections />
 
       {/* Preorder Section */}
       <PreorderSection onPreorderAdded={handlePreorderAdded} />
