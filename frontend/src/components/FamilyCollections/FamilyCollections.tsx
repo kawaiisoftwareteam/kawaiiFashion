@@ -102,11 +102,12 @@ export default function FamilyCollections() {
         {demographics.map((demo) => {
           const isActive = demo.id === activeTab;
           return (
-            <div
+            <Link
               key={demo.id}
+              href={`/collections/${demo.collectionTag}`}
               className={`${styles.demoCard} ${isActive ? styles.demoCardActive : ""}`}
               style={{ "--card-accent": demo.accentColor } as React.CSSProperties}
-              onClick={() => setActiveTab(demo.id)}
+              onMouseEnter={() => setActiveTab(demo.id)}
             >
               <div className={styles.cardBgWrapper}>
                 <Image
@@ -125,15 +126,11 @@ export default function FamilyCollections() {
                   {isActive && <span className={styles.cardActiveIndicator} />}
                 </h3>
                 <p className={styles.cardDesc}>{demo.description}</p>
-                <Link
-                  href={`/collections/${demo.collectionTag}`}
-                  className={styles.exploreLink}
-                  onClick={(e) => e.stopPropagation()}
-                >
+                <span className={styles.exploreLink}>
                   View Full Page →
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
