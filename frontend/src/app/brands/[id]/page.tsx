@@ -139,7 +139,7 @@ export default function BrandDetailPage({ params }: PageProps) {
                         color: "var(--color-white)",
                         border: "none",
                         padding: "6px 12px",
-                        borderRadius: "20px",
+                        borderRadius: "2px",
                         fontSize: "11px",
                         fontWeight: "600",
                         cursor: "pointer"

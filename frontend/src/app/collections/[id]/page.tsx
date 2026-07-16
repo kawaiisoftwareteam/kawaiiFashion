@@ -70,15 +70,40 @@ export default function CollectionDetailPage({ params }: PageProps) {
     <div style={{ ["--accent-color" as any]: collection.accentColor }}>
       {/* Collection Hero Header */}
       <div className={styles.detailHeader} style={{ background: collection.bgGradient }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <span className={styles.exploreButton} style={{ background: "none", border: "1px solid rgba(140, 136, 132, 0.2)", color: "var(--color-ink)", marginBottom: "20px" }}>
-            <Link href="/collections" style={{ textDecoration: "none", color: "inherit" }}>
-              ← All Collections
-            </Link>
-          </span>
-          <h1 style={{ marginTop: "16px" }}>{collection.name}</h1>
-          <span className={styles.collectionSubtitle}>{collection.subtitle}</span>
-          <p>{collection.description}</p>
+        <div className={styles.detailHeaderContent}>
+          <div className={styles.detailHeaderText}>
+            <span className={styles.backLinkWrapper}>
+              <Link href="/collections" className={styles.backLink}>
+                ← All Collections
+              </Link>
+            </span>
+            <h1 style={{ marginTop: "16px" }}>{collection.name}</h1>
+            <span className={styles.collectionSubtitle}>{collection.subtitle}</span>
+            <p>{collection.description}</p>
+            <div className={styles.ctaGroup}>
+              <a href="#featured-products" className={styles.primaryCta}>
+                <span>Shop Now</span>
+              </a>
+              {collectionProducts.length > 0 && (
+                <button className={styles.secondaryCta} onClick={handleBuyKit}>
+                  Buy Entire Kit
+                </button>
+              )}
+            </div>
+          </div>
+          
+          {collection.image && (
+            <div className={styles.detailHeaderImageWrapper}>
+              <Image
+                src={collection.image}
+                alt={`${collection.name} banner`}
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -106,7 +131,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
         </div>
 
         {/* Collection Products list */}
-        <h2 className={styles.pageTitle} style={{ textAlign: "center", fontSize: "28px", marginTop: "80px", marginBottom: "32px", fontFamily: "var(--font-serif)" }}>
+        <h2 id="featured-products" className={styles.pageTitle} style={{ textAlign: "center", fontSize: "28px", marginTop: "80px", marginBottom: "32px", fontFamily: "var(--font-serif)" }}>
           Featured Routine Products
         </h2>
 
@@ -174,7 +199,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
                       color: "var(--color-white)",
                       border: "none",
                       padding: "6px 12px",
-                      borderRadius: "20px",
+                      borderRadius: "2px",
                       fontSize: "11px",
                       fontWeight: "600",
                       cursor: "pointer"

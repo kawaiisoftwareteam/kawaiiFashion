@@ -41,6 +41,7 @@ export interface Collection {
   bgGradient: string;
   steps: string[]; // Steps for routine building
   tagline: string; // Short descriptor for dropdown menus
+  image?: string; // Optional collection banner image
 }
 
 export const brands: Brand[] = [
@@ -108,7 +109,8 @@ export const collections: Collection[] = [
       "Treat: Apply Rice Ferment Brightening Serum for deep radiance.",
       "Mist: Lock in moisture with Sakura Soothing Mist."
     ],
-    tagline: "4 Steps to Glass Skin"
+    tagline: "4 Steps to Glass Skin",
+    image: "/product_serum.png"
   },
   {
     id: "pore-detox-ritual",
@@ -122,7 +124,8 @@ export const collections: Collection[] = [
       "Soothe: Mist skin with Sakura Soothing Mist to calm redness.",
       "Eye Care: Nourish delicate under-eyes with Matcha Peptide Eye Cream."
     ],
-    tagline: "Calming Pore Purifier"
+    tagline: "Calming Pore Purifier",
+    image: "/product_mask.png"
   },
   {
     id: "double-hydration-kit",
@@ -136,7 +139,8 @@ export const collections: Collection[] = [
       "Intense Care: Treat extra dry areas with Hokkaido Milk Whipped Cream.",
       "Lip Care: Lock in lip moisture with Yuzu Brightening Lip Balm."
     ],
-    tagline: "Intense Barrier Repair"
+    tagline: "Intense Barrier Repair",
+    image: "/product_cream.png"
   },
   {
     id: "ladies-care",
@@ -150,7 +154,8 @@ export const collections: Collection[] = [
       "Moisturize: Firm and restore skin barrier with Tsubaki Blossom Anti-Aging Cream.",
       "Overnight Mask: Lock in hydration with Momo Rosewater Hydra-Gel Mask."
     ],
-    tagline: "3 Steps to Glass-Skin Youth"
+    tagline: "3 Steps to Glass-Skin Youth",
+    image: "/collection_ladies.png"
   },
   {
     id: "men-care",
@@ -164,7 +169,8 @@ export const collections: Collection[] = [
       "Soothe: Calm razor irritation using Tsubaki Men's Shave & Beard Balm.",
       "Moisturize: Hydrate and control shine with Rice Ferment Matte Moisturizer."
     ],
-    tagline: "3 Steps to Refined Skin"
+    tagline: "3 Steps to Refined Skin",
+    image: "/collection_men.png"
   },
   {
     id: "baby-care",
@@ -178,7 +184,8 @@ export const collections: Collection[] = [
       "Soothe: Protect dry patches or diaper rash with Sweet Peach Calming Baby Balm.",
       "Lotion: Nourish and soften skin with Camellia Seed Ultra-Soft Baby Lotion."
     ],
-    tagline: "3 Steps to Comfort Baby"
+    tagline: "3 Steps to Comfort Baby",
+    image: "/collection_baby.png"
   }
 ];
 

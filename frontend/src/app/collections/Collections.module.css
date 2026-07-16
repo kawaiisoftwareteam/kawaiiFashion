@@ -143,28 +143,207 @@
 }
 
 /* Dynamic Collection Details Page */
+/* Dynamic Collection Details Page */
 .detailHeader {
   width: 100%;
   padding: 80px 24px;
-  text-align: center;
   position: relative;
+  border-bottom: 1px solid rgba(140, 136, 132, 0.1);
 }
 
-.detailHeader h1 {
+.detailHeaderContent {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: left;
+}
+
+.detailHeaderText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detailHeaderText h1 {
   font-family: var(--font-serif);
   font-size: 48px;
   font-weight: 700;
-  margin-bottom: 16px;
   letter-spacing: -0.02em;
+  color: var(--color-ink);
+  line-height: 1.15;
 }
 
-.detailHeader p {
+.detailHeaderText p {
   font-family: var(--font-sans);
   font-size: 16px;
   color: var(--color-stone);
-  max-width: 700px;
-  margin: 0 auto 30px;
   line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.detailHeaderImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  border: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.backLinkWrapper {
+  display: inline-flex;
+  margin-bottom: 8px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: 1px solid rgba(140, 136, 132, 0.25);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 30px;
+  background-color: var(--color-white);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+  transform: translateX(-4px);
+}
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.primaryCta {
+  position: relative;
+  background-color: var(--accent-color, var(--color-crimson));
+  color: var(--color-white);
+  padding: 18px 42px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 2px;
+  border: 1px solid var(--accent-color, var(--color-crimson));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+  text-decoration: none;
+}
+
+.primaryCta span {
+  position: relative;
+  z-index: 3;
+  transition: color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Left door (slides left) */
+.primaryCta::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  width: calc(50% + 1.5px);
+  background-color: var(--color-white);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+/* Right door (slides right) */
+.primaryCta::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: -1px;
+  width: calc(50% + 1.5px);
+  background-color: var(--color-white);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.primaryCta:hover::before,
+.primaryCta:hover::after {
+  transform: scaleX(1);
+}
+
+.primaryCta:hover span {
+  color: var(--accent-color, var(--color-crimson));
+}
+
+.primaryCta:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 42px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  border: 1px solid rgba(13, 13, 13, 0.25);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.secondaryCta:hover {
+  border-color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .detailHeader {
+    padding: 60px 20px;
+  }
+  .detailHeaderContent {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .detailHeaderText {
+    align-items: center;
+  }
+  .detailHeaderImageWrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 }
 
 /* Routine Flow Steps Layout */
@@ -258,7 +437,7 @@
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 2px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 15px rgba(166, 43, 43, 0.2);
