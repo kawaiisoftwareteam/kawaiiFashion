@@ -17,6 +17,12 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Kawaii Beauty | Deep Moisture Skincare",
   description: "Discover Kawaii Beauty secrets for deeply moisturized skin with our curated collection of premium skincare.",
+  icons: {
+    icon: [
+      { url: "/Icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icon.png", type: "image/png" }
+    ],
+  },
 };
 
 export default function RootLayout({
