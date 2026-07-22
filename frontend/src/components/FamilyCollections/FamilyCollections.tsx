@@ -121,11 +121,11 @@ export default function FamilyCollections() {
               </div>
               <div className={styles.cardOverlay} />
               <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>
+                <h3 className={styles.demoCardTitle}>
                   {demo.name}
                   {isActive && <span className={styles.cardActiveIndicator} />}
                 </h3>
-                <p className={styles.cardDesc}>{demo.description}</p>
+                <p className={styles.demoCardDesc}>{demo.description}</p>
                 <span className={styles.exploreLink}>
                   View Full Page →
                 </span>
@@ -159,7 +159,9 @@ export default function FamilyCollections() {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className={styles.productCard}
+              className={`${styles.productCard} h-product`}
+              itemScope
+              itemType="https://schema.org/Product"
               onClick={() => setSelectedProduct(product)}
             >
               <div className={styles.productImageWrapper}>
@@ -170,7 +172,8 @@ export default function FamilyCollections() {
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   style={{ objectFit: "cover" }}
-                  className={styles.cardImage}
+                  className={`${styles.cardImage} u-photo`}
+                  itemProp="image"
                 />
                 <Image
                   src={product.hoverImage}
@@ -193,9 +196,21 @@ export default function FamilyCollections() {
                   <span className={styles.cardStars}>{"★".repeat(Math.round(product.rating))}</span>
                   <span className={styles.cardReviewsCount}>({product.reviewsCount})</span>
                 </div>
-                <h4 className={styles.cardTitle}>{product.name}</h4>
-                <p className={styles.cardTagline}>{product.tagline}</p>
-                <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+                <h4 className={`${styles.cardTitle} p-name`} itemProp="name">
+                  {product.name}
+                </h4>
+                <p className={`${styles.cardTagline} p-description`} itemProp="description">
+                  {product.tagline}
+                </p>
+                <span
+                  className={`${styles.cardPrice} p-price`}
+                  itemProp="offers"
+                  itemScope
+                  itemType="https://schema.org/Offer"
+                >
+                  <meta itemProp="priceCurrency" content="USD" />
+                  $<span itemProp="price">{product.price.toFixed(2)}</span>
+                </span>
               </div>
             </div>
           ))}

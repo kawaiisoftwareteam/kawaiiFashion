@@ -5,6 +5,8 @@ import ProductsShowcase from "../components/ProductsShowcase/ProductsShowcase";
 import FamilyCollections from "../components/FamilyCollections/FamilyCollections";
 import PreorderSection from "../components/PreorderSection/PreorderSection";
 import UpcomingSection from "../components/UpcomingSection/UpcomingSection";
+import BrandStory from "../components/BrandStory/BrandStory";
+import FaqSection from "../components/FaqSection/FaqSection";
 import { useCart } from "../context/CartContext";
 
 export default function Home() {
@@ -20,20 +22,14 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
       <Hero />
-
-      {/* Product Showcase Catalog */}
       <ProductsShowcase />
-
-      {/* Family Collections (Men, Ladies, Baby) */}
       <FamilyCollections />
-
-      {/* Preorder Section */}
       <PreorderSection onPreorderAdded={handlePreorderAdded} />
-
-      {/* Upcoming Section */}
       <UpcomingSection onNotifySubscribed={handleNotifySubscribed} />
+      <BrandStory />
+      <FaqSection />
     </>
   );
 }
+

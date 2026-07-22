@@ -135,23 +135,6 @@
   transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cardVideo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.cardVideoActive {
-  opacity: 1;
-}
-
 .productCard:hover .cardImage {
   opacity: 0;
   transform: scale(1.04);
@@ -694,4 +677,69 @@
   .productCard {
     flex: 0 0 250px; /* Slightly narrower card for small screens */
   }
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 48px;
+  width: 100%;
+}
+
+.pageBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 136, 132, 0.2);
+  background-color: var(--color-white);
+  color: var(--color-ink);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pageBtn:hover:not(:disabled) {
+  border-color: var(--color-crimson);
+  color: var(--color-crimson);
+  transform: scale(1.05);
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pageNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 136, 132, 0.2);
+  background-color: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pageNumber:hover {
+  border-color: var(--color-crimson);
+  color: var(--color-crimson);
+  transform: scale(1.05);
+}
+
+.pageNumberActive {
+  background-color: var(--color-crimson) !important;
+  color: var(--color-white) !important;
+  border-color: var(--color-crimson) !important;
+  box-shadow: 0 4px 10px rgba(207, 54, 66, 0.25);
 }

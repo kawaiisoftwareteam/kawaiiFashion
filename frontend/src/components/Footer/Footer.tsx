@@ -25,14 +25,18 @@ export default function Footer() {
       <div className={styles.footerContent}>
         <div className={styles.footerLeftColumn}>
           {/* Left Side: Brand Logo and Description */}
-          <div className={styles.brandPanel}>
-            <Link href="/" className={styles.logo}>
-              <div>
+          <div
+            className={`${styles.brandPanel} h-card`}
+            itemScope
+            itemType="https://schema.org/Organization"
+          >
+            <Link href="/" className={`${styles.logo} u-url p-name`} itemProp="url">
+              <div itemProp="name">
                 <span className={styles.logoAccent}>K</span>AWAII BEAUTY
               </div>
               <span className={styles.logoSub}>collection</span>
             </Link>
-            <p className={styles.brandDesc}>
+            <p className={`${styles.brandDesc} p-note`} itemProp="description">
               Time-honored Japanese skincare secrets meets modern clean beauty science. Handpicked premium formulations designed to target dehydration, build barrier resilience, and restore your natural, glass-like radiance.
             </p>
             {/* Social Icons */}
@@ -93,8 +97,7 @@ export default function Footer() {
               <li><Link href="/#shop">Shop All</Link></li>
               <li><Link href="/#new-arrivals">New Arrivals</Link></li>
               <li><Link href="/#shop">Best Sellers</Link></li>
-              <li><a href="#">Special Offers</a></li>
-              <li><a href="#">skincare Blog</a></li>
+              <li><Link href="/offers">Special Offers</Link></li>
             </ul>
           </div>
 

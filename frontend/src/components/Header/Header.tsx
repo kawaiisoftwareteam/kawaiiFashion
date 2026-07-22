@@ -198,12 +198,9 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
               </div>
             </div>
           </div>
-          <a href="#" className={styles.navLink}>
+          <Link href="/offers" className={styles.navLink}>
             Offers
-          </a>
-          <a href="#" className={styles.navLink}>
-            Blog
-          </a>
+          </Link>
         </nav>
 
         <div className={styles.actions}>

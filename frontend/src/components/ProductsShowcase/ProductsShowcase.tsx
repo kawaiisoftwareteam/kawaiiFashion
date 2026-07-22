@@ -6,21 +6,22 @@ import { products, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
 import styles from "./ProductsShowcase.module.css";
 
+// Filter out preorder products and non-core categories for the main featured homepage list
+const mainCategories = ["cleanser", "serum", "moisturizer", "mask"];
+const homepageProducts = products.filter(
+  (p) => !p.isPreorder && !p.releaseSchedule && mainCategories.includes(p.category)
+);
+
 export default function ProductsShowcase() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const { addToCart } = useCart();
 
-  // Filter out preorder products and non-core categories for the main featured homepage list
-  const mainCategories = ["cleanser", "serum", "moisturizer", "mask"];
-  const homepageProducts = products.filter(
-    (p) => !p.isPreorder && !p.releaseSchedule && mainCategories.includes(p.category)
-  );
-
   const gridRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
-  const [hoveredProductId, setHoveredProductId] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 8;
 
   const updateArrows = () => {
     if (gridRef.current) {
@@ -45,7 +46,31 @@ export default function ProductsShowcase() {
         clearTimeout(timer);
       };
     }
-  }, [activeFilter, homepageProducts]);
+  }, []); // Only register event listeners once on mount
+
+  const filteredProducts = homepageProducts.filter(
+    (p) => activeFilter === "all" || p.category === activeFilter
+  );
+  const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
+  // Reset pagination when active filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter]);
+
+  // Scroll to start of grid when changing pages
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollLeft = 0;
+    }
+    // Allow DOM to layout the new paginated items before checking scroll bounds
+    const timer = setTimeout(updateArrows, 50);
+    return () => clearTimeout(timer);
+  }, [currentPage]);
 
   const handleScroll = (direction: "left" | "right") => {
     if (gridRef.current) {
@@ -119,15 +144,13 @@ export default function ProductsShowcase() {
 
         {/* Product Cards Grid */}
         <div className={styles.productGrid} ref={gridRef}>
-          {homepageProducts
-            .filter((p) => activeFilter === "all" || p.category === activeFilter)
-            .map((product) => (
+          {paginatedProducts.map((product) => (
               <div
                 key={product.id}
-                className={styles.productCard}
+                className={`${styles.productCard} h-product`}
+                itemScope
+                itemType="https://schema.org/Product"
                 onClick={() => setSelectedProduct(product)}
-                onMouseEnter={() => setHoveredProductId(product.id)}
-                onMouseLeave={() => setHoveredProductId(null)}
               >
                 <div className={styles.productImageWrapper}>
                   {product.badge && <span className={styles.cardBadge}>{product.badge}</span>}
@@ -137,7 +160,8 @@ export default function ProductsShowcase() {
                     fill
                     sizes="(max-width: 768px) 50vw, 25vw"
                     style={{ objectFit: "cover" }}
-                    className={styles.cardImage}
+                    className={`${styles.cardImage} u-photo`}
+                    itemProp="image"
                   />
                   <Image
                     src={product.hoverImage}
@@ -146,24 +170,6 @@ export default function ProductsShowcase() {
                     sizes="(max-width: 768px) 50vw, 25vw"
                     style={{ objectFit: "cover" }}
                     className={styles.cardImageHover}
-                  />
-                  {/* Hover Video */}
-                  <video
-                    src={product.category === "cleanser" || product.category === "toner" ? "/cleanser_use.mp4" : "/serum_use.mp4"}
-                    loop
-                    muted
-                    playsInline
-                    className={`${styles.cardVideo} ${hoveredProductId === product.id ? styles.cardVideoActive : ""}`}
-                    ref={(el) => {
-                      if (el) {
-                        if (hoveredProductId === product.id) {
-                          el.play().catch(() => {});
-                        } else {
-                          el.pause();
-                          el.currentTime = 0;
-                        }
-                      }
-                    }}
                   />
                   <button
                     className={styles.quickAddBtn}
@@ -178,9 +184,21 @@ export default function ProductsShowcase() {
                     <span className={styles.cardStars}>{"★".repeat(product.rating)}</span>
                     <span className={styles.cardReviewsCount}>({product.reviewsCount})</span>
                   </div>
-                  <h3 className={styles.cardTitle}>{product.name}</h3>
-                  <p className={styles.cardTagline}>{product.tagline}</p>
-                  <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+                  <h3 className={`${styles.cardTitle} p-name`} itemProp="name">
+                    {product.name}
+                  </h3>
+                  <p className={`${styles.cardTagline} p-description`} itemProp="description">
+                    {product.tagline}
+                  </p>
+                  <span
+                    className={`${styles.cardPrice} p-price`}
+                    itemProp="offers"
+                    itemScope
+                    itemType="https://schema.org/Offer"
+                  >
+                    <meta itemProp="priceCurrency" content="USD" />
+                    $<span itemProp="price">{product.price.toFixed(2)}</span>
+                  </span>
                 </div>
               </div>
             ))}
@@ -207,6 +225,80 @@ export default function ProductsShowcase() {
           </svg>
         </button>
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button
+            type="button"
+            className={styles.pageBtn}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage((prev) => Math.max(prev - 1, 1));
+            }}
+            disabled={currentPage === 1}
+            aria-label="Previous page"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          
+          {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => (
+            <button
+              key={pageNum}
+              type="button"
+              className={`${styles.pageNumber} ${
+                currentPage === pageNum ? styles.pageNumberActive : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setCurrentPage(pageNum);
+              }}
+            >
+              {pageNum}
+            </button>
+          ))}
+
+          <button
+            type="button"
+            className={styles.pageBtn}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+            }}
+            disabled={currentPage === totalPages}
+            aria-label="Next page"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* Product Detail Modal */}
       {selectedProduct && (
