@@ -37,7 +37,7 @@ export default function Footer() {
               <span className={styles.logoSub}>collection</span>
             </Link>
             <p className={`${styles.brandDesc} p-note`} itemProp="description">
-              Time-honored Japanese skincare secrets meets modern clean beauty science. Handpicked premium formulations designed to target dehydration, build barrier resilience, and restore your natural, glass-like radiance.
+              Time-honored Japanese wellness traditions meet modern lifestyle purity. Handpicked premium skincare, Mt. Fuji ionized alkaline &amp; alpine spring waters, and artisanal Nama chocolates crafted for holistic vitality.
             </p>
             {/* Social Icons */}
             <div className={styles.socialList}>
@@ -95,8 +95,11 @@ export default function Footer() {
             <h3>Shop</h3>
             <ul>
               <li><Link href="/#shop">Shop All</Link></li>
-              <li><Link href="/#new-arrivals">New Arrivals</Link></li>
-              <li><Link href="/#shop">Best Sellers</Link></li>
+              <li><Link href="/category/gadgets">Smart Gadgets</Link></li>
+              <li><Link href="/category/alkaline-water">Alkaline Water</Link></li>
+              <li><Link href="/category/drinking-water">Drinking Water</Link></li>
+              <li><Link href="/category/chocolate">Chocolates</Link></li>
+              <li><Link href="/category/serum">Skincare</Link></li>
               <li><Link href="/offers">Special Offers</Link></li>
             </ul>
           </div>

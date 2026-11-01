@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { brands, collections } from "../../data/products";
+import { brands, collections, categories } from "../../data/products";
 import styles from "./Header.module.css";
 
 interface HeaderProps {
@@ -13,7 +13,7 @@ interface HeaderProps {
   onOpenCart: () => void;
 }
 
-export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenCart }: HeaderProps) {
+export default function Header({ cartCount, cartFeedback, onOpenCart }: HeaderProps) {
   return (
     <header className={styles.headerContainer}>
       {/* Promo Announcement Bar */}
@@ -41,6 +41,63 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
             Best Sellers
           </Link>
           <div className={styles.navItem}>
+            <Link href="/#shop" className={styles.navLink}>
+              Categories
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </Link>
+            <div className={`${styles.dropdown} ${styles.categoriesDropdown}`}>
+              <div className={styles.dropdownTitle}>Shop by Category</div>
+              <div className={styles.dropdownGrid}>
+                {categories.map((cat) => (
+                  <Link
+                    key={cat.id}
+                    href={`/category/${cat.id}`}
+                    className={styles.dropdownCard}
+                    style={{
+                      "--brand-hover-bg": `${cat.accentColor}14`,
+                      "--brand-hover-color": cat.accentColor,
+                    } as React.CSSProperties}
+                  >
+                    <div
+                      className={styles.dropdownCardLogo}
+                      style={{ backgroundColor: `${cat.accentColor}18` }}
+                    >
+                      <div
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: "50%",
+                          backgroundColor: cat.accentColor,
+                        }}
+                      />
+                    </div>
+                    <div className={styles.dropdownCardText}>
+                      <span className={styles.dropdownCardName}>{cat.name}</span>
+                      <span className={styles.dropdownCardTagline}>{cat.tagline}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className={styles.dropdownFooter}>
+                <Link href="/#shop" className={styles.dropdownFooterLink}>
+                  Explore All Categories & Products →
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className={styles.navItem}>
             <Link href="/brands" className={styles.navLink}>
               Brands
               <svg
@@ -58,7 +115,7 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
               </svg>
             </Link>
             <div className={`${styles.dropdown} ${styles.brandsDropdown}`}>
-              <div className={styles.dropdownTitle}>Japanese Skincare Brands</div>
+              <div className={styles.dropdownTitle}>Featured Japanese Brands</div>
               <div className={styles.dropdownGrid}>
                 {brands.map((brand) => (
                   <Link
@@ -66,9 +123,9 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
                     href={`/brands/${brand.id}`}
                     className={styles.dropdownCard}
                     style={{
-                      ["--brand-hover-bg" as any]: brand.accentColorLight,
-                      ["--brand-hover-color" as any]: brand.accentColor,
-                    }}
+                      "--brand-hover-bg": brand.accentColorLight,
+                      "--brand-hover-color": brand.accentColor,
+                    } as React.CSSProperties}
                   >
                     <div className={styles.dropdownCardLogo} style={{ backgroundColor: brand.accentColorLight }}>
                       <Image
@@ -111,7 +168,7 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
               </svg>
             </Link>
             <div className={`${styles.dropdown} ${styles.collectionsDropdown}`}>
-              <div className={styles.dropdownTitle}>Curated Skincare Routines</div>
+              <div className={styles.dropdownTitle}>Curated Collections & Routines</div>
               <div className={styles.dropdownGridCols3}>
                 {collections.map((col) => (
                   <Link
@@ -119,9 +176,9 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
                     href={`/collections/${col.id}`}
                     className={styles.collectionDropdownCard}
                     style={{
-                      ["--col-hover-bg" as any]: col.bgGradient,
-                      ["--col-hover-color" as any]: col.accentColor,
-                    }}
+                      "--col-hover-bg": col.bgGradient,
+                      "--col-hover-color": col.accentColor,
+                    } as React.CSSProperties}
                   >
                     <span className={styles.dropdownCardSubtitle}>{col.subtitle.split("&")[0].split("•")[0].split("—")[0].trim()}</span>
                     <span className={styles.dropdownCardName}>{col.name}</span>
@@ -131,7 +188,7 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
               </div>
               <div className={styles.dropdownFooter}>
                 <Link href="/collections" className={styles.dropdownFooterLink}>
-                  View Routine Builder →
+                  View All Collections →
                 </Link>
               </div>
             </div>
@@ -160,39 +217,39 @@ export default function Header({ cartCount, cartFeedback, onOpenReviews, onOpenC
                   href="/collections/ladies-care"
                   className={styles.dropdownCard}
                   style={{
-                    ["--brand-hover-bg" as any]: "#FDF7F8",
-                    ["--brand-hover-color" as any]: "#CF3642",
-                  }}
+                    "--brand-hover-bg": "#FDF7F8",
+                    "--brand-hover-color": "#CF3642",
+                  } as React.CSSProperties}
                 >
                   <div className={styles.dropdownCardText}>
-                    <span className={styles.dropdownCardName}>Ladies' Luxury</span>
-                    <span className={styles.dropdownCardTagline}>Sakura & Camellia glow care</span>
+                    <span className={styles.dropdownCardName}>Ladies&apos; Luxury</span>
+                    <span className={styles.dropdownCardTagline}>Sakura &amp; Camellia glow care</span>
                   </div>
                 </Link>
                 <Link
                   href="/collections/men-care"
                   className={styles.dropdownCard}
                   style={{
-                    ["--brand-hover-bg" as any]: "#F0F4F5",
-                    ["--brand-hover-color" as any]: "#026F98",
-                  }}
+                    "--brand-hover-bg": "#F0F4F5",
+                    "--brand-hover-color": "#026F98",
+                  } as React.CSSProperties}
                 >
                   <div className={styles.dropdownCardText}>
-                    <span className={styles.dropdownCardName}>Men's Care</span>
-                    <span className={styles.dropdownCardTagline}>Oil-control & shave relief</span>
+                    <span className={styles.dropdownCardName}>Men&apos;s Care</span>
+                    <span className={styles.dropdownCardTagline}>Oil-control &amp; shave relief</span>
                   </div>
                 </Link>
                 <Link
                   href="/collections/baby-care"
                   className={styles.dropdownCard}
                   style={{
-                    ["--brand-hover-bg" as any]: "#FDFBF7",
-                    ["--brand-hover-color" as any]: "#D4AF37",
-                  }}
+                    "--brand-hover-bg": "#FDFBF7",
+                    "--brand-hover-color": "#D4AF37",
+                  } as React.CSSProperties}
                 >
                   <div className={styles.dropdownCardText}>
-                    <span className={styles.dropdownCardName}>Baby & Kids</span>
-                    <span className={styles.dropdownCardTagline}>Ultra-gentle milk & oat care</span>
+                    <span className={styles.dropdownCardName}>Baby &amp; Kids</span>
+                    <span className={styles.dropdownCardTagline}>Ultra-gentle milk &amp; oat care</span>
                   </div>
                 </Link>
               </div>

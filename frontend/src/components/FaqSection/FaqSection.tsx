@@ -11,7 +11,11 @@ interface FaqItem {
 const faqData: FaqItem[] = [
   {
     question: "What is Kawaii Beauty and what products do you offer?",
-    answer: "Kawaii Beauty is an online e-commerce destination offering premium skincare, cosmetics, and beauty collections. We curate high-quality formulations designed to target dehydration, build barrier resilience, and restore your skin's natural radiance. From hydrating serums and nourishing moisturizers to specialized collections for men, women, and babies, we make it easy to find complete skincare routines tailored to every skin type."
+    answer: "Kawaii Beauty is an online lifestyle e-commerce store offering premium Japanese skincare, natural drinking waters (including Mt. Fuji ionized alkaline water and alpine spring water), and artisanal Nama chocolates. From hydrating rice ferment serums to refreshing mineral hydration and gourmet matcha confections, we curate authentic Japanese products that nourish the body from inside and out."
+  },
+  {
+    question: "Where are your alkaline waters, spring waters, and chocolates sourced?",
+    answer: "Our drinking waters are sourced directly from protected volcanic snowmelt aquifers on the northern slopes of Mt. Fuji and pristine alpine springs in Hokkaido, naturally filtered and mineral-balanced for optimal cellular hydration. Our Nama chocolates are handcrafted in small batches by master confectioners using rich Hokkaido double cream, single-origin cacao, and ceremonial stone-ground Uji matcha."
   },
   {
     question: "How can I track my order once it has been placed?",

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { brands, collections } from "../data/products";
+import { brands, collections, categories } from "../data/products";
 import { getSiteUrl } from "../lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -33,6 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
+    url: `${siteUrl}/category/${cat.id}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.85,
+  }));
+
   const collectionRoutes: MetadataRoute.Sitemap = collections.map((collection) => ({
     url: `${siteUrl}/collections/${collection.id}`,
     lastModified,
@@ -47,5 +54,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...collectionRoutes, ...brandRoutes];
+  return [...staticRoutes, ...categoryRoutes, ...collectionRoutes, ...brandRoutes];
 }

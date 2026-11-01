@@ -23,9 +23,9 @@ export default function BrandsPage() {
             href={`/brands/${brand.id}`}
             className={styles.brandCard}
             style={{
-              ["--brand-color" as any]: brand.accentColor,
-              ["--brand-gradient" as any]: `linear-gradient(90deg, ${brand.accentColor}, ${brand.accentColor}dd)`
-            }}
+              "--brand-color": brand.accentColor,
+              "--brand-gradient": `linear-gradient(90deg, ${brand.accentColor}, ${brand.accentColor}dd)`,
+            } as React.CSSProperties}
           >
             <div>
               <div className={styles.brandHeader}>

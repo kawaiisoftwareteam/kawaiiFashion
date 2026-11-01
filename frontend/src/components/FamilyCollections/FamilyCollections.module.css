@@ -69,9 +69,16 @@
 /* Demographic Cards Grid */
 .demographicGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   z-index: 1;
+}
+
+@media (max-width: 1100px) {
+  .demographicGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 .demoCard {
@@ -324,6 +331,10 @@
 .productCard:hover .quickAddBtn {
   opacity: 1;
   transform: translateY(0);
+}
+
+.quickAddBtn:hover {
+  filter: brightness(0.88);
 }
 
 .productInfo {

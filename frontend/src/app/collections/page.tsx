@@ -23,8 +23,8 @@ export default function CollectionsPage() {
             className={styles.collectionCard}
             style={{
               background: col.bgGradient,
-              ["--accent-color" as any]: col.accentColor
-            }}
+              "--accent-color": col.accentColor,
+            } as React.CSSProperties}
           >
             <div className={styles.collectionInfo}>
               <span className={styles.collectionSubtitle}>{col.subtitle}</span>

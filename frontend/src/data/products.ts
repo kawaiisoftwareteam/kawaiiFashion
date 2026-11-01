@@ -19,6 +19,82 @@ export interface Product {
   releaseSchedule?: string;
 }
 
+export interface CategoryInfo {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  heroImage: string;
+  accentColor: string;
+}
+
+export const categories: CategoryInfo[] = [
+  {
+    id: "alkaline-water",
+    name: "Alkaline Water",
+    tagline: "Ionized pH 9.0+ Mineral Hydration",
+    description: "Naturally filtered through volcanic strata and gently ionized to an optimal pH 9.0 - 9.5+ for deep cellular hydration, bio-active electrolytes, and body balance.",
+    heroImage: "/product_alkaline_water.png",
+    accentColor: "#0B7285"
+  },
+  {
+    id: "drinking-water",
+    name: "Drinking Water",
+    tagline: "Mt. Fuji & Hokkaido Spring Purity",
+    description: "Crystal-pure mountain spring water filtered through porous alpine basalt layers for decades to produce velvety-soft, untainted daily hydration.",
+    heroImage: "/product_drinking_water.png",
+    accentColor: "#026F98"
+  },
+  {
+    id: "chocolate",
+    name: "Chocolates & Confectionery",
+    tagline: "Artisanal Nama Ganache & Cacao",
+    description: "Handcrafted Japanese Nama chocolate made with fresh Hokkaido double cream, ceremonial Uji matcha, and single-origin dark cacao that melts on the tongue.",
+    heroImage: "/product_chocolate.png",
+    accentColor: "#78350F"
+  },
+  {
+    id: "gadgets",
+    name: "Smart Gadgets",
+    tagline: "Precision Japanese Beauty & Tech",
+    description: "Cutting-edge Japanese wellness devices: nano-ionic facial steamers, ultrasonic EMS lifting wands, and portable hydrogen electrolysis generators.",
+    heroImage: "/product_gadget_steamer.png",
+    accentColor: "#CF3642"
+  },
+  {
+    id: "serum",
+    name: "Serums & Essences",
+    tagline: "Translucent Glass-Skin Radiance",
+    description: "Concentrated bioactive formulas featuring traditional Japanese fermented rice, sakura flower distillate, and brightening actives.",
+    heroImage: "/product_serum.png",
+    accentColor: "#D4AF37"
+  },
+  {
+    id: "moisturizer",
+    name: "Moisturizers & Creams",
+    tagline: "Deep Barrier Nourishment",
+    description: "Rich, skin-identical lipid creams powered by pure cold-pressed Camellia Japonica seed oil and soothing milk ceramides.",
+    heroImage: "/product_cream.png",
+    accentColor: "#A62B2B"
+  },
+  {
+    id: "cleanser",
+    name: "Cleansers & Balms",
+    tagline: "Gentle Purity & Pore Clarity",
+    description: "Silky melting cleansing oils and stone-ground matcha washes that purify makeup and environmental impurities without stripping skin.",
+    heroImage: "/product_cleanser.png",
+    accentColor: "#D66B78"
+  },
+  {
+    id: "mask",
+    name: "Masks & Treatments",
+    tagline: "Detoxifying Clay & Overnight Jelly",
+    description: "Organic green tea clarifying clay treatments and sleeping hydration masks for a bouncy, revived complexion.",
+    heroImage: "/product_mask.png",
+    accentColor: "#4E6E58"
+  }
+];
+
 export interface Brand {
   id: string;
   name: string;
@@ -92,6 +168,42 @@ export const brands: Brand[] = [
     bgGradient: "linear-gradient(135deg, #FFF0F1 0%, #FFE0E3 100%)",
     heroBanner: "/brand_momo.png",
     tagline: "Peach Blossom Plump"
+  },
+  {
+    id: "fuji-springs",
+    name: "Fuji Pure Springs",
+    logo: "/brand_fuji.svg",
+    description: "Pristine volcanic mountain spring waters and micro-clustered ionized alkaline waters harvested from the sacred slopes of Mt. Fuji.",
+    philosophy: "Filtering through decades of natural volcanic basalt strata to deliver ultra-soft, cellular-hydrating mineral purity direct from Japan.",
+    accentColor: "#0B7285",
+    accentColorLight: "#E3FAFC",
+    bgGradient: "linear-gradient(135deg, #E6FCFF 0%, #C5F6FA 100%)",
+    heroBanner: "/product_drinking_water.png",
+    tagline: "Volcanic Alpine Purity"
+  },
+  {
+    id: "hokkaido-cacao",
+    name: "Hokkaido Cacao",
+    logo: "/brand_cacao.svg",
+    description: "Master confectionery blending single-origin ethical cacao with fresh Hokkaido double cream and traditional Japanese ganache artistry.",
+    philosophy: "Honoring the delicate melt-in-mouth perfection of Japanese Nama chocolate and subtle infusion of Kyoto botanicals.",
+    accentColor: "#78350F",
+    accentColorLight: "#FEF3C7",
+    bgGradient: "linear-gradient(135deg, #FFFBEB 0%, #FDE68A 100%)",
+    heroBanner: "/product_chocolate.png",
+    tagline: "Artisanal Nama Ganache"
+  },
+  {
+    id: "mirai-tech",
+    name: "Mirai Tokyo Tech",
+    logo: "/brand_mirai.svg",
+    description: "Pioneering Japanese biomedical engineering and ultrasonic beauty devices designed to elevate everyday self-care routines.",
+    philosophy: "Merging clinical micro-vibration, nano-steam atomization, and modern Tokyo minimalism for effortless vitality.",
+    accentColor: "#CF3642",
+    accentColorLight: "#FFF5F5",
+    bgGradient: "linear-gradient(135deg, #FFF5F5 0%, #FFE0E0 100%)",
+    heroBanner: "/product_gadget_steamer.png",
+    tagline: "Precision Beauty Tech"
   }
 ];
 
@@ -111,6 +223,51 @@ export const collections: Collection[] = [
     ],
     tagline: "4 Steps to Glass Skin",
     image: "/product_serum.png"
+  },
+  {
+    id: "wellness-hydration",
+    name: "Pure Hydration & Longevity",
+    subtitle: "Cellular rejuvenation & alkaline balance",
+    description: "An invigorating daily hydration ritual combining Mt. Fuji ionized alkaline water, antioxidant matcha infusions, and pristine alpine spring water.",
+    accentColor: "#0B7285",
+    bgGradient: "linear-gradient(135deg, #E6FCFF 0%, #C5F6FA 100%)",
+    steps: [
+      "Awaken: Drink chilled Mt. Fuji Ionized Alkaline Water pH 9.5+ upon waking to balance acidity.",
+      "Revitalize: Midday antioxidant lift with Uji Matcha Bio-Alkaline Infusion.",
+      "Restore: Evening pure hydration with Mt. Fuji Pristine Mountain Spring Water."
+    ],
+    tagline: "3 Steps to Cellular Hydration",
+    image: "/product_drinking_water.png"
+  },
+  {
+    id: "artisan-confections",
+    name: "Artisanal Sweet Indulgence",
+    subtitle: "Melt-in-mouth Nama chocolate & matcha ganache",
+    description: "A sensory tasting journey through the finest Japanese confectionery. Experience velvety fresh-cream Nama chocolate, bittersweet ceremonial matcha, and zesty citrus cacao.",
+    accentColor: "#78350F",
+    bgGradient: "linear-gradient(135deg, #FFFBEB 0%, #FDE68A 100%)",
+    steps: [
+      "Matcha Harmony: Savor silky Uji Matcha Nama Chocolate with hot green tea.",
+      "Dark Ganache: Melt-in-mouth indulgence with Hokkaido 72% Dark Cacao Truffles.",
+      "Citrus Zest: Crisp crunch and aromatic perfume of Kochi Yuzu Dark Cacao."
+    ],
+    tagline: "3 Decadent Confectionery Moments",
+    image: "/product_chocolate.png"
+  },
+  {
+    id: "smart-beauty-tech",
+    name: "Smart Tech & Hydration Ritual",
+    subtitle: "Nano-steam, ultrasonic sculpting & hydrogen pure water",
+    description: "An advanced ritual marrying ancient botanical serums with high-tech Japanese skincare devices for visible firming and maximum hydration.",
+    accentColor: "#CF3642",
+    bgGradient: "linear-gradient(135deg, #FFF5F5 0%, #FFE0E0 100%)",
+    steps: [
+      "Steam & Open: Prep pores with 10 minutes of Mirai Nano-Ionic Facial Hydration Steam.",
+      "Treat & Infuse: Apply Rice Ferment Serum and sculpt with Ultrasonic EMS Wand.",
+      "Hydrate: Replenish internally with antioxidant hydrogen water from the Mirai Smart Tumbler."
+    ],
+    tagline: "3 Steps to Tech-Powered Glow",
+    image: "/product_gadget_steamer.png"
   },
   {
     id: "pore-detox-ritual",
@@ -562,5 +719,288 @@ export const products: Product[] = [
     usage: "Gently massage onto baby's face and body after a bath, or anytime skin feels dry. Suitable for daily use.",
     brandId: "tsubaki-labs",
     collections: ["baby-care"]
+  },
+
+  // Alkaline Water Collection
+  {
+    id: "alkaline_fuji_95",
+    name: "Mt. Fuji Ionized Alkaline Water pH 9.5+",
+    category: "alkaline-water",
+    price: 18,
+    rating: 5,
+    reviewsCount: 64,
+    image: "/product_alkaline_water.png",
+    hoverImage: "/product_alkaline_water_hover.png",
+    badge: "Top Rated",
+    tagline: "Micro-Clustered Electrolyte Hydration",
+    description: "Naturally filtered through 60 years of Mt. Fuji volcanic basalt layers and gently ionized to an optimal pH 9.5+. Delivers rapid cellular hydration, bio-available minerals, and a crisp, silky taste.",
+    ingredients: "100% Japanese Volcanic Spring Water, Ionized Electrolytes (Potassium, Magnesium, Calcium, Natural Silica). pH 9.5+.",
+    usage: "Drink chilled throughout the day for daily cellular hydration, post-workout recovery, or to restore body pH balance after meals.",
+    brandId: "fuji-springs",
+    collections: ["wellness-hydration"]
+  },
+  {
+    id: "alkaline_matcha_bio",
+    name: "Uji Matcha Bio-Alkaline Infusion",
+    category: "alkaline-water",
+    price: 24,
+    rating: 5,
+    reviewsCount: 48,
+    image: "/product_alkaline_water.png",
+    hoverImage: "/product_alkaline_water_hover.png",
+    badge: "Antioxidant Rich",
+    tagline: "Clean Catechins & pH 9.2",
+    description: "A restorative fusion of pH 9.2 alkaline spring water cold-steeped with ceremonial grade Uji matcha catechins and organic bamboo silica for an inner vitality glow.",
+    ingredients: "Ionized Alkaline Spring Water (pH 9.2), Cold-Brewed Ceremonial Uji Matcha, Bamboo Extract (Organic Silica), Marine Ionic Minerals.",
+    usage: "Gently invert before opening. Best served crisp and cold in the morning or as an invigorating afternoon revitalizer.",
+    brandId: "uji-matcha-co",
+    collections: ["wellness-hydration"]
+  },
+  {
+    id: "alkaline_kochi_ocean",
+    name: "Kochi Deep Ocean Alkaline Mineral Water",
+    category: "alkaline-water",
+    price: 22,
+    rating: 4.8,
+    reviewsCount: 37,
+    image: "/product_alkaline_water.png",
+    hoverImage: "/product_alkaline_water_hover.png",
+    badge: "Deep Sea Minerals",
+    tagline: "Purity from 600m Deep Waters",
+    description: "Drawn from pristine Pacific deep ocean currents off the coast of Kochi at depths of 600 meters, naturally alkalized and enriched with over 70 bio-active trace minerals.",
+    ingredients: "Deep Sea Mineral Water, Magnesium Chloride, Calcium Carbonate, Potassium Bicarbonate, Trace Ocean Elements (pH 9.0).",
+    usage: "Sip throughout the day to boost alkalinity, replenish trace electrolytes, and support digestive harmony.",
+    brandId: "fuji-springs",
+    collections: ["wellness-hydration"]
+  },
+
+  // Drinking Water Collection
+  {
+    id: "fuji_pristine_spring",
+    name: "Mt. Fuji Pristine Mountain Spring Water",
+    category: "drinking-water",
+    price: 16,
+    rating: 5,
+    reviewsCount: 88,
+    image: "/product_drinking_water.png",
+    hoverImage: "/product_drinking_water_hover.png",
+    badge: "Best Seller",
+    tagline: "Naturally Filtered for 60 Years",
+    description: "Drawn directly from protected alpine springs nestled on Mt. Fuji's pristine northern slopes. Filtered naturally for over 60 years through porous volcanic rock strata to produce ultra-soft, crystal-pure drinking water.",
+    ingredients: "100% Natural Japanese Mountain Spring Water. Hardness 25mg/L (Ultra-Soft). Naturally Contains Vanadium and Silica.",
+    usage: "Serve at room temperature or lightly chilled. Exceptional for brewing premium Japanese green tea, pour-over coffee, and daily pure hydration.",
+    brandId: "fuji-springs",
+    collections: ["wellness-hydration"]
+  },
+  {
+    id: "hokkaido_glacier_water",
+    name: "Hokkaido Snowmelt Glacier Drinking Water",
+    category: "drinking-water",
+    price: 19,
+    rating: 4.9,
+    reviewsCount: 53,
+    image: "/product_drinking_water.png",
+    hoverImage: "/product_drinking_water_hover.png",
+    badge: "Pure Alpine",
+    tagline: "Untouched Northern Wilderness",
+    description: "Sourced from protected snowmelt springs in the Daisetsuzan mountain range of Hokkaido. Renowned for its velvety texture, crisp sweet finish, and untouched natural purity.",
+    ingredients: "100% Hokkaido Natural Alpine Spring Water. Low sodium, mineral balanced, ultra-soft mountain water.",
+    usage: "Enjoy chilled straight from the glass bottle for the ultimate crisp, refreshing drinking experience.",
+    brandId: "fuji-springs",
+    collections: ["wellness-hydration"]
+  },
+  {
+    id: "sakura_blossom_spring",
+    name: "Sakura Blossom Infused Spring Water",
+    category: "drinking-water",
+    price: 21,
+    rating: 4.8,
+    reviewsCount: 39,
+    image: "/product_drinking_water.png",
+    hoverImage: "/product_drinking_water_hover.png",
+    badge: "Seasonal Edition",
+    tagline: "Subtle Floral Botanical Refreshment",
+    description: "Pristine Japanese spring water delicately vapor-infused with hand-harvested Sakura cherry blossoms. Zero sugar, zero calories, with an enchanting whispering aroma of Japanese springtime.",
+    ingredients: "Natural Mountain Spring Water, Organic Sakura Flower Essence (Prunus Lannesiana), Citric Acid.",
+    usage: "Serve chilled in a tall stemmed glass over clear ice cubes for an elegant, aromatic hydration ritual.",
+    brandId: "momo-glow",
+    collections: ["wellness-hydration"]
+  },
+  {
+    id: "preorder_hokkaido_sparkling",
+    name: "Hokkaido Sparkling Alpine Spring Water",
+    category: "drinking-water",
+    price: 20,
+    rating: 0,
+    reviewsCount: 0,
+    image: "/product_drinking_water.png",
+    hoverImage: "/product_drinking_water_hover.png",
+    badge: "Pre-order",
+    tagline: "Effervescent Volcano Bubbles",
+    description: "Naturally effervescent micro-bubbles blended into pure Hokkaido snowmelt water. Delivers a champagne-fine bubble texture that cleanses the palate.",
+    ingredients: "Hokkaido Spring Water, Carbon Dioxide, Natural Mineral Bicarbonates.",
+    usage: "Pour over ice and garnish with fresh yuzu or lemon peel alongside gourmet dining.",
+    brandId: "fuji-springs",
+    collections: ["wellness-hydration"],
+    isPreorder: true,
+    availableDate: "September 15, 2026"
+  },
+
+  // Chocolates & Confectionery Collection
+  {
+    id: "matcha_nama_chocolate",
+    name: "Kyoto Uji Matcha Nama Chocolate Ganache",
+    category: "chocolate",
+    price: 28,
+    rating: 5,
+    reviewsCount: 112,
+    image: "/product_chocolate.png",
+    hoverImage: "/product_chocolate_hover.png",
+    badge: "Award Winner",
+    tagline: "Melt-in-Your-Mouth Velvet Luxury",
+    description: "Handcrafted artisanal Japanese Nama chocolate made with pure Hokkaido fresh double cream and stone-ground ceremonial Uji matcha. Dusted in vibrant green matcha powder for a sublime bittersweet balance that melts instantly on the tongue.",
+    ingredients: "White Chocolate (Cocoa Butter, Sugar, Whole Milk Powder), Hokkaido Fresh Cream, Ceremonial Uji Matcha Powder, Butter, Glucose.",
+    usage: "Keep refrigerated at 10°C (50°F). Enjoy slightly below room temperature paired with green tea, espresso, or dry champagne.",
+    brandId: "uji-matcha-co",
+    collections: ["artisan-confections"]
+  },
+  {
+    id: "hokkaido_dark_truffles",
+    name: "Hokkaido 72% Dark Cacao Truffles",
+    category: "chocolate",
+    price: 26,
+    rating: 5,
+    reviewsCount: 85,
+    image: "/product_chocolate.png",
+    hoverImage: "/product_chocolate_hover.png",
+    badge: "Best Seller",
+    tagline: "Rich Ganache & Flaked Sea Salt",
+    description: "Intense 72% single-origin dark cacao blended with rich farm-fresh Hokkaido butter and flaked sea salt crystals from the Okhotsk Sea. Deep roasted aromatic notes with a silky smooth ganache finish.",
+    ingredients: "72% Dark Cacao Mass, Cocoa Butter, Unrefined Cane Sugar, Hokkaido Butter, Okhotsk Sea Salt, Natural Vanilla Bean.",
+    usage: "Savor slowly one truffle at a time to experience the gradual melting of bitter cacao into rich creamy sweetness.",
+    brandId: "hokkaido-cacao",
+    collections: ["artisan-confections"]
+  },
+  {
+    id: "momo_ruby_chocolate",
+    name: "Momo Ruby & White Peach Chocolate Bark",
+    category: "chocolate",
+    price: 22,
+    rating: 4.9,
+    reviewsCount: 47,
+    image: "/product_chocolate.png",
+    hoverImage: "/product_chocolate_hover.png",
+    badge: "Artisanal",
+    tagline: "Natural Berry Notes & Crispy Peach",
+    description: "Crafted from naturally pink Ruby cocoa beans layered with velvety white chocolate and freeze-dried Yamanashi white peach slivers. Fruity, tangy, and decadently creamy.",
+    ingredients: "Ruby Cacao Mass, Cocoa Butter, Whole Milk Powder, Freeze-Dried Yamanashi White Peach, Citric Acid, Soy Lecithin.",
+    usage: "Snap off a crisp piece for a delightfully fruity afternoon sweet treat or pair with sparkling rosé.",
+    brandId: "momo-glow",
+    collections: ["artisan-confections"]
+  },
+  {
+    id: "yuzu_dark_chocolate",
+    name: "Kochi Yuzu & Roasted Dark Cacao Bar",
+    category: "chocolate",
+    price: 19,
+    rating: 4.8,
+    reviewsCount: 38,
+    image: "/product_chocolate.png",
+    hoverImage: "/product_chocolate_hover.png",
+    badge: "Citrus Zest",
+    tagline: "Candied Citrus Peel & 68% Cacao",
+    description: "Sun-dried candied Kochi Yuzu citrus peel folded into single-estate 68% dark chocolate. Zesty, aromatic citrus blossoms dance against deep roasted cacao.",
+    ingredients: "Cacao Beans, Cane Sugar, Candied Yuzu Peel (Yuzu, Sugar, Honey), Cocoa Butter, Sea Salt.",
+    usage: "Break into squares and let melt on the palate to release the vibrant yuzu citrus essential oils.",
+    brandId: "kome-rituals",
+    collections: ["artisan-confections"]
+  },
+  {
+    id: "upcoming_nama_gold",
+    name: "Kyoto 24K Gold Leaf Dark Nama Ganache",
+    category: "chocolate",
+    price: 36,
+    rating: 0,
+    reviewsCount: 0,
+    image: "/product_chocolate.png",
+    hoverImage: "/product_chocolate_hover.png",
+    badge: "Upcoming",
+    tagline: "Kanazawa Gold Leaf Edition",
+    description: "Ultra-luxury dark ganache squares crafted from 80% grand cru cacao and finished with hand-applied Kanazawa 24-karat edible gold leaf. The ultimate luxury indulgence.",
+    ingredients: "Grand Cru 80% Cacao Mass, Hokkaido Cream, Kanazawa Edible 24K Gold Leaf, Organic Cane Sugar, Madagascar Vanilla.",
+    usage: "Best presented as an extraordinary gift or saved for special celebration tastings.",
+    brandId: "hokkaido-cacao",
+    collections: ["artisan-confections"],
+    releaseSchedule: "Releasing Winter 2026"
+  },
+
+  // Smart Beauty & Lifestyle Gadgets
+  {
+    id: "gadget_nano_steamer",
+    name: "Mirai Nano-Ionic Facial Hydration Steamer",
+    category: "gadgets",
+    price: 89,
+    rating: 5,
+    reviewsCount: 92,
+    image: "/product_gadget_steamer.png",
+    hoverImage: "/product_gadget_steamer_hover.png",
+    badge: "Best Seller",
+    tagline: "Ultra-Fine Warm Ionic Steam",
+    description: "Engineered with advanced Japanese ceramic heating elements to generate nano-sized steam particles 10x smaller than regular steam. Penetrates deep into pores to melt impurities, prep skin for serums, and boost hydration by 130%.",
+    ingredients: "BPA-Free Medical-Grade Polymers, Ceramic PTC Heating Element, Nano-Atomizing Ultrasonic Nozzle.",
+    usage: "Fill tank with distilled or Mt. Fuji spring water. Position face 8 inches away and enjoy a soothing 10-minute facial steam session before applying serums or masks.",
+    brandId: "mirai-tech",
+    collections: ["smart-beauty-tech"]
+  },
+  {
+    id: "gadget_ultrasonic_wand",
+    name: "Mirai Ultrasonic EMS Facial Sculpting Wand",
+    category: "gadgets",
+    price: 120,
+    rating: 5,
+    reviewsCount: 74,
+    image: "/product_gadget_wand.png",
+    hoverImage: "/product_gadget_wand_hover.png",
+    badge: "Top Tech",
+    tagline: "Micro-Current EMS & 24kHz Sonic Lift",
+    description: "Delivers 24,000 ultrasonic oscillations per minute combined with gentle micro-current EMS stimulation. Firms facial contours, lifts jawlines, and drives active serum nutrients deep into dermal layers.",
+    ingredients: "Hypoallergenic Titanium Applicator Head, Aerospace-Grade Aluminum Alloy, Wireless Magnetic Charging Dock.",
+    usage: "Apply Rice Ferment Serum or Camellia Oil to clean skin. Glide the wand along jawline, cheekbones, and forehead in upward motions for 5 minutes daily.",
+    brandId: "mirai-tech",
+    collections: ["smart-beauty-tech"]
+  },
+  {
+    id: "gadget_hydrogen_bottle",
+    name: "Mirai Smart Hydrogen & Alkaline Water Bottle",
+    category: "gadgets",
+    price: 145,
+    rating: 4.9,
+    reviewsCount: 58,
+    image: "/product_gadget_hydrogen.png",
+    hoverImage: "/product_gadget_hydrogen_hover.png",
+    badge: "Innovation Award",
+    tagline: "SPE/PEM Platinum Electrolysis up to 3000ppb",
+    description: "Featuring state-of-the-art Japanese SPE/PEM platinum titanium electrolysis technology. Generates therapeutic concentrations of antioxidant molecular hydrogen (up to 3000 ppb) and optimizes drinking water alkalinity in just 3 minutes.",
+    ingredients: "Thermal Shock-Resistant Borosilicate Glass, Medical Platinum-Coated Titanium Plates, DuPont SPE Membrane, OLED Digital Display.",
+    usage: "Fill with Mt. Fuji drinking water or filtered water, press the one-touch sensor, and drink immediately once electrolysis cycle completes.",
+    brandId: "mirai-tech",
+    collections: ["wellness-hydration", "smart-beauty-tech"]
+  },
+  {
+    id: "gadget_heated_eye_mask",
+    name: "ZenFlow Heated Smart Eye Acupressure Mask",
+    category: "gadgets",
+    price: 68,
+    rating: 4.9,
+    reviewsCount: 41,
+    image: "/product_gadget_steamer.png",
+    hoverImage: "/product_gadget_steamer_hover.png",
+    badge: "Sleep & Relief",
+    tagline: "Thermal Airbag Compression & Ambient Audio",
+    description: "Combines 42°C constant soothing thermal warmth with multi-frequency airbag acupressure around temples and ocular acupoints to eliminate digital eye fatigue, tension headaches, and dark under-eye circles.",
+    ingredients: "Soft Breathable Cloud Protein Leather, Graphene Fast-Heating Element, Built-in Zen Audio Soundscapes.",
+    usage: "Wear comfortably over eyes before bedtime or during screen breaks. Select from 5 preset thermal modes for a 15-minute restorative session.",
+    brandId: "mirai-tech",
+    collections: ["smart-beauty-tech"]
   }
 ];

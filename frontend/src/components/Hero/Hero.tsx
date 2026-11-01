@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -21,19 +22,19 @@ export default function Hero() {
       {/* Banner Content Wrapper */}
       <div className={styles.bannerContentWrapper}>
         <div className={styles.bannerContent}>
-          <span className={styles.tagline}>Dry skin? Not for long.</span>
+          <span className={styles.tagline}>Modern Japanese Living &amp; Innovation</span>
           <h1 className={styles.headline}>
-            Discover <span className={styles.highlight}>Kawaii Beauty secrets</span> for deeply moisturized skin
+            Discover <span className={styles.highlight}>Kawaii Living</span>: beauty, pure waters &amp; smart gadgets
           </h1>
           <p className={styles.description}>
-            Inspired by centuries-old Japanese rituals, our moisture-rich formulas combine natural botanicals with advanced skincare technology to restore your skin's natural, healthy glow.
+            From moisture-rich skincare rituals and Mt. Fuji alkaline hydration to artisanal chocolates and intelligent beauty gadgets — handpicked Japanese essentials for vibrant, modern living.
           </p>
           <div className={styles.ctaGroup}>
-            <a href="#" className={styles.primaryCta}>
+            <Link href="/#shop" className={styles.primaryCta}>
               <span>Shop Now</span>
-            </a>
-            <a href="#" className={styles.secondaryCta}>
-              Explore Routine
+            </Link>
+            <Link href="/collections" className={styles.secondaryCta}>
+              Explore Catalog
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -48,7 +49,7 @@ export default function Hero() {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -60,8 +61,8 @@ export default function Hero() {
             src="/kawaii_beauty_landscape.png"
             alt="Premium Kawaii Beauty skincare collection"
             fill
+            sizes="(max-width: 768px) 100vw, 1px"
             style={{ objectFit: "cover" }}
-            sizes="100vw"
           />
         </div>
       </div>

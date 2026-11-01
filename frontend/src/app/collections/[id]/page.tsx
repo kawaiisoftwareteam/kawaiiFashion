@@ -22,7 +22,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
     return (
       <div className={styles.pageContainer} style={{ textAlign: "center" }}>
         <h1 className={styles.pageTitle}>Collection Not Found</h1>
-        <p className={styles.pageSubtitle}>We couldn't find the skincare routine you were looking for.</p>
+        <p className={styles.pageSubtitle}>We couldn&apos;t find the skincare routine you were looking for.</p>
         <Link href="/collections" className={styles.exploreButton} style={{ marginTop: "24px" }}>
           Back to all collections
         </Link>
@@ -67,7 +67,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
   const kitTotalPrice = collectionProducts.reduce((acc, p) => acc + p.price, 0);
 
   return (
-    <div style={{ ["--accent-color" as any]: collection.accentColor }}>
+    <div style={{ "--accent-color": collection.accentColor } as React.CSSProperties}>
       {/* Collection Hero Header */}
       <div className={styles.detailHeader} style={{ background: collection.bgGradient }}>
         <div className={styles.detailHeaderContent}>

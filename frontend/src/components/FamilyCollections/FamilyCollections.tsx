@@ -7,71 +7,109 @@ import { products, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
 import styles from "./FamilyCollections.module.css";
 
-interface Demographic {
+interface CurationDepartment {
   id: string;
   name: string;
+  tagline: string;
   description: string;
   image: string;
   bgGradient: string;
   accentColor: string;
   glowColor: string;
-  collectionTag: string;
+  filterType: "category" | "collection";
+  filterKey: string | string[];
+  linkUrl: string;
   badgeTextColor: string;
 }
 
-const demographics: Demographic[] = [
+const departments: CurationDepartment[] = [
   {
-    id: "ladies",
-    name: "Ladies' Luxury",
-    description: "Premium glowing serums & lifting creams formulated with Sakura & Camellia blossom extracts.",
-    image: "/collection_ladies.png",
-    bgGradient: "linear-gradient(180deg, #FDF7F8 0%, #FAECEF 100%)",
+    id: "gadgets",
+    name: "Smart Gadgets",
+    tagline: "Beauty & Life Tech",
+    description: "Ultrasonic EMS sculpting wands, nano-ionic facial steamers & smart hydrogen generators.",
+    image: "/product_gadget_steamer.png",
+    bgGradient: "linear-gradient(180deg, #FAFAF7 0%, #F5F0EB 100%)",
     accentColor: "#CF3642",
-    glowColor: "rgba(243, 222, 223, 0.4)",
-    collectionTag: "ladies-care",
+    glowColor: "rgba(207, 54, 66, 0.12)",
+    filterType: "category",
+    filterKey: "gadgets",
+    linkUrl: "/category/gadgets",
     badgeTextColor: "#FFFFFF"
   },
   {
-    id: "men",
-    name: "Men's Care",
-    description: "Oil-control foaming washes & matte moisturizers enriched with Uji Matcha & charcoal.",
-    image: "/collection_men.png",
-    bgGradient: "linear-gradient(180deg, #F0F4F5 0%, #E6ECEF 100%)",
+    id: "waters",
+    name: "Alkaline & Pure Waters",
+    tagline: "Volcanic Alpine Hydration",
+    description: "Mt. Fuji ionized alkaline water pH 9.5+, bio-active volcanic minerals & alpine spring purity.",
+    image: "/product_alkaline_water.png",
+    bgGradient: "linear-gradient(180deg, #FAFAF7 0%, #F0F6F8 100%)",
     accentColor: "#026F98",
-    glowColor: "rgba(2, 111, 152, 0.15)",
-    collectionTag: "men-care",
+    glowColor: "rgba(2, 111, 152, 0.12)",
+    filterType: "category",
+    filterKey: ["alkaline-water", "drinking-water"],
+    linkUrl: "/category/alkaline-water",
     badgeTextColor: "#FFFFFF"
   },
   {
-    id: "baby",
-    name: "Baby & Kids",
-    description: "Ultra-soothing, tear-free washes & barrier balms containing gentle organic milk lipids.",
-    image: "/collection_baby.png",
-    bgGradient: "linear-gradient(180deg, #FDFBF7 0%, #FAF6EE 100%)",
-    accentColor: "#D4AF37",
-    glowColor: "rgba(212, 175, 55, 0.15)",
-    collectionTag: "baby-care",
+    id: "chocolate",
+    name: "Artisanal Chocolates",
+    tagline: "Nama Ganache & Cocoa Luxury",
+    description: "Handmade Kyoto Uji matcha Nama ganache, 72% single-origin dark cacao truffles & candied yuzu bark.",
+    image: "/product_chocolate.png",
+    bgGradient: "linear-gradient(180deg, #FAFAF7 0%, #F7F3ED 100%)",
+    accentColor: "#78350F",
+    glowColor: "rgba(120, 53, 15, 0.12)",
+    filterType: "category",
+    filterKey: "chocolate",
+    linkUrl: "/category/chocolate",
+    badgeTextColor: "#FFFFFF"
+  },
+  {
+    id: "skincare",
+    name: "Skincare Rituals",
+    tagline: "Ladies, Men & Baby Care",
+    description: "Fermented rice brightening serums, cold-pressed camellia creams, and gentle botanical cleansers.",
+    image: "/collection_ladies.png",
+    bgGradient: "linear-gradient(180deg, #FAFAF7 0%, #FDF4F5 100%)",
+    accentColor: "#CF3642",
+    glowColor: "rgba(207, 54, 66, 0.12)",
+    filterType: "collection",
+    filterKey: ["ladies-care", "men-care", "baby-care", "glass-skin-routine"],
+    linkUrl: "/collections",
     badgeTextColor: "#FFFFFF"
   }
 ];
 
 export default function FamilyCollections() {
-  const [activeTab, setActiveTab] = useState<string>("ladies");
+  const [activeTab, setActiveTab] = useState<string>("gadgets");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const { addToCart } = useCart();
 
-  const activeDemo = demographics.find((d) => d.id === activeTab) || demographics[0];
+  const activeDept = departments.find((d) => d.id === activeTab) || departments[0];
 
-  // Filter products by the current collection
-  const filteredProducts = products.filter((product) =>
-    product.collections.includes(activeDemo.collectionTag)
-  );
+  // Filter products by the current department
+  const filteredProducts = products.filter((product) => {
+    if (activeDept.filterType === "category") {
+      if (Array.isArray(activeDept.filterKey)) {
+        return activeDept.filterKey.includes(product.category);
+      }
+      return product.category === activeDept.filterKey;
+    }
+    if (activeDept.filterType === "collection") {
+      if (Array.isArray(activeDept.filterKey)) {
+        return product.collections.some((col) => (activeDept.filterKey as string[]).includes(col));
+      }
+      return product.collections.includes(activeDept.filterKey as string);
+    }
+    return false;
+  }).slice(0, 4);
 
   const sectionStyles = {
-    "--section-bg": activeDemo.bgGradient,
-    "--accent-theme-color": activeDemo.accentColor,
-    "--badge-text-color": activeDemo.badgeTextColor,
-    "--glow-color": activeDemo.glowColor,
+    "--section-bg": activeDept.bgGradient,
+    "--accent-theme-color": activeDept.accentColor,
+    "--badge-text-color": activeDept.badgeTextColor,
+    "--glow-color": activeDept.glowColor,
   } as React.CSSProperties;
 
   const handleAddToCart = (product: Product, event?: React.MouseEvent) => {
@@ -90,31 +128,31 @@ export default function FamilyCollections() {
     <section className={styles.sectionContainer} style={sectionStyles} id="family-collections">
       {/* Section Header */}
       <div className={styles.sectionHeader}>
-        <span className={styles.tagline}>Curated For Everyone</span>
-        <h2 className={styles.title}>The Family Collections</h2>
+        <span className={styles.tagline}>Curated Lifestyle Departments</span>
+        <h2 className={styles.title}>The Japanese Collections</h2>
         <p className={styles.subtitle}>
-          Discover specialized, dermatologist-tested beauty and skin wellness routines crafted specifically for Men, Ladies, and Babies.
+          Explore specialized Japanese curations: precision smart gadgets, Mt. Fuji alkaline hydration, artisanal Nama chocolates, and moisture-rich skincare rituals.
         </p>
       </div>
 
       {/* Demographic Cards Grid Selector */}
       <div className={styles.demographicGrid}>
-        {demographics.map((demo) => {
-          const isActive = demo.id === activeTab;
+        {departments.map((dept) => {
+          const isActive = dept.id === activeTab;
           return (
             <Link
-              key={demo.id}
-              href={`/collections/${demo.collectionTag}`}
+              key={dept.id}
+              href={dept.linkUrl}
               className={`${styles.demoCard} ${isActive ? styles.demoCardActive : ""}`}
-              style={{ "--card-accent": demo.accentColor } as React.CSSProperties}
-              onMouseEnter={() => setActiveTab(demo.id)}
+              style={{ "--card-accent": dept.accentColor } as React.CSSProperties}
+              onMouseEnter={() => setActiveTab(dept.id)}
             >
               <div className={styles.cardBgWrapper}>
                 <Image
-                  src={demo.image}
-                  alt={demo.name}
+                  src={dept.image}
+                  alt={dept.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
                   style={{ objectFit: "cover" }}
                   priority
                 />
@@ -122,12 +160,12 @@ export default function FamilyCollections() {
               <div className={styles.cardOverlay} />
               <div className={styles.cardContent}>
                 <h3 className={styles.demoCardTitle}>
-                  {demo.name}
+                  {dept.name}
                   {isActive && <span className={styles.cardActiveIndicator} />}
                 </h3>
-                <p className={styles.demoCardDesc}>{demo.description}</p>
+                <p className={styles.demoCardDesc}>{dept.description}</p>
                 <span className={styles.exploreLink}>
-                  View Full Page →
+                  Explore Department →
                 </span>
               </div>
             </Link>
@@ -139,17 +177,17 @@ export default function FamilyCollections() {
       <div className={styles.productsDisplayArea}>
         <div className={styles.productsSectionHeader}>
           <h3 className={styles.productsSectionTitle}>
-            Featuring <span className={styles.themeColoredText}>{activeDemo.name}</span> Essentials
+            Featuring <span className={styles.themeColoredText}>{activeDept.name}</span>
           </h3>
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
             <span className={styles.productsCount}>
-              Showing {filteredProducts.length} Premium Formulations
+              Showing {filteredProducts.length} Premium Picks
             </span>
             <Link
-              href={`/collections/${activeDemo.collectionTag}`}
+              href={activeDept.linkUrl}
               className={styles.viewFullPageBtn}
             >
-              View Full Page →
+              View Full Department →
             </Link>
           </div>
         </div>
@@ -270,11 +308,23 @@ export default function FamilyCollections() {
 
                 <div className={styles.modalMetaInfo}>
                   <div className={styles.modalMetaItem}>
-                    <strong>Key Ingredients:</strong>
+                    <strong>
+                      {selectedProduct.category === "gadgets"
+                        ? "Specs & Materials:"
+                        : ["alkaline-water", "drinking-water", "chocolate"].includes(selectedProduct.category)
+                        ? "Ingredients & Source:"
+                        : "Key Ingredients:"}
+                    </strong>
                     <p>{selectedProduct.ingredients}</p>
                   </div>
                   <div className={styles.modalMetaItem}>
-                    <strong>How to Use:</strong>
+                    <strong>
+                      {selectedProduct.category === "gadgets"
+                        ? "How to Operate:"
+                        : ["alkaline-water", "drinking-water", "chocolate"].includes(selectedProduct.category)
+                        ? "Serving & Ritual:"
+                        : "How to Use:"}
+                    </strong>
                     <p>{selectedProduct.usage}</p>
                   </div>
                 </div>

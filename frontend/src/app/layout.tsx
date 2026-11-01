@@ -37,6 +37,15 @@ export const metadata: Metadata = {
   keywords: [
     "Japanese skincare",
     "Kawaii Beauty",
+    "smart beauty gadgets",
+    "nano ionic steamer",
+    "ultrasonic EMS wand",
+    "hydrogen water bottle",
+    "alkaline water",
+    "ionized water 9.5",
+    "Mt Fuji spring drinking water",
+    "Japanese chocolate",
+    "matcha nama chocolate",
     "glass skin",
     "camellia oil",
     "rice ferment serum",
@@ -44,7 +53,7 @@ export const metadata: Metadata = {
     "baby gentle skincare",
     "men skincare",
     "hydrating moisturizer",
-    "online beauty shop",
+    "online lifestyle shop",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -187,7 +196,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${jakarta.variable}`}>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${jakarta.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />

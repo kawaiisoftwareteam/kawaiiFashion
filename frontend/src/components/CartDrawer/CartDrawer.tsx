@@ -61,7 +61,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             <div className={styles.emptyState}>
               <h3 className={styles.emptyTitle}>Your bag is empty</h3>
               <p className={styles.emptySubtitle}>
-                Looks like you haven't added any products yet. Let's find some premium formulas for you!
+                Looks like you haven&apos;t added any products yet. Let&apos;s find some premium formulas for you!
               </p>
               <button className={styles.shopBtn} onClick={onClose}>
                 Explore Collection

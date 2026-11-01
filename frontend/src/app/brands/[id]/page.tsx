@@ -22,7 +22,7 @@ export default function BrandDetailPage({ params }: PageProps) {
     return (
       <div className={styles.pageContainer} style={{ textAlign: "center" }}>
         <h1 className={styles.pageTitle}>Brand Not Found</h1>
-        <p className={styles.pageSubtitle}>We couldn't find the brand you were looking for.</p>
+        <p className={styles.pageSubtitle}>We couldn&apos;t find the brand you were looking for.</p>
         <Link href="/brands" className={styles.exploreLink} style={{ marginTop: "24px" }}>
           Back to all brands
         </Link>
@@ -47,7 +47,7 @@ export default function BrandDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div style={{ ["--brand-color" as any]: brand.accentColor }}>
+    <div style={{ "--brand-color": brand.accentColor } as React.CSSProperties}>
       {/* Brand Hero Header */}
       <div className={styles.detailHeader} style={{ background: brand.bgGradient }}>
         <div className={styles.detailHeaderContent}>
@@ -75,7 +75,7 @@ export default function BrandDetailPage({ params }: PageProps) {
 
         {brandProducts.length === 0 ? (
           <p style={{ textAlign: "center", color: "var(--color-stone)" }}>
-            No products are currently available in this brand's collection. Check back soon!
+            No products are currently available in this brand&apos;s collection. Check back soon!
           </p>
         ) : (
           <div className={styles.productsGrid}>

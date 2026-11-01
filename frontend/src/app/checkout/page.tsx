@@ -25,10 +25,11 @@ export default function CheckoutPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [orderNumber, setOrderNumber] = useState("");
 
-  const { cartItems, cartCount, cartSubtotal, clearCart } = useCart();
+  const { cartItems, cartSubtotal, clearCart } = useCart();
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -82,8 +83,8 @@ export default function CheckoutPage() {
         </div>
         <h1 className={styles.successTitle}>Order Placed!</h1>
         <p className={styles.successMessage}>
-          Thank you for your order, {fullName}! We've sent a receipt confirmation to <strong>{email}</strong>.
-          Your premium skincare items are being prepared for shipping.
+          Thank you for your order, {fullName}! We&apos;ve sent a receipt confirmation to <strong>{email}</strong>.
+          Your premium items are being prepared for shipping.
         </p>
         <div className={styles.orderBadge}>ORDER NO: {orderNumber}</div>
         <div>

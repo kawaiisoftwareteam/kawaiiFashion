@@ -60,16 +60,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Load cart from localStorage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      try {
-        const storedCart = localStorage.getItem("kb_cart");
-        if (storedCart) {
-          setCartItems(JSON.parse(storedCart));
+      const timer = setTimeout(() => {
+        try {
+          const storedCart = localStorage.getItem("kb_cart");
+          if (storedCart) {
+            setCartItems(JSON.parse(storedCart));
+          }
+        } catch (error) {
+          console.error("Error loading cart from localStorage:", error);
+        } finally {
+          setIsLoaded(true);
         }
-      } catch (error) {
-        console.error("Error loading cart from localStorage:", error);
-      } finally {
-        setIsLoaded(true);
-      }
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 

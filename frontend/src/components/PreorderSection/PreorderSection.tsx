@@ -34,6 +34,15 @@ const preorderProducts: PreorderProduct[] = [
     image: "/product_cream.png",
     releaseDate: "September 1, 2026",
   },
+  {
+    id: "preorder_hokkaido_sparkling",
+    name: "Hokkaido Sparkling Alpine Spring Water",
+    tagline: "Effervescent Volcano Bubbles",
+    description: "Naturally effervescent micro-bubbles blended into pure Hokkaido snowmelt water. Delivers a champagne-fine bubble texture that cleanses the palate.",
+    price: 20,
+    image: "/product_drinking_water.png",
+    releaseDate: "September 15, 2026",
+  },
 ];
 
 interface PreorderSectionProps {

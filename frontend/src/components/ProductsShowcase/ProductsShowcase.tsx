@@ -7,7 +7,29 @@ import { useCart } from "../../context/CartContext";
 import styles from "./ProductsShowcase.module.css";
 
 // Filter out preorder products and non-core categories for the main featured homepage list
-const mainCategories = ["cleanser", "serum", "moisturizer", "mask"];
+const mainCategories = [
+  "gadgets",
+  "alkaline-water",
+  "drinking-water",
+  "chocolate",
+  "serum",
+  "moisturizer",
+  "cleanser",
+  "mask",
+];
+
+const filterCategories = [
+  { id: "all", label: "All Products" },
+  { id: "gadgets", label: "Smart Gadgets" },
+  { id: "alkaline-water", label: "Alkaline Water" },
+  { id: "drinking-water", label: "Drinking Water" },
+  { id: "chocolate", label: "Chocolates" },
+  { id: "serum", label: "Serums" },
+  { id: "moisturizer", label: "Moisturizers" },
+  { id: "cleanser", label: "Cleansers" },
+  { id: "mask", label: "Masks" },
+];
+
 const homepageProducts = products.filter(
   (p) => !p.isPreorder && !p.releaseSchedule && mainCategories.includes(p.category)
 );
@@ -57,10 +79,10 @@ export default function ProductsShowcase() {
     currentPage * PAGE_SIZE
   );
 
-  // Reset pagination when active filter changes
-  useEffect(() => {
+  const handleFilterChange = (catId: string) => {
+    setActiveFilter(catId);
     setCurrentPage(1);
-  }, [activeFilter]);
+  };
 
   // Scroll to start of grid when changing pages
   useEffect(() => {
@@ -100,20 +122,20 @@ export default function ProductsShowcase() {
     <section className={styles.showcaseSection} id="shop">
       <div className={styles.showcaseHeaderWrapper}>
         <span className={styles.showcaseTagline}>Curated For You</span>
-        <h2 className={styles.showcaseTitle}>Best of Kawaii Beauty</h2>
+        <h2 className={styles.showcaseTitle}>Best of Kawaii Collection</h2>
         <p className={styles.showcaseSubtitle}>
-          Handpicked premium formulations designed to target dehydration, build skin resilience, and restore your natural, glass-like radiance.
+          Handpicked Japanese essentials: ionized alkaline waters, Mt. Fuji spring water, artisanal Nama chocolates, and moisture-rich skincare rituals.
         </p>
 
         {/* Filter Categories */}
         <div className={styles.filterTabs}>
-          {["all", "cleanser", "serum", "moisturizer", "mask"].map((cat) => (
+          {filterCategories.map((cat) => (
             <button
-              key={cat}
-              className={`${styles.filterTab} ${activeFilter === cat ? styles.filterTabActive : ""}`}
-              onClick={() => setActiveFilter(cat)}
+              key={cat.id}
+              className={`${styles.filterTab} ${activeFilter === cat.id ? styles.filterTabActive : ""}`}
+              onClick={() => handleFilterChange(cat.id)}
             >
-              {cat === "all" ? "All Products" : cat.charAt(0).toUpperCase() + cat.slice(1) + "s"}
+              {cat.label}
             </button>
           ))}
         </div>
@@ -353,11 +375,23 @@ export default function ProductsShowcase() {
 
                 <div className={styles.modalMetaInfo}>
                   <div className={styles.modalMetaItem}>
-                    <strong>Key Ingredients:</strong>
+                    <strong>
+                      {selectedProduct.category === "gadgets"
+                        ? "Specs & Materials:"
+                        : ["alkaline-water", "drinking-water", "chocolate"].includes(selectedProduct.category)
+                        ? "Ingredients & Source:"
+                        : "Key Ingredients:"}
+                    </strong>
                     <p>{selectedProduct.ingredients}</p>
                   </div>
                   <div className={styles.modalMetaItem}>
-                    <strong>How to Use:</strong>
+                    <strong>
+                      {selectedProduct.category === "gadgets"
+                        ? "How to Operate:"
+                        : ["alkaline-water", "drinking-water", "chocolate"].includes(selectedProduct.category)
+                        ? "Serving & Ritual:"
+                        : "How to Use:"}
+                    </strong>
                     <p>{selectedProduct.usage}</p>
                   </div>
                 </div>

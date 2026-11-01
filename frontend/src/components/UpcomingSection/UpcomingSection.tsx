@@ -33,6 +33,15 @@ const upcomingProducts: UpcomingProduct[] = [
     image: "/product_serum.png",
     releaseSchedule: "Releasing Winter 2026",
   },
+  {
+    id: "upcoming_nama_gold",
+    name: "Kyoto 24K Gold Leaf Dark Nama Ganache",
+    tagline: "Kanazawa Gold Leaf Edition",
+    description: "Ultra-luxury dark ganache squares crafted from 80% grand cru cacao and finished with hand-applied Kanazawa 24-karat edible gold leaf.",
+    price: 36,
+    image: "/product_chocolate.png",
+    releaseSchedule: "Releasing Winter 2026",
+  },
 ];
 
 interface UpcomingSectionProps {

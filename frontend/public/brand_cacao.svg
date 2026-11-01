@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <circle cx="50" cy="50" r="46" fill="#FEF3C7" stroke="#78350F" stroke-width="1.5"/>
+  <!-- Minimalist Cacao Pod & Chocolate Square -->
+  <g transform="translate(50, 50)">
+    <!-- Cacao Pod -->
+    <path d="M0,-24 C14,-14 20,4 0,26 C-20,4 -14,-14 0,-24 Z" fill="#78350F" opacity="0.88"/>
+    <!-- Cacao inner ridges -->
+    <path d="M0,-20 C6,-10 6,12 0,22" stroke="#FEF3C7" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+    <path d="M-5,-16 C-8,-6 -7,8 -3,17" stroke="#FDE68A" stroke-width="1" stroke-linecap="round" fill="none"/>
+    <path d="M5,-16 C8,-6 7,8 3,17" stroke="#FDE68A" stroke-width="1" stroke-linecap="round" fill="none"/>
+    <!-- Cacao stem -->
+    <path d="M0,-24 C1,-28 3,-30 6,-31" stroke="#78350F" stroke-width="2" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
+
