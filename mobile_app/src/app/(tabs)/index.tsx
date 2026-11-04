@@ -1,12 +1,23 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppHeader } from "../../components/AppHeader";
+import { Button, type IconName } from "../../components/Button";
 import { ProductCard } from "../../components/ProductCard";
 import { SectionHeader } from "../../components/SectionHeader";
 import { collections, images, products } from "../../data/catalog";
-import { colors, fonts, radius } from "../../theme";
+import { colors, fonts, radius, shadows } from "../../theme";
+
+const CATEGORIES: { id: string; en: string; icon: IconName }[] = [
+  { id: "serum", en: "Serums", icon: "water-outline" },
+  { id: "alkaline-water", en: "Waters", icon: "beaker-outline" },
+  { id: "chocolate", en: "Nama", icon: "gift-outline" },
+  { id: "gadgets", en: "Tech", icon: "hardware-chip-outline" },
+  { id: "moisturizer", en: "Creams", icon: "flower-outline" },
+];
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
@@ -23,15 +34,19 @@ export default function HomeScreen() {
       showsVerticalScrollIndicator={false}
     >
       <View style={[styles.promo, { paddingTop: insets.top + 8 }]}>
+        <Ionicons name="airplane-outline" size={13} color={colors.white} />
         <Text style={styles.promoText}>Free shipping over $50</Text>
       </View>
 
-      <View style={styles.header}>
-        <Text style={styles.brand}>KAWAII BEAUTY</Text>
-        <Pressable onPress={() => router.push("/search")} style={styles.searchBtn}>
-          <Text style={styles.searchLabel}>Search</Text>
-        </Pressable>
-      </View>
+      <AppHeader brand actions={["search", "heart", "bag"]} />
+
+      <Pressable onPress={() => router.push("/search")} style={styles.searchBar}>
+        <Ionicons name="search-outline" size={18} color={colors.stone} />
+        <Text style={styles.searchHint}>Search serum, matcha, Fuji water…</Text>
+        <View style={styles.searchTune}>
+          <Ionicons name="options-outline" size={16} color={colors.white} />
+        </View>
+      </Pressable>
 
       <View style={styles.hero}>
         <Image source={images.landscape} style={styles.heroImage} contentFit="cover" />
@@ -45,30 +60,36 @@ export default function HomeScreen() {
           <Text style={styles.heroBody}>
             Skincare, Fuji waters, nama chocolate, and Tokyo beauty tech — curated from Japan.
           </Text>
-          <Pressable onPress={() => router.push("/shop")} style={styles.heroCta}>
-            <Text style={styles.heroCtaText}>Shop the collection</Text>
-          </Pressable>
+          <Button
+            label="Shop the collection"
+            variant="light"
+            iconRight="arrow-forward"
+            onPress={() => router.push("/shop")}
+            style={styles.heroCta}
+          />
         </View>
       </View>
 
-      <SectionHeader eyebrow="Browse" title="Shop by ritual" action="All" />
+      <SectionHeader
+        eyebrow="Browse"
+        title="Shop by ritual"
+        action="See all"
+        onAction={() => router.push("/shop")}
+      />
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.cats}
       >
-        {[
-          { id: "serum", en: "Serums" },
-          { id: "alkaline-water", en: "Waters" },
-          { id: "chocolate", en: "Nama" },
-          { id: "gadgets", en: "Tech" },
-          { id: "moisturizer", en: "Creams" },
-        ].map((cat) => (
+        {CATEGORIES.map((cat) => (
           <Pressable
             key={cat.id}
             onPress={() => router.push({ pathname: "/shop", params: { category: cat.id } })}
-            style={styles.cat}
+            style={({ pressed }) => [styles.cat, pressed && styles.pressed]}
           >
+            <View style={styles.catIcon}>
+              <Ionicons name={cat.icon} size={22} color={colors.crimson} />
+            </View>
             <Text style={styles.catEn}>{cat.en}</Text>
           </Pressable>
         ))}
@@ -141,7 +162,10 @@ const styles = StyleSheet.create({
   },
   promo: {
     backgroundColor: colors.crimson,
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
+    gap: 6,
     paddingBottom: 10,
   },
   promoText: {
@@ -151,32 +175,36 @@ const styles = StyleSheet.create({
     letterSpacing: 1.4,
     textTransform: "uppercase",
   },
-  header: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+  searchBar: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    height: 52,
+    paddingLeft: 18,
+    paddingRight: 6,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-  },
-  brand: {
-    fontFamily: fonts.sans,
-    fontSize: 18,
-    letterSpacing: 2.4,
-    color: colors.ink,
-  },
-  searchBtn: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.line,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+    gap: 10,
     borderRadius: radius.full,
     backgroundColor: colors.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+    ...shadows.soft,
   },
-  searchLabel: {
-    fontFamily: fonts.serif,
-    fontSize: 13,
-    color: colors.ink,
+  searchHint: {
+    flex: 1,
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    color: colors.stone,
   },
+  searchTune: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.ink,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pressed: { opacity: 0.8, transform: [{ scale: 0.97 }] },
   hero: {
     marginHorizontal: 20,
     height: 420,
@@ -215,39 +243,33 @@ const styles = StyleSheet.create({
     maxWidth: 280,
   },
   heroCta: {
-    marginTop: 16,
-    alignSelf: "flex-start",
-    backgroundColor: colors.white,
-    paddingHorizontal: 18,
-    paddingVertical: 11,
-  },
-  heroCtaText: {
-    fontFamily: fonts.sans,
-    fontSize: 12,
-    letterSpacing: 1.2,
-    textTransform: "uppercase",
-    color: colors.ink,
+    marginTop: 18,
   },
   cats: {
     paddingHorizontal: 20,
     paddingBottom: 28,
-    gap: 10,
+    gap: 14,
   },
   cat: {
+    alignItems: "center",
+    gap: 8,
+  },
+  catIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     backgroundColor: colors.white,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.line,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    minWidth: 86,
     alignItems: "center",
+    justifyContent: "center",
+    ...shadows.soft,
   },
   catEn: {
     fontFamily: fonts.sans,
-    fontSize: 10,
-    letterSpacing: 1,
-    color: colors.stone,
-    textTransform: "uppercase",
+    fontSize: 11,
+    letterSpacing: 0.8,
+    color: colors.inkSoft,
   },
   grid: {
     flexDirection: "row",

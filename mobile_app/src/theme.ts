@@ -44,3 +44,33 @@ export const radius = {
   lg: 22,
   full: 999,
 };
+
+export const shadows = {
+  soft: Platform.select({
+    ios: {
+      shadowColor: colors.ink,
+      shadowOpacity: 0.08,
+      shadowRadius: 12,
+      shadowOffset: { width: 0, height: 4 },
+    },
+    default: { elevation: 3 },
+  }),
+  lifted: Platform.select({
+    ios: {
+      shadowColor: colors.ink,
+      shadowOpacity: 0.16,
+      shadowRadius: 24,
+      shadowOffset: { width: 0, height: 10 },
+    },
+    default: { elevation: 12 },
+  }),
+  glow: Platform.select({
+    ios: {
+      shadowColor: colors.crimson,
+      shadowOpacity: 0.35,
+      shadowRadius: 14,
+      shadowOffset: { width: 0, height: 6 },
+    },
+    default: { elevation: 6 },
+  }),
+};

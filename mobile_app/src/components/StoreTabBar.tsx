@@ -1,6 +1,8 @@
-import { StyleSheet, Text, Pressable, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useCart } from "../context/CartContext";
-import { colors, fonts } from "../theme";
+import { colors, fonts, radius, shadows } from "../theme";
+import { Badge, type IconName } from "./Button";
 
 type TabBarProps = {
   state: { index: number; routes: { key: string; name: string }[] };
@@ -8,35 +10,42 @@ type TabBarProps = {
   insets: { bottom: number };
 };
 
-const LABELS: Record<string, string> = {
-  index: "Home",
-  shop: "Shop",
-  cart: "Bag",
-  account: "Member",
+const TABS: Record<string, { label: string; icon: IconName; iconOn: IconName }> = {
+  index: { label: "Home", icon: "home-outline", iconOn: "home" },
+  shop: { label: "Shop", icon: "grid-outline", iconOn: "grid" },
+  cart: { label: "Bag", icon: "bag-handle-outline", iconOn: "bag-handle" },
+  account: { label: "Member", icon: "person-outline", iconOn: "person" },
 };
 
 export function StoreTabBar({ state, navigateToTab, insets }: TabBarProps) {
   const { count } = useCart();
 
   return (
-    <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 10) }]}>
-      <View style={styles.line} />
-      <View style={styles.row}>
+    <View style={[styles.wrap, { paddingBottom: Math.max(insets.bottom, 12) }]}>
+      <View style={styles.bar}>
         {state.routes.map((route, index) => {
           const focused = state.index === index;
-          const label = LABELS[route.name] ?? route.name;
+          const tab = TABS[route.name] ?? { label: route.name, icon: "ellipse-outline", iconOn: "ellipse" };
           return (
             <Pressable
               key={route.key}
               onPress={() => navigateToTab(route.key)}
-              style={styles.item}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: focused }}
+              accessibilityLabel={tab.label}
+              style={({ pressed }) => [styles.item, pressed && styles.pressed]}
             >
-              <Text style={[styles.label, focused && styles.labelOn]}>{label}</Text>
-              {route.name === "cart" && count > 0 ? (
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{count}</Text>
+              <View style={[styles.pill, focused && styles.pillOn]}>
+                <View>
+                  <Ionicons
+                    name={focused ? tab.iconOn : tab.icon}
+                    size={21}
+                    color={focused ? colors.white : colors.stone}
+                  />
+                  {route.name === "cart" && count > 0 ? <Badge value={count} /> : null}
                 </View>
-              ) : null}
+                {focused ? <Text style={styles.label}>{tab.label}</Text> : null}
+              </View>
             </Pressable>
           );
         })}
@@ -46,47 +55,43 @@ export function StoreTabBar({ state, navigateToTab, insets }: TabBarProps) {
 }
 
 const styles = StyleSheet.create({
+  wrap: {
+    backgroundColor: colors.paper,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+  },
   bar: {
-    backgroundColor: colors.white,
-  },
-  line: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: colors.line,
-  },
-  row: {
     flexDirection: "row",
-    paddingTop: 10,
+    alignItems: "center",
+    height: 64,
+    paddingHorizontal: 8,
+    borderRadius: radius.full,
+    backgroundColor: colors.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+    ...shadows.lifted,
   },
   item: {
     flex: 1,
     alignItems: "center",
-    paddingVertical: 6,
+  },
+  pressed: { opacity: 0.7 },
+  pill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    height: 46,
+    paddingHorizontal: 14,
+    borderRadius: radius.full,
+  },
+  pillOn: {
+    backgroundColor: colors.ink,
   },
   label: {
-    fontFamily: fonts.sans,
-    fontSize: 11,
-    letterSpacing: 1.2,
-    textTransform: "uppercase",
-    color: colors.stone,
-  },
-  labelOn: {
-    color: colors.crimson,
-  },
-  badge: {
-    position: "absolute",
-    top: 2,
-    right: "28%",
-    minWidth: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: colors.crimson,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 4,
-  },
-  badgeText: {
     color: colors.white,
-    fontSize: 9,
     fontFamily: fonts.sans,
+    fontWeight: "600",
+    fontSize: 11,
+    letterSpacing: 0.8,
   },
 });

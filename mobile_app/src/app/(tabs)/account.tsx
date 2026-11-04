@@ -1,15 +1,18 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppHeader } from "../../components/AppHeader";
+import { Button, type IconName } from "../../components/Button";
 import { useCart } from "../../context/CartContext";
-import { colors, fonts } from "../../theme";
+import { colors, fonts, radius, shadows } from "../../theme";
 
-const ROWS = [
-  "Order history",
-  "Addresses",
-  "Payment methods",
-  "Saved pieces",
-  "Language & currency",
-  "Concierge",
+const ROWS: { label: string; icon: IconName }[] = [
+  { label: "Order history", icon: "receipt-outline" },
+  { label: "Addresses", icon: "location-outline" },
+  { label: "Payment methods", icon: "card-outline" },
+  { label: "Saved pieces", icon: "heart-outline" },
+  { label: "Language & currency", icon: "globe-outline" },
+  { label: "Concierge", icon: "chatbubble-ellipses-outline" },
 ];
 
 export default function AccountScreen() {
@@ -19,16 +22,17 @@ export default function AccountScreen() {
   return (
     <ScrollView
       style={styles.screen}
-      contentContainerStyle={{ paddingTop: insets.top + 12, paddingBottom: 40 }}
+      contentContainerStyle={{ paddingTop: insets.top, paddingBottom: 40 }}
     >
-      <View style={styles.header}>
-        <Text style={styles.title}>Atelier member</Text>
-      </View>
+      <AppHeader eyebrow="Welcome back" title="Atelier member" actions={["bag"]} />
 
       <View style={styles.card}>
         <View style={styles.cardTop}>
           <Text style={styles.cardBrand}>KAWAII BEAUTY</Text>
-          <Text style={styles.cardSeal}>Member</Text>
+          <View style={styles.cardSealRow}>
+            <Ionicons name="diamond-outline" size={14} color={colors.goldSoft} />
+            <Text style={styles.cardSeal}>Member</Text>
+          </View>
         </View>
         <Text style={styles.cardName}>Guest</Text>
         <Text style={styles.cardMeta}>Silver house account · {count} items in bag</Text>
@@ -39,13 +43,31 @@ export default function AccountScreen() {
       </View>
 
       <View style={styles.list}>
-        {ROWS.map((row) => (
-          <Pressable key={row} style={styles.row}>
-            <Text style={styles.rowEn}>{row}</Text>
-            <Text style={styles.chev}>›</Text>
+        {ROWS.map((row, i) => (
+          <Pressable
+            key={row.label}
+            style={({ pressed }) => [
+              styles.row,
+              i === ROWS.length - 1 && styles.rowLast,
+              pressed && styles.rowPressed,
+            ]}
+          >
+            <View style={styles.rowIcon}>
+              <Ionicons name={row.icon} size={18} color={colors.crimson} />
+            </View>
+            <Text style={styles.rowEn}>{row.label}</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.stone} />
           </Pressable>
         ))}
       </View>
+
+      <Button
+        label="Sign in or join"
+        variant="dark"
+        icon="log-in-outline"
+        fullWidth
+        style={styles.signIn}
+      />
 
       <Text style={styles.footnote}>
         A quiet Japanese house for beauty, water, confection, and tech. Est. Tokyo.
@@ -56,15 +78,17 @@ export default function AccountScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.paper },
-  header: { paddingHorizontal: 20, marginBottom: 16 },
-  title: { fontFamily: fonts.serif, fontSize: 28, color: colors.ink },
   card: {
     marginHorizontal: 20,
+    marginTop: 4,
     backgroundColor: colors.ink,
+    borderRadius: radius.lg,
     padding: 22,
     marginBottom: 22,
+    ...shadows.lifted,
   },
   cardTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  cardSealRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   cardBrand: {
     color: colors.goldSoft,
     letterSpacing: 2.2,
@@ -97,20 +121,33 @@ const styles = StyleSheet.create({
   list: {
     marginHorizontal: 20,
     backgroundColor: colors.white,
+    borderRadius: radius.lg,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.line,
+    overflow: "hidden",
+    ...shadows.soft,
   },
   row: {
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.line,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
+    gap: 12,
   },
-  rowEn: { fontFamily: fonts.sans, fontSize: 15, color: colors.ink },
-  chev: { fontSize: 22, color: colors.stone, marginTop: -4 },
+  rowLast: { borderBottomWidth: 0 },
+  rowPressed: { backgroundColor: colors.paper },
+  rowIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.blush,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rowEn: { flex: 1, fontFamily: fonts.sans, fontSize: 15, color: colors.ink },
+  signIn: { marginHorizontal: 20, marginTop: 20 },
   footnote: {
     marginTop: 24,
     marginHorizontal: 24,

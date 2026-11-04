@@ -1,10 +1,13 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppHeader } from "../../components/AppHeader";
+import { Button, IconButton } from "../../components/Button";
 import { useCart } from "../../context/CartContext";
 import { formatPrice } from "../../data/catalog";
-import { colors, fonts } from "../../theme";
+import { colors, fonts, radius, shadows } from "../../theme";
 
 export default function CartScreen() {
   const insets = useSafeAreaInsets();
@@ -15,19 +18,27 @@ export default function CartScreen() {
 
   return (
     <View style={[styles.screen, { paddingTop: insets.top }]}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Your bag</Text>
-      </View>
+      <AppHeader
+        eyebrow={lines.length ? `${lines.length} ${lines.length === 1 ? "piece" : "pieces"}` : undefined}
+        title="Your bag"
+        actions={["heart"]}
+      />
 
       {lines.length === 0 ? (
         <View style={styles.empty}>
+          <View style={styles.emptyIcon}>
+            <Ionicons name="bag-handle-outline" size={36} color={colors.crimson} />
+          </View>
           <Text style={styles.emptyTitle}>Your bag is still quiet</Text>
           <Text style={styles.emptyBody}>
             Add a serum, a bottle of Fuji water, or nama chocolate to begin the ritual.
           </Text>
-          <Pressable onPress={() => router.push("/shop")} style={styles.cta}>
-            <Text style={styles.ctaText}>Browse the catalog</Text>
-          </Pressable>
+          <Button
+            label="Browse the catalog"
+            iconRight="arrow-forward"
+            onPress={() => router.push("/shop")}
+            style={styles.emptyCta}
+          />
         </View>
       ) : (
         <>
@@ -41,16 +52,30 @@ export default function CartScreen() {
                   </Text>
                   <Text style={styles.itemPrice}>{formatPrice(line.product.price)}</Text>
                   <View style={styles.qtyRow}>
-                    <Pressable onPress={() => setQty(line.product.id, line.qty - 1)} style={styles.qtyBtn}>
-                      <Text style={styles.qtyMark}>–</Text>
-                    </Pressable>
-                    <Text style={styles.qty}>{line.qty}</Text>
-                    <Pressable onPress={() => setQty(line.product.id, line.qty + 1)} style={styles.qtyBtn}>
-                      <Text style={styles.qtyMark}>+</Text>
-                    </Pressable>
-                    <Pressable onPress={() => remove(line.product.id)}>
-                      <Text style={styles.remove}>Remove</Text>
-                    </Pressable>
+                    <View style={styles.stepper}>
+                      <IconButton
+                        icon="remove"
+                        label="Decrease quantity"
+                        variant="plain"
+                        size={30}
+                        onPress={() => setQty(line.product.id, line.qty - 1)}
+                      />
+                      <Text style={styles.qty}>{line.qty}</Text>
+                      <IconButton
+                        icon="add"
+                        label="Increase quantity"
+                        variant="dark"
+                        size={30}
+                        onPress={() => setQty(line.product.id, line.qty + 1)}
+                      />
+                    </View>
+                    <IconButton
+                      icon="trash-outline"
+                      label="Remove"
+                      variant="plain"
+                      size={34}
+                      onPress={() => remove(line.product.id)}
+                    />
                   </View>
                 </View>
               </View>
@@ -61,9 +86,14 @@ export default function CartScreen() {
             <Row label="Shipping" value={shipping === 0 ? "Complimentary" : formatPrice(shipping)} />
             <View style={styles.hairline} />
             <Row label="Total" value={formatPrice(total)} strong />
-            <Pressable onPress={() => router.push("/checkout")} style={styles.cta}>
-              <Text style={styles.ctaText}>Proceed to checkout</Text>
-            </Pressable>
+            <Button
+              label="Proceed to checkout"
+              size="lg"
+              icon="lock-closed-outline"
+              fullWidth
+              onPress={() => router.push("/checkout")}
+              style={styles.cta}
+            />
           </View>
         </>
       )}
@@ -82,9 +112,17 @@ function Row({ label, value, strong }: { label: string; value: string; strong?: 
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.paper },
-  header: { paddingHorizontal: 20, paddingTop: 12, paddingBottom: 8 },
-  title: { fontFamily: fonts.serif, fontSize: 28, color: colors.ink },
   empty: { flex: 1, alignItems: "center", justifyContent: "center", padding: 32 },
+  emptyIcon: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    backgroundColor: colors.blush,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  emptyCta: { marginTop: 24, alignSelf: "center" },
   emptyTitle: { fontFamily: fonts.serif, fontSize: 24, color: colors.ink },
   emptyBody: {
     marginTop: 10,
@@ -97,50 +135,44 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     backgroundColor: colors.white,
+    borderRadius: radius.lg,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.line,
     marginBottom: 12,
     padding: 10,
     gap: 12,
+    ...shadows.soft,
   },
-  thumb: { width: 88, height: 88, backgroundColor: colors.paperWarm },
+  thumb: { width: 92, height: 92, borderRadius: radius.md, backgroundColor: colors.paperWarm },
   meta: { flex: 1 },
   itemName: { fontFamily: fonts.sans, color: colors.ink, fontSize: 14 },
   itemPrice: { marginTop: 6, fontFamily: fonts.serif, fontSize: 16, color: colors.ink },
-  qtyRow: { marginTop: 8, flexDirection: "row", alignItems: "center", gap: 10 },
-  qtyBtn: {
-    width: 26,
-    height: 26,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.line,
+  qtyRow: {
+    marginTop: 8,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
-  qtyMark: { fontSize: 16, color: colors.ink },
-  qty: { fontFamily: fonts.serif, fontSize: 16, minWidth: 16, textAlign: "center" },
-  remove: { fontFamily: fonts.sans, fontSize: 11, color: colors.stone, letterSpacing: 0.6 },
+  stepper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    padding: 3,
+    borderRadius: radius.full,
+    backgroundColor: colors.paper,
+  },
+  qty: { fontFamily: fonts.serif, fontSize: 16, minWidth: 20, textAlign: "center", color: colors.ink },
   summary: {
     padding: 20,
     backgroundColor: colors.white,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: colors.line,
+    borderTopLeftRadius: radius.lg,
+    borderTopRightRadius: radius.lg,
+    ...shadows.lifted,
   },
   sumRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 8 },
   sumLabel: { fontFamily: fonts.sans, color: colors.stone, fontSize: 13 },
   sumValue: { fontFamily: fonts.serif, color: colors.ink, fontSize: 15 },
   strong: { color: colors.ink, fontSize: 16 },
   hairline: { height: StyleSheet.hairlineWidth, backgroundColor: colors.line, marginVertical: 8 },
-  cta: {
-    marginTop: 14,
-    backgroundColor: colors.crimson,
-    alignItems: "center",
-    paddingVertical: 14,
-  },
-  ctaText: {
-    color: colors.white,
-    fontFamily: fonts.sans,
-    letterSpacing: 1.4,
-    textTransform: "uppercase",
-    fontSize: 12,
-  },
+  cta: { marginTop: 14 },
 });

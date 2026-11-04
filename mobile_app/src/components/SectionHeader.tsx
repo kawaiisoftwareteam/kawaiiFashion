@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, fonts } from "../theme";
 
 export function SectionHeader({
   eyebrow,
   title,
   action,
+  onAction,
 }: {
   eyebrow: string;
   title: string;
   action?: string;
+  onAction?: () => void;
 }) {
   return (
     <View style={styles.wrap}>
@@ -16,7 +19,12 @@ export function SectionHeader({
         <Text style={styles.eyebrow}>{eyebrow}</Text>
         <Text style={styles.title}>{title}</Text>
       </View>
-      {action ? <Text style={styles.action}>{action}</Text> : null}
+      {action ? (
+        <Pressable onPress={onAction} hitSlop={8} style={styles.action}>
+          <Text style={styles.actionText}>{action}</Text>
+          <Ionicons name="chevron-forward" size={14} color={colors.crimson} />
+        </Pressable>
+      ) : null}
     </View>
   );
 }
@@ -42,10 +50,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   action: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  },
+  actionText: {
     fontFamily: fonts.sans,
-    color: colors.stone,
+    color: colors.crimson,
     fontSize: 12,
-    letterSpacing: 1,
-    textTransform: "uppercase",
+    fontWeight: "600",
+    letterSpacing: 0.6,
   },
 });

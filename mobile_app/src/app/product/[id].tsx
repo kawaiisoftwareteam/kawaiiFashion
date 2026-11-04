@@ -1,18 +1,20 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppHeader } from "../../components/AppHeader";
+import { Button, IconButton, type IconName } from "../../components/Button";
 import { useCart } from "../../context/CartContext";
 import { formatPrice, getBrand, getProduct } from "../../data/catalog";
-import { colors, fonts } from "../../theme";
+import { colors, fonts, radius, shadows } from "../../theme";
 
 export default function ProductScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const product = getProduct(id);
   const brand = product ? getBrand(product.brandId) : undefined;
   const { add } = useCart();
-  const router = useRouter();
   const insets = useSafeAreaInsets();
   const [qty, setQty] = useState(1);
 
@@ -29,9 +31,7 @@ export default function ProductScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
         <View style={styles.hero}>
           <Image source={product.image} style={styles.image} contentFit="cover" />
-          <Pressable onPress={() => router.back()} style={[styles.back, { top: insets.top + 8 }]}>
-            <Text style={styles.backText}>Back</Text>
-          </Pressable>
+          <AppHeader back overlay topInset={insets.top} actions={["heart", "bag"]} />
         </View>
 
         <View style={styles.body}>
@@ -43,10 +43,25 @@ export default function ProductScreen() {
               {brand?.name} · {product.origin}
             </Text>
           </View>
-          <Text style={styles.rating}>
-            {"★".repeat(Math.round(product.rating))}
-            <Text style={styles.reviews}>  {product.reviewsCount} atelier notes</Text>
-          </Text>
+          <View style={styles.rating}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <Ionicons
+                key={n}
+                name={
+                  product.rating >= n ? "star" : product.rating >= n - 0.5 ? "star-half" : "star-outline"
+                }
+                size={14}
+                color={colors.gold}
+              />
+            ))}
+            <Text style={styles.reviews}>{product.reviewsCount} atelier notes</Text>
+          </View>
+
+          <View style={styles.perks}>
+            <Perk icon="airplane-outline" label="Ships from Tokyo" />
+            <Perk icon="shield-checkmark-outline" label="Authentic" />
+            <Perk icon="refresh-outline" label="30-day returns" />
+          </View>
           <Text style={styles.description}>{product.description}</Text>
 
           <View style={styles.block}>
@@ -62,21 +77,39 @@ export default function ProductScreen() {
 
       <View style={[styles.bar, { paddingBottom: Math.max(insets.bottom, 12) }]}>
         <View style={styles.qty}>
-          <Pressable onPress={() => setQty((n) => Math.max(1, n - 1))} style={styles.qtyBtn}>
-            <Text style={styles.qtyMark}>–</Text>
-          </Pressable>
+          <IconButton
+            icon="remove"
+            label="Decrease quantity"
+            variant="plain"
+            size={40}
+            onPress={() => setQty((n) => Math.max(1, n - 1))}
+          />
           <Text style={styles.qtyVal}>{qty}</Text>
-          <Pressable onPress={() => setQty((n) => n + 1)} style={styles.qtyBtn}>
-            <Text style={styles.qtyMark}>+</Text>
-          </Pressable>
+          <IconButton
+            icon="add"
+            label="Increase quantity"
+            variant="plain"
+            size={40}
+            onPress={() => setQty((n) => n + 1)}
+          />
         </View>
-        <Pressable
+        <Button
+          label={`Add to bag · ${formatPrice(product.price * qty)}`}
+          icon="bag-add-outline"
+          size="lg"
           onPress={() => add(product, qty)}
           style={styles.add}
-        >
-          <Text style={styles.addText}>Add to bag</Text>
-        </Pressable>
+        />
       </View>
+    </View>
+  );
+}
+
+function Perk({ icon, label }: { icon: IconName; label: string }) {
+  return (
+    <View style={styles.perk}>
+      <Ionicons name={icon} size={18} color={colors.crimson} />
+      <Text style={styles.perkText}>{label}</Text>
     </View>
   );
 }
@@ -87,22 +120,36 @@ const styles = StyleSheet.create({
   missing: { fontFamily: fonts.serif, fontSize: 20, color: colors.ink },
   hero: { height: 420, backgroundColor: colors.paperWarm },
   image: { width: "100%", height: "100%" },
-  back: {
-    position: "absolute",
-    left: 16,
-    backgroundColor: colors.white,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
+  body: {
+    marginTop: -24,
+    padding: 22,
+    borderTopLeftRadius: radius.lg,
+    borderTopRightRadius: radius.lg,
+    backgroundColor: colors.paper,
   },
-  backText: { fontFamily: fonts.serif, fontSize: 13, color: colors.ink },
-  body: { padding: 22 },
   name: { fontFamily: fonts.serif, fontSize: 28, lineHeight: 34, color: colors.ink },
   tagline: { marginTop: 8, fontFamily: fonts.sans, color: colors.stone, fontSize: 13, letterSpacing: 0.4 },
   meta: { marginTop: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" },
   price: { fontFamily: fonts.serif, fontSize: 28, color: colors.ink },
   origin: { fontFamily: fonts.sans, fontSize: 12, color: colors.stone },
-  rating: { marginTop: 8, color: colors.gold, fontSize: 13 },
-  reviews: { color: colors.stone, fontFamily: fonts.sans },
+  rating: { marginTop: 10, flexDirection: "row", alignItems: "center", gap: 2 },
+  reviews: { marginLeft: 8, color: colors.stone, fontFamily: fonts.sans, fontSize: 12 },
+  perks: {
+    marginTop: 18,
+    flexDirection: "row",
+    gap: 8,
+  },
+  perk: {
+    flex: 1,
+    alignItems: "center",
+    gap: 6,
+    paddingVertical: 12,
+    borderRadius: radius.md,
+    backgroundColor: colors.white,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+  },
+  perkText: { fontFamily: fonts.sans, fontSize: 10, color: colors.inkSoft, letterSpacing: 0.4 },
   description: { marginTop: 18, fontFamily: fonts.sans, fontSize: 15, lineHeight: 24, color: colors.inkSoft },
   block: {
     marginTop: 22,
@@ -122,29 +169,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 12,
     backgroundColor: colors.white,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: colors.line,
+    borderTopLeftRadius: radius.lg,
+    borderTopRightRadius: radius.lg,
+    ...shadows.lifted,
   },
   qty: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.line,
+    height: 56,
+    paddingHorizontal: 4,
+    borderRadius: radius.full,
+    backgroundColor: colors.paper,
   },
-  qtyBtn: { width: 40, height: 48, alignItems: "center", justifyContent: "center" },
-  qtyMark: { fontSize: 20, color: colors.ink },
-  qtyVal: { minWidth: 24, textAlign: "center", fontFamily: fonts.serif, fontSize: 18 },
-  add: {
-    flex: 1,
-    backgroundColor: colors.crimson,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  addText: {
-    color: colors.white,
-    fontFamily: fonts.sans,
-    letterSpacing: 1,
-    fontSize: 12,
-    textTransform: "uppercase",
-  },
+  qtyVal: { minWidth: 24, textAlign: "center", fontFamily: fonts.serif, fontSize: 18, color: colors.ink },
+  add: { flex: 1 },
 });

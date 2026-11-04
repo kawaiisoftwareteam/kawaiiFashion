@@ -1,14 +1,16 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { AppHeader } from "../../components/AppHeader";
+import { Chip } from "../../components/Button";
 import { ProductCard } from "../../components/ProductCard";
 import { categories, products } from "../../data/catalog";
 import { colors, fonts } from "../../theme";
 
 export default function ShopScreen() {
   const insets = useSafeAreaInsets();
-  const router = useRouter();
   const params = useLocalSearchParams<{ category?: string }>();
   const [active, setActive] = useState(params.category ?? "all");
 
@@ -25,36 +27,33 @@ export default function ShopScreen() {
 
   return (
     <View style={[styles.screen, { paddingTop: insets.top }]}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>The catalog</Text>
-        </View>
-        <Pressable onPress={() => router.push("/search")}>
-          <Text style={styles.search}>Search</Text>
-        </Pressable>
-      </View>
+      <AppHeader eyebrow="Curated from Japan" title="The catalog" actions={["search", "bag"]} />
 
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.pills}
+        style={styles.pillsScroll}
       >
-        {categories.map((category) => {
-          const on = category.id === active;
-          return (
-            <Pressable
-              key={category.id}
-              onPress={() => setActive(category.id)}
-              style={[styles.pill, on && styles.pillOn]}
-            >
-              <Text style={[styles.pillEn, on && styles.pillEnOn]}>{category.name}</Text>
-            </Pressable>
-          );
-        })}
+        {categories.map((category) => (
+          <Chip
+            key={category.id}
+            label={category.name}
+            icon={category.id === "all" ? "sparkles-outline" : undefined}
+            active={category.id === active}
+            onPress={() => setActive(category.id)}
+          />
+        ))}
       </ScrollView>
 
       <ScrollView contentContainerStyle={styles.grid} showsVerticalScrollIndicator={false}>
-        <Text style={styles.count}>{filtered.length} selected pieces</Text>
+        <View style={styles.toolbar}>
+          <Text style={styles.count}>{filtered.length} selected pieces</Text>
+          <View style={styles.sort}>
+            <Ionicons name="swap-vertical" size={14} color={colors.ink} />
+            <Text style={styles.sortText}>Featured</Text>
+          </View>
+        </View>
         <View style={styles.wrap}>
           {filtered.map((product) => (
             <View key={product.id} style={styles.item}>
@@ -72,61 +71,39 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.paper,
   },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
-  title: {
-    fontFamily: fonts.serif,
-    fontSize: 28,
-    color: colors.ink,
-  },
-  search: {
-    fontFamily: fonts.sans,
-    fontSize: 12,
-    color: colors.stone,
-    letterSpacing: 0.6,
+  pillsScroll: {
+    flexGrow: 0,
   },
   pills: {
     paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingBottom: 14,
     gap: 8,
-  },
-  pill: {
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.line,
-    backgroundColor: colors.white,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignItems: "center",
-  },
-  pillOn: {
-    backgroundColor: colors.ink,
-    borderColor: colors.ink,
-  },
-  pillEn: {
-    fontFamily: fonts.sans,
-    fontSize: 12,
-    letterSpacing: 0.8,
-    color: colors.ink,
-  },
-  pillEnOn: {
-    color: colors.white,
   },
   grid: {
     paddingHorizontal: 16,
     paddingBottom: 32,
   },
+  toolbar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
   count: {
     fontFamily: fonts.sans,
     fontSize: 12,
     color: colors.stone,
-    marginBottom: 12,
     letterSpacing: 0.8,
+  },
+  sort: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  sortText: {
+    fontFamily: fonts.sans,
+    fontSize: 12,
+    color: colors.ink,
   },
   wrap: {
     flexDirection: "row",
