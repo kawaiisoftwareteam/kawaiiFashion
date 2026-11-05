@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { formatPrice } from "../../lib/currency";
 import styles from "./UpcomingSection.module.css";
 
 interface UpcomingProduct {
@@ -116,7 +117,7 @@ export default function UpcomingSection({ onNotifySubscribed }: UpcomingSectionP
               <p className={styles.description}>{product.description}</p>
               <div className={styles.footer}>
                 <div className={styles.priceContainer}>
-                  <span className={styles.price}>Est. Price: ${product.price.toFixed(2)}</span>
+                  <span className={styles.price}>Est. Price: {formatPrice(product.price)}</span>
                 </div>
                 {notifyFormId === product.id ? (
                   <form

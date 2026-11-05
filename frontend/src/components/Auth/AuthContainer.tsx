@@ -180,41 +180,6 @@ export default function AuthContainer({ initialMode = "login" }: AuthContainerPr
               <span className={styles.brandDot} />
               KAWAII MART
             </div>
-            <span className={styles.visualOriginTag}>
-              Tokyo · Kyoto Atelier
-            </span>
-          </div>
-
-          {/* Floating 3D Glass Badge */}
-          <div className={styles.floatingGlassBadge}>
-            <span className={styles.sparkleIcon}>✦</span>
-            <div>
-              <div className={styles.badgeBold}>
-                {mode === "login" ? "Ginza Atelier · 100% Authentic" : "Member Privilege · Early Drops"}
-              </div>
-              <div className={styles.badgeSub}>
-                {mode === "login" ? "Direct air shipment from Tokyo" : "Complimentary seasonal sample gift"}
-              </div>
-            </div>
-          </div>
-
-          {/* Floating 3D Review Card */}
-          <div className={styles.floatingReviewCard}>
-            <div className={styles.reviewStars}>
-              ★★★★★ <span>4.98 / 5</span>
-            </div>
-            <p className={styles.reviewQuote}>
-              {mode === "login"
-                ? "“The glass skin routine completely transformed my hydration. Pure Japanese luxury.”"
-                : "“Early access to the Kyoto nama drops and concierge care is unmatched.”"}
-            </p>
-            <div className={styles.reviewAuthor}>
-              <span className={styles.reviewAvatar}>🌸</span>
-              <div>
-                <strong>{mode === "login" ? "Aoi Takahashi" : "Elena Kuroda"}</strong>
-                <span>{mode === "login" ? "Tokyo Atelier Member" : "Verified Beauty Member"}</span>
-              </div>
-            </div>
           </div>
 
           {/* Center Copy with smooth content shift */}
@@ -233,53 +198,9 @@ export default function AuthContainer({ initialMode = "login" }: AuthContainerPr
                 </>
               )}
             </h2>
-            <p className={styles.visualText}>
-              {mode === "login"
-                ? "Sign in for curated Japanese beauty, saved routines, and quiet order tracking — from Tokyo & Kyoto to your door."
-                : "Create an account for early drops, personalised rituals, and a quieter way to shop Japanese beauty & care."}
-            </p>
           </div>
 
-          {/* Bottom Metas */}
-          <div className={styles.visualMeta}>
-            {mode === "login" ? (
-              <>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Ships from</span>
-                  <span className={styles.metaValue}>Tokyo · Kyoto</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Members</span>
-                  <span className={styles.metaValue}>Free shipping $50+</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Authenticity</span>
-                  <span className={styles.metaValue}>100% Guaranteed</span>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Perks</span>
-                  <span className={styles.metaValue}>Early access drops</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Care</span>
-                  <span className={styles.metaValue}>Concierge support</span>
-                </div>
-                <div className={styles.metaCard}>
-                  <span className={styles.metaLabel}>Gifts</span>
-                  <span className={styles.metaValue}>Atelier samples</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Floating authentic atelier seal */}
-          <div className={styles.atelierBadge}>
-            <span className={styles.atelierBadgeDot} />
-            Authentic Japanese Care
-          </div>
+          <div className={styles.visualBottomSpacer} />
         </aside>
 
         {/* White Form Panel (Glides in counter-direction) */}
@@ -624,11 +545,6 @@ export default function AuthContainer({ initialMode = "login" }: AuthContainerPr
                 </>
               )}
             </h2>
-            <p className={styles.mobileVisualText}>
-              {mode === "login"
-                ? "Sign in for curated Japanese beauty, saved routines, and quiet order tracking."
-                : "Create an account for early drops and personalised routines."}
-            </p>
           </div>
         </div>
 

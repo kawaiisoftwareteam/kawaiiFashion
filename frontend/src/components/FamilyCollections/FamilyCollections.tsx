@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "./FamilyCollections.module.css";
 
 interface CurationDepartment {
@@ -246,8 +247,8 @@ export default function FamilyCollections() {
                   itemScope
                   itemType="https://schema.org/Offer"
                 >
-                  <meta itemProp="priceCurrency" content="USD" />
-                  $<span itemProp="price">{product.price.toFixed(2)}</span>
+                  <meta itemProp="priceCurrency" content="BDT" />
+                  <span itemProp="price">{formatPrice(product.price)}</span>
                 </span>
               </div>
             </div>
@@ -302,7 +303,7 @@ export default function FamilyCollections() {
                     {selectedProduct.rating.toFixed(1)} • {selectedProduct.reviewsCount} reviews
                   </span>
                 </div>
-                <div className={styles.modalPrice}>${selectedProduct.price.toFixed(2)}</div>
+                <div className={styles.modalPrice}>{formatPrice(selectedProduct.price)}</div>
 
                 <p className={styles.modalDesc}>{selectedProduct.description}</p>
 

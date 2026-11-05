@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "./CartDrawer.module.css";
 
 interface CartDrawerProps {
@@ -81,7 +82,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 </div>
                 <div className={styles.itemInfo}>
                   <h4 className={styles.itemName}>{item.name}</h4>
-                  <span className={styles.itemPrice}>${item.price.toFixed(2)}</span>
+                  <span className={styles.itemPrice}>{formatPrice(item.price)}</span>
                   {item.isPreorder && (
                     <span className={styles.preorderBadge}>
                       Pre-order (Ships {item.availableDate})
@@ -137,25 +138,25 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           <div className={styles.footer}>
             <div className={styles.summaryRow}>
               <span>Subtotal</span>
-              <span>${cartSubtotal.toFixed(2)}</span>
+              <span>{formatPrice(cartSubtotal)}</span>
             </div>
             <div className={styles.summaryRow}>
               <span>Estimated Shipping</span>
-              <span>{shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}</span>
+              <span>{shipping === 0 ? "FREE" : formatPrice(shipping)}</span>
             </div>
             {shipping === 0 && (
               <div className={`${styles.summaryRow} ${styles.summaryRowActive}`}>
                 <span>Free Shipping Reward</span>
-                <span>-$5.00 Applied</span>
+                <span>-{formatPrice(5)} Applied</span>
               </div>
             )}
             <div className={styles.summaryRow}>
               <span>Estimated Tax (8%)</span>
-              <span>${tax.toFixed(2)}</span>
+              <span>{formatPrice(tax)}</span>
             </div>
             <div className={styles.totalRow}>
               <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <span>{formatPrice(total)}</span>
             </div>
 
             <Link href="/checkout" className={styles.checkoutBtn} onClick={onClose}>

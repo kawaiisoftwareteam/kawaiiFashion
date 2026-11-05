@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { collections, products, Product } from "../../../data/products";
 import { useCart } from "../../../context/CartContext";
+import { formatPrice } from "../../../lib/currency";
 import styles from "../Collections.module.css";
 
 interface PageProps {
@@ -190,7 +191,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
                 </p>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "auto", paddingTop: "12px" }}>
                   <span style={{ fontWeight: "700", color: "var(--color-ink)", fontSize: "15px" }}>
-                    ${product.price.toFixed(2)}
+                    {formatPrice(product.price)}
                   </span>
                   <button
                     onClick={(e) => handleAddToCart(product, e)}
@@ -221,7 +222,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
               Experience the synergistic power of all {collectionProducts.length} steps together for maximum results.
             </p>
             <div style={{ fontSize: "28px", fontWeight: "700", color: "var(--color-ink)", marginBottom: "24px" }}>
-              Total Kit Price: ${kitTotalPrice.toFixed(2)}
+              Total Kit Price: {formatPrice(kitTotalPrice)}
             </div>
             <button className={styles.buyKitBtn} onClick={handleBuyKit}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -317,7 +318,7 @@ export default function CollectionDetailPage({ params }: PageProps) {
                   <span style={{ color: "var(--color-stone)", marginLeft: "4px" }}>({selectedProduct.reviewsCount} reviews)</span>
                 </div>
                 <div style={{ fontSize: "22px", fontWeight: "700", color: "var(--color-ink)" }}>
-                  ${selectedProduct.price.toFixed(2)}
+                  {formatPrice(selectedProduct.price)}
                 </div>
                 <p style={{ fontSize: "14px", color: "var(--color-stone)", lineHeight: 1.6 }}>
                   {selectedProduct.description}

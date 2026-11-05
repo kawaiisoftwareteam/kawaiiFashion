@@ -2,7 +2,6 @@
 
 import Hero from "../components/Hero/Hero";
 import ProductsShowcase from "../components/ProductsShowcase/ProductsShowcase";
-import FamilyCollections from "../components/FamilyCollections/FamilyCollections";
 import PreorderSection from "../components/PreorderSection/PreorderSection";
 import UpcomingSection from "../components/UpcomingSection/UpcomingSection";
 import BrandStory from "../components/BrandStory/BrandStory";
@@ -24,7 +23,6 @@ export default function Home() {
     <>
       <Hero />
       <ProductsShowcase />
-      <FamilyCollections />
       <PreorderSection onPreorderAdded={handlePreorderAdded} />
       <UpcomingSection onNotifySubscribed={handleNotifySubscribed} />
       <BrandStory />
@@ -32,4 +30,3 @@ export default function Home() {
     </>
   );
 }
-

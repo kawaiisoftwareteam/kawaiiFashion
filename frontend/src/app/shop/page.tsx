@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { products, categories, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "../category/[slug]/Category.module.css";
 
 export default function ShopPage() {
@@ -33,65 +33,56 @@ export default function ShopPage() {
       {/* Shop Hero */}
       <section className={styles.heroHeader} style={{ background: "linear-gradient(135deg, #FFFFFF 0%, #F5EFEB 100%)" }}>
         <div className={styles.heroContent}>
-          <div>
-            <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-              <Link href="/">Home</Link>
-              <span>/</span>
-              <span>Shop All</span>
-            </nav>
-            <span className={styles.categoryTagline}>Japanese Lifestyle &amp; Wellness</span>
-            <h1 className={styles.categoryTitle}>Full Product Catalog</h1>
-            <p className={styles.categoryDescription}>
-              Explore our complete collection of Japanese beauty formulations, Mt. Fuji ionized alkaline waters, mountain spring purity, and artisanal Nama chocolates.
-            </p>
-          </div>
+          <span className={styles.categoryBadge}>The Full Vault</span>
+          <h1 className={styles.categoryTitle}>Curated Japanese Living</h1>
+          <p className={styles.categoryDescription}>
+            Explore our complete catalogue of Japanese beauty rituals, mountain alkaline waters, matcha chocolate confections, and precision morning grooming tools.
+          </p>
 
-          <div className={styles.heroImageCard}>
-            <Image
-              src="/product_alkaline_water.png"
-              alt="Kawaii Mart and Lifestyle catalog"
-              fill
-              sizes="(max-width: 900px) 100vw, 400px"
-              style={{ objectFit: "cover" }}
-              priority
-            />
+          <div className={styles.metaStats}>
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>{filteredProducts.length}</span>
+              <span className={styles.statLabel}>Available Pieces</span>
+            </div>
+            <div className={styles.statDivider} />
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>100%</span>
+              <span className={styles.statLabel}>Tokyo Authentic</span>
+            </div>
+            <div className={styles.statDivider} />
+            <div className={styles.statItem}>
+              <span className={styles.statNumber}>Direct</span>
+              <span className={styles.statLabel}>Air Shipment</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Filter Tabs */}
-      <div className={styles.pillsBar}>
-        <span className={styles.pillsLabel}>Category:</span>
-        <button
-          type="button"
-          onClick={() => setActiveCategory("all")}
-          className={`${styles.pillLink} ${activeCategory === "all" ? styles.pillLinkActive : ""}`}
-        >
-          All ({products.filter((p) => !p.isPreorder && !p.releaseSchedule).length})
-        </button>
-        {categories.map((cat) => {
-          const count = products.filter((p) => p.category === cat.id && !p.isPreorder && !p.releaseSchedule).length;
-          return (
+      {/* Category Pills Filter */}
+      <div className={styles.navPillsWrapper}>
+        <div className={styles.navPills}>
+          <button
+            type="button"
+            onClick={() => setActiveCategory("all")}
+            className={`${styles.pillLink} ${activeCategory === "all" ? styles.pillLinkActive : ""}`}
+          >
+            All Products
+          </button>
+          {categories.map((c) => (
             <button
-              key={cat.id}
+              key={c.id}
               type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={`${styles.pillLink} ${activeCategory === cat.id ? styles.pillLinkActive : ""}`}
+              onClick={() => setActiveCategory(c.id)}
+              className={`${styles.pillLink} ${activeCategory === c.id ? styles.pillLinkActive : ""}`}
             >
-              {cat.name} ({count})
+              {c.name}
             </button>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
       {/* Products Grid */}
       <section className={styles.productsSection}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.productCount}>
-            Showing {filteredProducts.length} {filteredProducts.length === 1 ? "Product" : "Products"}
-          </span>
-        </div>
-
         <div className={styles.productsGrid}>
           {filteredProducts.map((product) => (
             <div
@@ -99,23 +90,16 @@ export default function ShopPage() {
               className={`${styles.productCard} h-product`}
               onClick={() => setSelectedProduct(product)}
             >
-              <div className={styles.cardImageWrapper}>
-                {product.badge && <span className={styles.badge}>{product.badge}</span>}
+              <div className={styles.imageContainer}>
+                {product.badge && (
+                  <span className={styles.badge}>{product.badge}</span>
+                )}
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className={styles.cardImage}
-                />
-                <Image
-                  src={product.hoverImage}
-                  alt={`${product.name} alternate view`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{ objectFit: "cover" }}
-                  className={styles.cardImageHover}
                 />
                 <button
                   type="button"
@@ -133,7 +117,7 @@ export default function ShopPage() {
                 </div>
                 <h2 className={styles.cardTitle}>{product.name}</h2>
                 <p className={styles.cardTagline}>{product.tagline}</p>
-                <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+                <span className={styles.cardPrice}>{formatPrice(product.price)}</span>
               </div>
             </div>
           ))}
@@ -177,7 +161,7 @@ export default function ShopPage() {
                     {selectedProduct.rating || 5}.0 • {selectedProduct.reviewsCount} customer reviews
                   </span>
                 </div>
-                <div className={styles.modalPrice}>${selectedProduct.price.toFixed(2)}</div>
+                <div className={styles.modalPrice}>{formatPrice(selectedProduct.price)}</div>
 
                 <p className={styles.modalDesc}>{selectedProduct.description}</p>
 
@@ -211,7 +195,7 @@ export default function ShopPage() {
                     setSelectedProduct(null);
                   }}
                 >
-                  Add to Cart • ${selectedProduct.price.toFixed(2)}
+                  Add to Cart • {formatPrice(selectedProduct.price)}
                 </button>
               </div>
             </div>
@@ -221,4 +205,3 @@ export default function ShopPage() {
     </div>
   );
 }
-

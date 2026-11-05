@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products, brands, categories } from "../../../data/products";
 import { useCart } from "../../../context/CartContext";
+import { formatPrice } from "../../../lib/currency";
 import styles from "../../category/[slug]/Category.module.css";
 
 interface PageProps {
@@ -106,7 +107,7 @@ export default function ProductDetailPage({ params }: PageProps) {
               </span>
             </div>
             <div className={styles.modalPrice} style={{ fontSize: 28, margin: "14px 0 20px" }}>
-              ${product.price.toFixed(2)}
+              {formatPrice(product.price)}
             </div>
 
             <p className={styles.modalDesc} style={{ fontSize: 16 }}>
@@ -140,7 +141,7 @@ export default function ProductDetailPage({ params }: PageProps) {
               className={styles.modalAddBtn}
               onClick={handleAddToCart}
             >
-              {product.isPreorder ? "Pre-order Now" : "Add to Cart"} • ${product.price.toFixed(2)}
+              {product.isPreorder ? "Pre-order Now" : "Add to Cart"} • {formatPrice(product.price)}
             </button>
           </div>
         </div>

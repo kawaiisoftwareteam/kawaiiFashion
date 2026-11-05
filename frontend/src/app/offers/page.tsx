@@ -54,7 +54,7 @@ export default function OffersPage() {
       badgeType: "crimson",
       value: "FREE GIFT",
       title: "Complimentary Yuzu Lip Balm",
-      description: "Receive a free full-size Yuzu Brightening Lip Balm (valued at $14) with any purchase of $75 or more. The gift will be automatically added to your cart at checkout.",
+      description: "Receive a free full-size Yuzu Brightening Lip Balm (valued at BDT 1,680) with any purchase of BDT 9,000 or more. The gift will be automatically added to your cart at checkout.",
       ctaText: "Browse All Products",
       ctaLink: "/#shop",
       productImage: "/product_cleanser.png"
@@ -64,8 +64,8 @@ export default function OffersPage() {
       badge: "Always Available",
       badgeType: "blue",
       value: "FREE SHIPPING",
-      title: "Free Tracked Worldwide Shipping",
-      description: "Enjoy complimentary tracked international shipping on all orders over $50. No discount code required. Free shipping is automatically applied at checkout.",
+      title: "Free Tracked Shipping",
+      description: "Enjoy complimentary tracked shipping on all orders over BDT 5,000. No discount code required. Free shipping is automatically applied at checkout.",
       ctaText: "Shop New Arrivals",
       ctaLink: "/#new-arrivals",
       productImage: "/product_cream.png"
@@ -232,8 +232,8 @@ export default function OffersPage() {
         <h2 className={styles.termsTitle}>Terms &amp; Conditions</h2>
         <ul className={styles.termsList}>
           <li>Promo codes cannot be combined with other ongoing sales or discount codes on a single purchase.</li>
-          <li>The Free Gift (Yuzu Lip Balm) is subject to stock availability and applies only to orders exceeding $75 subtotal before taxes and shipping.</li>
-          <li>Free worldwide shipping applies to standard tracked shipping options on orders exceeding $50 subtotal.</li>
+          <li>The Free Gift (Yuzu Lip Balm) is subject to stock availability and applies only to orders exceeding BDT 9,000 subtotal before taxes and shipping.</li>
+          <li>Free shipping applies to standard tracked shipping options on orders exceeding BDT 5,000 subtotal.</li>
           <li>Offers are subject to change or termination at any time without prior notice.</li>
         </ul>
       </section>

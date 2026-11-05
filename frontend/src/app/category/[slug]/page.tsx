@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { categories, products, Product } from "../../../data/products";
 import { useCart } from "../../../context/CartContext";
+import { formatPrice } from "../../../lib/currency";
 import styles from "./Category.module.css";
 
 interface PageProps {
@@ -161,7 +162,7 @@ export default function CategoryPage({ params }: PageProps) {
                 </div>
                 <h2 className={styles.cardTitle}>{product.name}</h2>
                 <p className={styles.cardTagline}>{product.tagline}</p>
-                <span className={styles.cardPrice}>${product.price.toFixed(2)}</span>
+                <span className={styles.cardPrice}>{formatPrice(product.price)}</span>
               </div>
             </div>
           ))}
@@ -205,7 +206,7 @@ export default function CategoryPage({ params }: PageProps) {
                     {selectedProduct.rating || 5}.0 • {selectedProduct.reviewsCount} customer reviews
                   </span>
                 </div>
-                <div className={styles.modalPrice}>${selectedProduct.price.toFixed(2)}</div>
+                <div className={styles.modalPrice}>{formatPrice(selectedProduct.price)}</div>
 
                 <p className={styles.modalDesc}>{selectedProduct.description}</p>
 
@@ -239,7 +240,7 @@ export default function CategoryPage({ params }: PageProps) {
                     setSelectedProduct(null);
                   }}
                 >
-                  Add to Cart • ${selectedProduct.price.toFixed(2)}
+                  Add to Cart • {formatPrice(selectedProduct.price)}
                 </button>
               </div>
             </div>

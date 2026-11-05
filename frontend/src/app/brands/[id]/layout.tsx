@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import JsonLd from "../../../components/JsonLd/JsonLd";
 import { brands, products } from "../../../data/products";
 import { getSiteUrl, SITE_NAME } from "../../../lib/site";
+import { toBDT } from "../../../lib/currency";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -72,8 +73,8 @@ export default async function BrandDetailLayout({ params, children }: Props) {
     makesOffer: brandProducts.map((product) => ({
       "@type": "Offer",
       name: product.name,
-      price: product.price.toFixed(2),
-      priceCurrency: "USD",
+      price: toBDT(product.price).toString(),
+      priceCurrency: "BDT",
       url: `${siteUrl}/brands/${brand.id}`,
     })),
   };

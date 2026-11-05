@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "../checkout/checkout.module.css";
 
 export default function CartPage() {
@@ -73,7 +74,7 @@ export default function CartPage() {
                       {item.name}
                     </h3>
                     <div style={{ fontSize: 14, color: "var(--color-crimson)", fontWeight: 700, fontFamily: "var(--font-sans)" }}>
-                      ${item.price.toFixed(2)}
+                      {formatPrice(item.price)}
                     </div>
                   </div>
 
@@ -148,17 +149,17 @@ export default function CartPage() {
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, fontSize: 14, fontFamily: "var(--font-sans)" }}>
               <span>Subtotal</span>
-              <span>${cartSubtotal.toFixed(2)}</span>
+              <span>{formatPrice(cartSubtotal)}</span>
             </div>
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16, fontSize: 14, fontFamily: "var(--font-sans)" }}>
               <span>Estimated Shipping</span>
-              <span>{shippingCost === 0 ? "Free" : `$${shippingCost.toFixed(2)}`}</span>
+              <span>{shippingCost === 0 ? "Free" : formatPrice(shippingCost)}</span>
             </div>
 
             {cartSubtotal < 50 && (
               <div style={{ fontSize: 12, color: "var(--color-crimson)", marginBottom: 16, fontFamily: "var(--font-sans)" }}>
-                Add ${(50 - cartSubtotal).toFixed(2)} more for free tracked shipping!
+                Add {formatPrice(50 - cartSubtotal)} more for free tracked shipping!
               </div>
             )}
 
@@ -166,7 +167,7 @@ export default function CartPage() {
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 24, fontSize: 18, fontWeight: 700, fontFamily: "var(--font-sans)" }}>
               <span>Total</span>
-              <span style={{ color: "var(--color-crimson)" }}>${grandTotal.toFixed(2)}</span>
+              <span style={{ color: "var(--color-crimson)" }}>{formatPrice(grandTotal)}</span>
             </div>
 
             <Link
@@ -193,4 +194,3 @@ export default function CartPage() {
     </div>
   );
 }
-

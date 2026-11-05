@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { products, Product } from "../../data/products";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "./ProductsShowcase.module.css";
 
 // Filter out preorder products and non-core categories for the main featured homepage list
@@ -218,8 +219,8 @@ export default function ProductsShowcase() {
                     itemScope
                     itemType="https://schema.org/Offer"
                   >
-                    <meta itemProp="priceCurrency" content="USD" />
-                    $<span itemProp="price">{product.price.toFixed(2)}</span>
+                    <meta itemProp="priceCurrency" content="BDT" />
+                    <span itemProp="price">{formatPrice(product.price)}</span>
                   </span>
                 </div>
               </div>
@@ -369,7 +370,7 @@ export default function ProductsShowcase() {
                     {selectedProduct.rating}.0 • {selectedProduct.reviewsCount} customer reviews
                   </span>
                 </div>
-                <div className={styles.modalPrice}>${selectedProduct.price.toFixed(2)}</div>
+                <div className={styles.modalPrice}>{formatPrice(selectedProduct.price)}</div>
 
                 <p className={styles.modalDesc}>{selectedProduct.description}</p>
 

@@ -18,7 +18,7 @@ export default function Header({ cartCount, cartFeedback, onOpenCart }: HeaderPr
     <header className={styles.headerContainer}>
       {/* Promo Announcement Bar */}
       <div className={styles.promoBar}>
-        Free standard shipping on purchases with a subtotal of $50 and over
+        Free standard shipping on purchases with a subtotal of BDT 5,000 and over
       </div>
 
       {/* Header / Navigation */}

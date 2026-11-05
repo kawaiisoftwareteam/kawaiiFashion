@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { brands, products, Product } from "../../../data/products";
 import { useCart } from "../../../context/CartContext";
+import { formatPrice } from "../../../lib/currency";
 import styles from "../Brands.module.css";
 
 interface PageProps {
@@ -130,7 +131,7 @@ export default function BrandDetailPage({ params }: PageProps) {
                   </p>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "auto", paddingTop: "12px" }}>
                     <span style={{ fontWeight: "700", color: "var(--color-ink)", fontSize: "15px" }}>
-                      ${product.price.toFixed(2)}
+                      {formatPrice(product.price)}
                     </span>
                     <button
                       onClick={(e) => handleAddToCart(product, e)}
@@ -157,62 +158,31 @@ export default function BrandDetailPage({ params }: PageProps) {
 
       {/* Product Detail Modal */}
       {selectedProduct && (
-        <div
-          onClick={() => setSelectedProduct(null)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1000,
-            backdropFilter: "blur(4px)",
-            padding: "20px"
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundColor: "var(--color-white)",
-              borderRadius: "16px",
-              width: "100%",
-              maxWidth: "850px",
-              maxHeight: "90vh",
-              overflowY: "auto",
-              position: "relative",
-              boxShadow: "0 20px 50px rgba(0, 0, 0, 0.15)",
-              animation: "fadeIn 0.3s ease"
-            }}
-          >
+        <div className={styles.modalOverlay} onClick={() => setSelectedProduct(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <button
+              className={styles.modalClose}
               onClick={() => setSelectedProduct(null)}
-              style={{
-                position: "absolute",
-                top: "16px",
-                right: "16px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                color: "var(--color-ink)",
-                zIndex: 10
-              }}
-              aria-label="Close details"
+              aria-label="Close modal"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "450px" }}>
-              <div style={{ position: "relative", minHeight: "350px", width: "100%" }}>
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fill style={{ objectFit: "cover" }} />
+            <div className={styles.modalLayout}>
+              <div style={{ position: "relative", width: "100%", minHeight: "320px", borderRadius: "12px", overflow: "hidden" }}>
+                <Image
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
-              <div style={{ padding: "40px", display: "flex", flexDirection: "column", gap: "16px" }}>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {selectedProduct.badge && (
                   <span
                     style={{
@@ -237,7 +207,7 @@ export default function BrandDetailPage({ params }: PageProps) {
                   <span style={{ color: "var(--color-stone)", marginLeft: "4px" }}>({selectedProduct.reviewsCount} reviews)</span>
                 </div>
                 <div style={{ fontSize: "22px", fontWeight: "700", color: "var(--color-ink)" }}>
-                  ${selectedProduct.price.toFixed(2)}
+                  {formatPrice(selectedProduct.price)}
                 </div>
                 <p style={{ fontSize: "14px", color: "var(--color-stone)", lineHeight: 1.6 }}>
                   {selectedProduct.description}

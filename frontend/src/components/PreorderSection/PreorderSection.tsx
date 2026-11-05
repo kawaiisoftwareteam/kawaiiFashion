@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/currency";
 import styles from "./PreorderSection.module.css";
 
 interface PreorderProduct {
@@ -113,7 +114,7 @@ export default function PreorderSection({ onPreorderAdded }: PreorderSectionProp
               <p className={styles.taglineText}>{product.tagline}</p>
               <p className={styles.description}>{product.description}</p>
               <div className={styles.footer}>
-                <span className={styles.price}>${product.price.toFixed(2)}</span>
+                <span className={styles.price}>{formatPrice(product.price)}</span>
                 <button
                   className={styles.preorderBtn}
                   onClick={() => handlePreorder(product)}

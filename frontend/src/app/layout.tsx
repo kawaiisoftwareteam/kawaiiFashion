@@ -5,6 +5,7 @@ import { CartProvider } from "../context/CartContext";
 import StoreLayout from "../components/StoreLayout/StoreLayout";
 import JsonLd from "../components/JsonLd/JsonLd";
 import { brands, collections, products } from "../data/products";
+import { toBDT } from "../lib/currency";
 import {
   getSiteUrl,
   SITE_DESCRIPTION,
@@ -171,8 +172,8 @@ const productListJsonLd = {
       sku: product.id,
       offers: {
         "@type": "Offer",
-        priceCurrency: "USD",
-        price: product.price.toFixed(2),
+        priceCurrency: "BDT",
+        price: toBDT(product.price).toString(),
         availability: product.isPreorder
           ? "https://schema.org/PreOrder"
           : "https://schema.org/InStock",
