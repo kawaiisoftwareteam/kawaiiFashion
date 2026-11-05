@@ -78,10 +78,6 @@
   letter-spacing: -0.01em;
 }
 
-.highlight {
-  color: var(--color-crimson);
-}
-
 .description {
   font-family: var(--font-sans);
   font-size: 16px;

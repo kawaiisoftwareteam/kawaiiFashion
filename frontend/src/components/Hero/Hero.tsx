@@ -24,7 +24,7 @@ export default function Hero() {
         <div className={styles.bannerContent}>
           <span className={styles.tagline}>Modern Japanese Living &amp; Innovation</span>
           <h1 className={styles.headline}>
-            Discover <span className={styles.highlight}>Kawaii Living</span>: beauty, pure waters &amp; smart gadgets
+            KAWAII — Elevate Your Everyday.
           </h1>
           <p className={styles.description}>
             From moisture-rich skincare rituals and Mt. Fuji alkaline hydration to artisanal chocolates and intelligent beauty gadgets — handpicked Japanese essentials for vibrant, modern living.
