@@ -10,8 +10,8 @@ interface FaqItem {
 
 const faqData: FaqItem[] = [
   {
-    question: "What is Kawaii Beauty and what products do you offer?",
-    answer: "Kawaii Beauty is an online lifestyle e-commerce store offering premium Japanese skincare, natural drinking waters (including Mt. Fuji ionized alkaline water and alpine spring water), and artisanal Nama chocolates. From hydrating rice ferment serums to refreshing mineral hydration and gourmet matcha confections, we curate authentic Japanese products that nourish the body from inside and out."
+    question: "What is Kawaii Mart and what products do you offer?",
+    answer: "Kawaii Mart is an online lifestyle e-commerce store offering premium Japanese skincare, natural drinking waters (including Mt. Fuji ionized alkaline water and alpine spring water), and artisanal Nama chocolates. From hydrating rice ferment serums to refreshing mineral hydration and gourmet matcha confections, we curate authentic Japanese products that nourish the body from inside and out."
   },
   {
     question: "Where are your alkaline waters, spring waters, and chocolates sourced?",
@@ -23,7 +23,7 @@ const faqData: FaqItem[] = [
   },
   {
     question: "What is your return and exchange policy?",
-    answer: "We want you to love your Kawaii Beauty purchase. We offer a 30-day return policy for unused and unopened products in their original packaging. If you receive a damaged or incorrect item, please contact our support team immediately, and we will issue a replacement or full refund."
+    answer: "We want you to love your Kawaii Mart purchase. We offer a 30-day return policy for unused and unopened products in their original packaging. If you receive a damaged or incorrect item, please contact our support team immediately, and we will issue a replacement or full refund."
   },
   {
     question: "How do pre-orders work and when will they ship?",
@@ -31,10 +31,10 @@ const faqData: FaqItem[] = [
   },
   {
     question: "What payment methods do you accept on the website?",
-    answer: "To provide a seamless checkout experience, Kawaii Beauty accepts all major credit and debit cards including Visa, Mastercard, American Express, and Discover. We also support modern digital wallets like Apple Pay and Google Pay for secure, one-click transactions."
+    answer: "To provide a seamless checkout experience, Kawaii Mart accepts all major credit and debit cards including Visa, Mastercard, American Express, and Discover. We also support modern digital wallets like Apple Pay and Google Pay for secure, one-click transactions."
   },
   {
-    question: "Are Kawaii Beauty products safe for sensitive skin types?",
+    question: "Are Kawaii Mart products safe for sensitive skin types?",
     answer: "Yes, safety and skin health are our top priorities. Many of our curated products are dermatologist-tested, hypoallergenic, and formulated with clean, gentle ingredients. We offer dedicated collections for sensitive skin, including our pediatrician-tested Baby & Kids collection, which is completely fragrance-free and designed for delicate skin barriers."
   }
 ];

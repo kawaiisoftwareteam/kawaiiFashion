@@ -10,7 +10,7 @@ export function getSiteUrl(): string {
   return withProtocol.replace(/\/$/, "");
 }
 
-export const SITE_NAME = "Kawaii Beauty";
+export const SITE_NAME = "Kawaii Mart";
 export const SITE_TAGLINE = "Deep Moisture Japanese Skincare";
 export const SITE_DESCRIPTION =
-  "Shop premium Japanese skincare at Kawaii Beauty. Discover fermented rice, camellia oil, matcha, and peach blossom formulas for glass skin, hydration, and gentle care for the whole family.";
+  "Shop premium Japanese skincare at Kawaii Mart. Discover fermented rice, camellia oil, matcha, and peach blossom formulas for glass skin, hydration, and gentle care for the whole family.";

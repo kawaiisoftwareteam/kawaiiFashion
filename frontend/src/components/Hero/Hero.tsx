@@ -10,7 +10,7 @@ export default function Hero() {
       <div className={styles.bannerBg}>
         <Image
           src="/kawaii_beauty_landscape.png"
-          alt="Premium Kawaii Beauty skincare collection background"
+          alt="Premium Kawaii Mart skincare collection background"
           fill
           priority
           sizes="100vw"
@@ -59,7 +59,7 @@ export default function Hero() {
         <div className={styles.mobileImageWrapper}>
           <Image
             src="/kawaii_beauty_landscape.png"
-            alt="Premium Kawaii Beauty skincare collection"
+            alt="Premium Kawaii Mart skincare collection"
             fill
             sizes="(max-width: 768px) 100vw, 1px"
             style={{ objectFit: "cover" }}

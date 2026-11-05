@@ -38,7 +38,7 @@ export function AppHeader({
         {brand ? (
           <View>
             <Text style={styles.brand}>KAWAII</Text>
-            <Text style={styles.brandSub}>BEAUTY · TOKYO</Text>
+            <Text style={styles.brandSub}>MART · TOKYO</Text>
           </View>
         ) : null}
         {title ? (

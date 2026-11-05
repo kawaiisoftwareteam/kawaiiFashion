@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     canonical: "/collections",
   },
   openGraph: {
-    title: "Skincare Collections | Kawaii Beauty",
+    title: "Skincare Collections | Kawaii Mart",
     description:
       "Curated Japanese skincare routines designed for specific skin goals and family needs.",
   },

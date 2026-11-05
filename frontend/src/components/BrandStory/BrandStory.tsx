@@ -57,7 +57,7 @@ const features = [
     href: "/brands",
     cta: "Shop Japanese Brands",
     image: "/collection_men.png",
-    imageAlt: "Premium Japanese skincare and lifestyle brands curated by Kawaii Beauty",
+    imageAlt: "Premium Japanese skincare and lifestyle brands curated by Kawaii Mart",
   },
 ];
 
@@ -69,10 +69,10 @@ export default function BrandStory() {
           <div className={styles.headerCopy}>
             <span className={styles.eyebrow}>Japanese Skincare Expertise</span>
             <h2 id="brand-story-heading" className={styles.title}>
-              Why Kawaii Beauty Skincare Works
+              Why Kawaii Mart Skincare Works
             </h2>
             <p className={styles.lead}>
-              Kawaii Beauty is an online Japanese skincare shop built around moisture-first
+              Kawaii Mart is an online Japanese skincare shop built around moisture-first
               routines. We curate fermented rice, camellia oil, Uji matcha, and peach blossom
               formulas that help dry, sensitive, and congested skin feel calm, hydrated, and
               luminous.
@@ -81,7 +81,7 @@ export default function BrandStory() {
           <div className={styles.headerVisual}>
             <Image
               src="/kawaii_beauty_hero.png"
-              alt="Kawaii Beauty Japanese skincare products"
+              alt="Kawaii Mart Japanese skincare products"
               fill
               sizes="(max-width: 900px) 100vw, 42vw"
               className={styles.headerImage}
@@ -121,7 +121,7 @@ export default function BrandStory() {
           <div className={styles.closingVisual}>
             <Image
               src="/collection_baby.png"
-              alt="Gentle baby and kids skincare from Kawaii Beauty"
+              alt="Gentle baby and kids skincare from Kawaii Mart"
               fill
               sizes="(max-width: 900px) 100vw, 40vw"
               className={styles.closingImage}
@@ -130,7 +130,7 @@ export default function BrandStory() {
           <div className={styles.closingCopy}>
             <p>
               Whether you need a brightening serum, camellia facial oil, charcoal cleanser,
-              hydrating mask, or a tear-free baby lotion, Kawaii Beauty makes it simple to shop
+              hydrating mask, or a tear-free baby lotion, Kawaii Mart makes it simple to shop
               curated Japanese skincare online. Pair products into a kit, save with seasonal
               offers, and build a routine that supports healthy moisture every day.
             </p>

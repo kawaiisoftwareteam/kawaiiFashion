@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppHeader } from "../../components/AppHeader";
@@ -17,6 +18,7 @@ const ROWS: { label: string; icon: IconName }[] = [
 
 export default function AccountScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const { count } = useCart();
 
   return (
@@ -28,7 +30,7 @@ export default function AccountScreen() {
 
       <View style={styles.card}>
         <View style={styles.cardTop}>
-          <Text style={styles.cardBrand}>KAWAII BEAUTY</Text>
+          <Text style={styles.cardBrand}>KAWAII MART</Text>
           <View style={styles.cardSealRow}>
             <Ionicons name="diamond-outline" size={14} color={colors.goldSoft} />
             <Text style={styles.cardSeal}>Member</Text>
@@ -67,6 +69,7 @@ export default function AccountScreen() {
         icon="log-in-outline"
         fullWidth
         style={styles.signIn}
+        onPress={() => router.push("/login")}
       />
 
       <Text style={styles.footnote}>

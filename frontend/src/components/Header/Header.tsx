@@ -25,7 +25,7 @@ export default function Header({ cartCount, cartFeedback, onOpenCart }: HeaderPr
       <div className={styles.header}>
         <Link href="/" className={styles.logo}>
           <div>
-            <span className={styles.logoAccent}>K</span>AWAII BEAUTY
+            <span className={styles.logoAccent}>K</span>AWAII MART
           </div>
           <span className={styles.logoSub}>collection</span>
         </Link>
@@ -261,7 +261,7 @@ export default function Header({ cartCount, cartFeedback, onOpenCart }: HeaderPr
         </nav>
 
         <div className={styles.actions}>
-          <button className={styles.iconButton} aria-label="Profile">
+          <Link href="/login" className={styles.iconButton} aria-label="Sign in">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -276,7 +276,7 @@ export default function Header({ cartCount, cartFeedback, onOpenCart }: HeaderPr
               <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-          </button>
+          </Link>
           <button className={styles.iconButton} aria-label="Search">
             <svg
               xmlns="http://www.w3.org/2000/svg"

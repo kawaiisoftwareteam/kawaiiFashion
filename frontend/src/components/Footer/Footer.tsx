@@ -32,7 +32,7 @@ export default function Footer() {
           >
             <Link href="/" className={`${styles.logo} u-url p-name`} itemProp="url">
               <div itemProp="name">
-                <span className={styles.logoAccent}>K</span>AWAII BEAUTY
+                <span className={styles.logoAccent}>K</span>AWAII MART
               </div>
               <span className={styles.logoSub}>collection</span>
             </Link>
@@ -132,7 +132,7 @@ export default function Footer() {
 
       <div className={styles.footerBottom}>
         <span className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Kawaii Beauty. All rights reserved.
+          &copy; {new Date().getFullYear()} Kawaii Mart. All rights reserved.
         </span>
         
         {/* Payment Badges */}

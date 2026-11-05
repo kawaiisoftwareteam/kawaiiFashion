@@ -22,6 +22,8 @@ export default function RootLayout() {
           <Stack.Screen name="collection/[id]" options={{ animation: "slide_from_right" }} />
           <Stack.Screen name="checkout" options={{ animation: "slide_from_bottom", presentation: "modal" }} />
           <Stack.Screen name="search" options={{ animation: "fade", presentation: "modal" }} />
+          <Stack.Screen name="login" options={{ animation: "slide_from_bottom", presentation: "modal" }} />
+          <Stack.Screen name="register" options={{ animation: "slide_from_bottom", presentation: "modal" }} />
         </Stack>
         <Toast />
       </View>

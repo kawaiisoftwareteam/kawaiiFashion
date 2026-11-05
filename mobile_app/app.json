@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Kawaii Beauty",
-    "slug": "kawaii-beauty",
+    "name": "Kawaii Mart",
+    "slug": "kawaii-mart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/Icon-512.png",
-    "scheme": "kawaiibeauty",
+    "scheme": "kawaiimart",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true

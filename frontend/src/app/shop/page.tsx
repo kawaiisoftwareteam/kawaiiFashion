@@ -49,7 +49,7 @@ export default function ShopPage() {
           <div className={styles.heroImageCard}>
             <Image
               src="/product_alkaline_water.png"
-              alt="Kawaii Beauty and Lifestyle catalog"
+              alt="Kawaii Mart and Lifestyle catalog"
               fill
               sizes="(max-width: 900px) 100vw, 400px"
               style={{ objectFit: "cover" }}

@@ -42,7 +42,7 @@ export default function OffersPage() {
       badgeType: "gold",
       value: "10% OFF",
       title: "First-Time Customer Discount",
-      description: "New to Kawaii Beauty? Apply this coupon at checkout to save 10% on your entire first purchase of our traditional Japanese skincare lines.",
+      description: "New to Kawaii Mart? Apply this coupon at checkout to save 10% on your entire first purchase of our traditional Japanese skincare lines.",
       code: "KAWAIIFIRST",
       ctaText: "Explore Best Sellers",
       ctaLink: "/#shop",

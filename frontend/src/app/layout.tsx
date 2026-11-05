@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "Japanese skincare",
-    "Kawaii Beauty",
+    "Kawaii Mart",
     "smart beauty gadgets",
     "nano ionic steamer",
     "ultrasonic EMS wand",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
         url: "/kawaii_beauty_hero.png",
         width: 1200,
         height: 630,
-        alt: "Kawaii Beauty Japanese skincare",
+        alt: "Kawaii Mart Japanese skincare",
       },
     ],
   },

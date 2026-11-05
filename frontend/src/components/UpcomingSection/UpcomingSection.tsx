@@ -72,7 +72,7 @@ export default function UpcomingSection({ onNotifySubscribed }: UpcomingSectionP
     <section className={styles.upcomingSection}>
       <div className={styles.sectionHeader}>
         <span className={styles.tagline}>Future Collections</span>
-        <h2 className={styles.title}>Coming Soon to Kawaii Beauty</h2>
+        <h2 className={styles.title}>Coming Soon to Kawaii Mart</h2>
         <p className={styles.subtitle}>
           Here is a sneak peek at what our laboratory has been working on. Sign up for exclusive early access and launch day notifications.
         </p>
